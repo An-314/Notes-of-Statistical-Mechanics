@@ -1,0 +1,4 @@
+files/
+builds/
+*.pdf
+!pic/*.pdf
