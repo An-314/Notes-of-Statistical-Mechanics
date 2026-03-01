@@ -42,7 +42,7 @@
   template: "book",
   title: [统计力学],
   author: ("Anzreww",),
-  time: "乙巳秋冬于清华园",
+  time: "丙午春夏于清华园",
   contents: true,
   content-depth: 3,
   matheq-depth: 3,
