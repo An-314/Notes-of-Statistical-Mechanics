@@ -1,5 +1,6 @@
 #import "@preview/scripst:1.1.1": *
 #import "@preview/physica:0.9.8": *
+#import "@preview/fletcher:0.5.8": diagram, edge, node
 
 = 热力学基础
 
@@ -565,8 +566,9 @@ $
 $
   eta = W/Q_1 = 1 - T_2/T_1
 $
+可逆机效率只与热源温度有关，与工作物质无关。
 
-==== Carnot定理
+==== Carnot定理与，Clausius不等式与熵
 
 #theorem(subname: [Carnot定理])[
   在相同高、低温热源之间工作的热机，以可逆机的效率最高。
@@ -654,6 +656,361 @@ $
     eta = 1 - T_2/T_1
   $
 ]
+
+#newpara()
+
+由此可以给出Clausius不等式
+#theorem(subname: [Clausius不等式])[
+  对于任意循环过程，系统从外界吸收的热量与温度的比值的循环积分小于或等于零：
+
+  对于任意循环过程，从热源$T_i$吸收$Q_i$
+  $
+    sum_i (Q_i/T_i) <= 0
+  $
+  或者积分形式
+  $
+    integral.cont (dd(Q)/T) <= 0
+  $
+  等号成立当且仅当过程可逆。
+]
+
+#proof[
+  Carnot定理给出
+  $
+    eta = 1 - Q_2/Q_1 <= 1 - T_2/T_1
+  $
+  等号成立当且仅当过程可逆，这就给出
+  $
+    Q_2/Q_1 >= T_2/T_1
+  $
+  定义放热变为定义吸热，就有
+  $
+    Q_1/T_1 + Q_2/T_2 <= 0
+  $
+  同理可以得到任意循环过程的Clausius不等式
+  $
+    sum_i (Q_i/T_i) <= 0
+  $
+]
+
+由此可知，对于可逆过程
+$
+  integral_(i(R_1))^f dd(Q)/T = integral_(i(R_2))^f dd(Q)/T
+$
+其中$R_1, R_2$是从初态$i$到终态$f$的两条不同路径。由此可以定义*状态函数——熵(Entropy)*
+#definition(subname: [熵])[
+  *熵*是一个状态函数，定义为系统从某参考状态$i$到状态$f$的可逆路径上吸收的热量与温度的比值的积分：
+  $
+    dd(Q)/T = dd(S)
+  $
+  从而对与任意路径$R$，有
+  $
+    S_f - S_i = integral_i^f dd(Q)/T
+  $
+  单位为焦耳每开尔文（J/K）。
+]
+
+#newpara()
+
+结合热力学一二定律可以得到，热力学基本关系
+#theorem(subname: [热力学基本关系])[
+  对于可逆，准静态过程
+  $
+    dd(U) = T dd(S) + sum_k Y_k dd(y)_k
+  $
+]
+
+#newpara()
+由Clausius不等式
+$
+  integral.cont (dd(Q)/T) <= 0
+$
+拆成两个路径
+$
+  integral_(i(R_1))^f dd(Q)/T <= integral_(f(R_2))^i dd(Q)/T = Delta S
+$
+其中$R_1$是从初态$i$到终态$f$的任意路径，$R_2$是从$f$到$i$的可逆路径。给出
+$
+  dd(S) >= dd(Q)/T
+$
+对于*绝热过程*，$dd(Q) = 0$，就给出
+$
+  dd(S) >= 0
+$
+由此可以得到热力学第二定律的熵增表述：对于孤立系统，自发过程总是伴随着熵的增加。
+#theorem(subname: [热力学第二定律的第三种表述])[
+  对于孤立系统，自发过程总是伴随着熵的增加。
+]
+孤立系统的熵不减，熵是热运动混乱程度的量度。
+
+#note[
+  现在我们证明了
+  $
+    "Kelvin表述" => "Clausius表述" => "Carnot定理" => "Clausius不等式" => "熵增表述"
+  $
+  下面只需证明$"熵增表述" => "Kelvin表述"$，就可以证明这几种表述的等价性。
+]
+
+考虑热机和制冷机，重物下降做功，产生热，放热给热库；考虑相反过程是否可行。
+
+#figure(
+  include "pic/1.2.typ",
+  numbering: none,
+)
+
+- 正过程：熵增，系统分布更混乱$Delta S >=0$
+- 逆过程：从第一热源吸热做功，不改变环境的“完美机”；随机分布在不同自由度的内能转变为功（提升重物），这将破坏第二定律
+  - 装置回到原态$Delta S_"机" = 0$
+  - 装置仅仅改变重物，不改变熵$Delta S_"外" = 0$
+  - 热源的熵变
+    $
+      (-q)/T >=0 => q/T = w/T <= 0
+    $
+    这就要求$w <= 0$，要求做功，而不是被做功，这在逆过程中是无法实现的
+
+这就给出第二定律Kelvin表述：不可能构造完美热机。
+
+*任何一个不可逆过程都可以是热力学第二定律的表述。*
+
+有了熵增原理后，Carnot定理就很好推出：热力学第二定律要求
+$
+  Delta S = (-q_1)/T_1 + q_2/T_2 >= 0 => (-q_1)/T_1 + (q_1 - w)/T_2 >= 0
+$
+给出
+$
+  eta = w/q_1 <= 1 - T_2/T_1
+$
+#figure(
+  include "pic/1.3.typ",
+  numbering: none,
+)
+#newpara()
+我们认为不可能实现的*完美机*为
+$
+  w = q_1, eta=1
+$
+这是不可以实现的，实际上效率最高的热机是可逆机，效率为
+$
+  eta = 1 - T_2/T_1 < 1
+$
+某些热没转成功，而转成第二热源内能。为了提高热机效率，可以提高高温热源温度。
+
+==== 熵的计算
+
+计算两平衡态的熵差可以设想一个可逆过程联接初未态：
+$
+  S_f - S_i = integral_i^f dd(Q)/T
+$
+
+#example[
+  将质量相同而温度分别为$T_1$和$T_2$的两杯水在等压下绝热的混合，求熵变。
+]
+
+#solution[
+  两杯水等压绝热混合后，终态温度为$(T_1 + T_2)/2$；以$T, p$为状态变量
+  - 第一杯水 $(T_1, p)$
+  - 第二杯水 $(T_2, p)$
+  - 终态 $(T_f, p)$
+  根据：
+  $
+    dd(S) = dd(Q)/T, dd(U) = T dd(S) - p dd(V)
+  $
+  这是*等压过程*，就有
+  $
+    dd(S) = (dd(U) + p dd(V))/T = dd(H)/T = (C_p dd(T))/T
+  $
+  积分后得两杯水得熵变分别为：
+  $
+    Delta S_1 = C_p ln (T_1 + T_2)/(2T_1), Delta S_2 = C_p ln (T_1 + T_2)/(2T_2)
+  $
+  总的熵等于两杯水得熵之和：
+  $
+    Delta S = Delta S_1 + Delta S_2 = C_p ln ((T_1 + T_2)^2)/(4 T_1 T_2) > 0
+  $
+  两杯水等压绝热混合是一个不可逆过程。
+]
+
+==== 不可逆过程的方向
+
+熵增原理给出了*绝热过程*中的不可逆过程的方向
+$
+  dd(S) >= 0
+$
+
+为了研究非绝热过程进行的方向，引入
+- Helmholtz自由能
+  $
+    F = U - T S
+  $
+  对于*等温等容过程*，Helmholtz自由能的改变为
+  $
+    Delta F & = Delta U - T Delta S = Delta Q + Delta W - T Delta S \
+            & = Delta W - T Delta S <= 0
+  $
+- Gibbs自由能
+  $
+    G = U - T S + p V
+  $
+  对于*等温等压过程*，Gibbs自由能的改变为
+  $
+    Delta G & = Delta U - T Delta S + p Delta V = Delta Q + Delta W - T Delta S + p Delta V \
+            & = Delta Q - T Delta S <= 0
+  $
+
+#definition(subname: [Helmholtz自由能])[
+  *Helmholtz自由能*是一个状态函数，定义为内能与温度-熵乘积之差：
+  $
+    F = U - T S
+  $
+  在*等温等容过程*中，系统的Helmholtz自由能不增。
+]
+
+#definition(subname: [Gibbs自由能])[
+  *Gibbs自由能*是一个状态函数，定义为内能与温度-熵乘积之差再加上压力-体积乘积：
+  node((0, 0), $V$),
+  $
+    G = U - T S + p V
+  $
+  在*等温等压过程*中，系统的Gibbs自由能不增。
+]
+
+#newpara()
+
+计算热力学量出发点是
+$
+  dd(U) = T dd(S) + sum_k Y_k dd(y)_k
+$
+有基本热力学函数即物态方程，$U, S$的状态方程，就可以给系统的其他热力学量。
+
+==== 特性函数与Maxwell关系
+
+实际上，有更强的结论
+#definition(subname: [特性函数])[
+  适当选取*自变量*，只需*一个*热力学量就可决定均匀系统的*全部热力学性质*，这样的函数称为*特性函数*，包括
+  - 内能$U$
+    $
+      U, U = U(S, V)
+    $
+  - 焓$H$
+    $
+      H = U + p V, H = H(S, p)
+    $
+  - Helmholtz自由能$F$
+    $
+      F = U - T S, F = F(T, V)
+    $
+  - Gibbs自由能$G$
+    $
+      G = U - T S + p V, G = G(T, p)
+    $
+]
+这些特性函数由*Legendre变换*得到，选取不同的自变量，得到不同的特性函数。根据微分关系
+$
+  dd(U) = T dd(S) - p dd(V)
+$
+就有
+$
+  T = (pdv(U, S))_V, p = - (pdv(U, V))_S
+$
+同理有
+$
+  dd(H) = T dd(S) + V dd(p)
+$
+可以得到
+$
+  T = (pdv(H, S))_p, V = (pdv(H, p))_S
+$
+其中$p, V$是共轭变量，$S, T$是共轭变量。对于特性函数$F, G$同样可以得到类似的关系。
+
+同理由全微分的性质可以得到Maxwell关系
+#theorem(subname: [Maxwell关系])[
+  热力学量的二阶偏导数满足交换律，给出热力学量的偏导数之间的关系，例如
+  $
+    (pdv(T, V))_S = - (pdv(p, T))_V
+  $
+  $
+    (pdv(T, p))_S = (pdv(V, T))_p
+  $
+  $
+    (pdv(S, V))_T = (pdv(p, T))_V
+  $
+  $
+    (pdv(S, p))_T = - (pdv(V, T))_p
+  $
+]
+#proof[
+  由特征函数的全微分条件建立
+  $
+    dd(U) = T dd(S) - p dd(V) = (pdv(U, S))_V dd(S) + (pdv(U, V))_S dd(V)
+  $
+  $
+    (pdv(T, V))_S = pdv(U, S, V) = pdv(U, V, S) = - (pdv(p, T))_V
+  $
+  同理可以得到其它Maxwell关系。
+]
+Maxwell关系使不能直接测量量（如内能$U$，熵$S$）的偏导数关系可以用直接可测的量（热容量、物态方程等）表述出来：
+- 四个特性函数全微分式
+- 四个Maxwell关系
+
+Maxwell关系可以用下面的图来记忆
+#figure(
+  diagram(
+    spacing: (0.5cm, 0.5cm),
+    // nodes
+    node((0, 0), $V$),
+    node((1, 0), $F$),
+    node((2, 0), $T$),
+    node((0, 1), $U$),
+    node((2, 1), $G$),
+    node((0, 2), $S$),
+    node((1, 2), $H$),
+    node((2, 2), $p$),
+    // cross arrows
+    edge((0, 2), (2, 0), "->"),
+    edge((2, 2), (0, 0), "->"),
+  ),
+  caption: [Maxwell关系],
+)
+
+可以得到*熵的标准全微分式*：以$p,V,T$中两个为自变量，且将微分前系数用可测量表达出来的全微分式。
+$
+  dd(S) = (pdv(S, T))_V dd(T) + (pdv(S, V))_T dd(V)
+$
+其中
+$
+  C_V = (pdv(Q, T))_V = T (pdv(S, T))_V, (pdv(S, V))_T = (pdv(p, T))_V
+$
+从而
+$
+  dd(S) = C_V/T dd(T) + (pdv(p, T))_V dd(V)
+$
+
+#newpara()
+
+还能给出*内能标准全微分式*，以$T, V$为自变量
+$
+  dd(U) & = T dd(S) - p dd(V) \
+        & = T (pdv(S, T))_V dd(T) + (T (pdv(S, V))_T - p) dd(V) \
+        & = C_V dd(T) + ((pdv(p, T))_V T - p) dd(V)
+$
+前面还得到了
+$
+  dd(U) = C_V dd(T) + ((C_p -C_V) (pdv(T, V))_p - p) dd(V)
+$
+对比可以得到
+$
+  (pdv(p, T))_V T - p = (C_p -C_V) (pdv(T, V))_p
+$
+#theorem(subname: [热容量方程])[
+  热容量方程
+  $
+    C_p - C_V = (T (pdv(p, T))_V) / (pdv(T, V))_p = - T (pdv(p, T))_V^2 (pdv(V, p))_T
+  $
+]
+理想气体有
+$
+  C_p - C_V = n R
+$
 
 == 均匀系统的热力学性质
 
