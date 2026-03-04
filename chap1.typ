@@ -568,6 +568,11 @@ $
 $
 可逆机效率只与热源温度有关，与工作物质无关。
 
+#figure(
+  include "pic/1.4.typ",
+  caption: [Carnot循环$p-V$图],
+)
+
 ==== Carnot定理与，Clausius不等式与熵
 
 #theorem(subname: [Carnot定理])[
