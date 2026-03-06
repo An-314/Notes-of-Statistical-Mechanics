@@ -1017,6 +1017,195 @@ $
   C_p - C_V = n R
 $
 
+=== 热力学第三定律
+
+==== 热力学第三定律
+
+前两条热力学定律给出的熵，但只能确定熵的改变，无法确定熵的绝对值。热力学第三定律给出了熵的绝对零点问题。
+
+#theorem(subname: [Nernst定理])[
+  (1906)等温过程中熵的改变
+  $
+    lim_(T -> 0) (Delta S)_T = 0
+  $
+]
+
+#theorem(subname: [Nernst原理])[
+  (1906) 不可能使一个物体冷却到绝对温度的零度
+]
+
+我们在后面证明两种表述等价。
+
+#theorem(subname: [热力学第三定律Planck形式])[
+  $
+    S(T=0) = 0
+  $
+]
+#newpara()
+对于固定热力学变量$y in {p,V}$有比热
+$
+  C_y = T (pdv(S, T))_y
+$
+这是因为
+$
+  dd(S) = (pdv(S, T))_y dd(T) + (pdv(S, y))_T dd(y)
+$
+从而有
+$
+  S(T,y) = S_0(0,y) + integral_0^T C_y/T dd(T)
+$
+由于
+$
+  T->0, lim_(T->0) (Delta S)_T = 0
+$
+由Planck表述
+$
+  S(T,y) = integral_0^T C_y dd(T)/T
+$
+这就给出
+$
+  lim_(T->0) C_p = lim_(T->0) C_V = 0
+$
+否则与热力学第三定律矛盾。这意味着当$T->0$时，*系统的热容量*趋于0。
+
+另外低温热容量规律如下
+- 金属 $C_V = A T$，低温热容来自电子激发，Fermi气体理论
+- 非金属固体 $C_V = B T^3$，低温热容来自声子振动，Debye理论
+- Dulong-Petit定律给出，金属热容在低温趋于0，在高温趋于$3R$
+
+另外，由Maxwell关系
+$
+  (pdv(V, T))_p = - (pdv(S, p))_T, (pdv(p, T))_V = (pdv(S, V))_T
+$
+从而
+$
+  lim_(T -> 0) (pdv(S, p))_T = lim_(T -> 0) (pdv(S, V))_T = 0
+$
+给出
+$
+  lim_(T -> 0) (pdv(V, T))_p = lim_(T -> 0) (pdv(p, T))_V = 0\
+  alpha = 1/V (pdv(V, T))_p, beta = 1/p (pdv(p, T))_V
+$
+这意味着$T->0$时，*物质的膨胀系数和压强系数*趋于0。
+
+现在证明Nernst定理和Nernst原理的等价性
+- Nernst定理$->$Nernst原理
+  - 考虑$S-T$图上的$S(T,y)$曲线，$y$为$p$或$V$
+  - 曲线$y=y_1$和$y=y_2$将交于一点$=>$不能通过有限的步骤使物体冷却到绝对零度
+- Nernst原理$->$Nernst定理
+  - 反证：不交于一点，可以通过有限的步骤使物体冷却到绝对零度
+*体系的熵在绝对零度时是一个绝对的常数。*
+
 == 均匀系统的热力学性质
 
+对于均匀系统，热力学量的空间分布是均匀的，热力学量仅依赖于时间和状态变量。对于均匀系统，可以定义一些重要的热力学性质：
+- 体膨胀系数
+  $
+    alpha = 1/V (pdv(V, T))_p
+  $
+- 压强系数
+  $
+    beta = 1/p (pdv(p, T))_V
+  $
+- 等温压缩系数
+  $
+    kappa_T = - 1/V (pdv(V, p))_T
+  $
+由微分关系
+$
+  (pdv(x, y))_z (pdv(y, z))_x (pdv(z, x))_y = -1
+$
+有
+$
+  alpha = kappa_T beta p
+$
+*热容量方程*就变为
+$
+  C_p - C_V = - T (pdv(p, T))_V^2 (pdv(V, p))_T = (V T alpha^2) / kappa_T >=0
+$
+#newpara()
+#example(subname: [水])[
+  水的密度在4摄氏度时具有极大值
+  $
+    alpha = 1/V (pdv(V, T))_p = 0
+  $
+  此时
+  $
+    C_p - C_V = 0
+  $
+]
+
+*小结：应用热力学定律研究均匀系统性质的一般方法*
++ 选自变量（直接可测量）
++ $dd(U)=T dd(S)-p dd(V)$（可逆）等等
++ 引出其它特性函数的全微分，并得到Maxwell关系
++ 若只涉及$S$的偏导，利用Maxwell关系及偏导法则即可
++ 若涉及特性函数的偏导，先换$S$的偏导，再回到4
+
+#figure(
+  three-line-table[
+    | 特性函数 | 定义 | 自变量 | 基本关系 |
+    | --- | --- | --- | --- |
+    | 熵 | $S$ 基本函数 | $U, V, N$ | $dd(S) = 1/T dd(U) + p/T dd(V) - mu/T dd(N)$ |
+    | 内能 | $U$ 基本能量 | $S, V, N$ | $dd(U) = T dd(S) - p dd(V) + mu dd(N)$ |
+    | 焓 | $H = U + p V$ | $S, p, N$ | $dd(H) = T dd(S) + V dd(p) + mu dd(N)$ |
+    | Helmholtz自由能 | $F = U - T S$ | $T, V, N$ | $dd(F) = - S dd(T) - p dd(V) + mu dd(N)$ |
+    | Gibbs自由焓 | $G = U - T S + p V$ | $T, p, N$ | $dd(G) = - S dd(T) + V dd(p) + mu dd(N)$ |
+    | 巨热力势 | $J = U - T S - mu N$ | $T, V, mu$ | $dd(J) = - S dd(T) - p dd(V) - N dd(mu)$ |
+  ],
+  caption: [特性函数与基本关系],
+)
+
+*极值原理*：不同约束下，系统趋向于使某个势极小或极大
+
+#figure(
+  three-line-table[
+    | 特性函数 | 约束条件 | 极值 | 热 | 力学 | 化学 |
+    | --- | --- | --- | --- | --- | --- |
+    | 熵 | 孤立系统 | $S = max$ | $delta U = 0$ | $delta V = 0$ | $delta N = 0$ |
+    | 内能 | 恒$S$恒$p$ | $U = min$ | $delta S = 0$ | $delta V = 0$ | $delta N = 0$ |
+    | 焓 | 恒$S$恒$p$ | $H = min$ | $delta S = 0$ | $delta p = 0$ | $delta N = 0$ |
+    | Helmholtz自由能 | 恒$T$恒$V$ | $F = min$ | $delta T = 0$ | $delta V = 0$ | $delta N = 0$ |
+    | Gibbs自由焓 | 恒$T$恒$p$ | $G = min$ | $delta T = 0$ | $delta p = 0$ | $delta N = 0$ |
+    | 巨热力势 | 恒$T$恒$V$恒$mu$ | $J = min$ | $delta T = 0$ | $delta V = 0$ | $delta mu = 0$ |
+  ],
+  caption: [极值原理],
+)
+建立热力学几何结构只要知道一个势，就可以求出：熵，压强，温度，化学势，相平衡，相变，热容量全部信息。
+
+对于一个简单均匀系统状态可以完全由三个广延变量确定：$S,V,N$因此
+$
+  U = U(S,V,N)
+$
+这是热力学基本关系。其它变量都是导数
+$
+  T = (pdv(U, S))_(V, N), p = -(pdv(U, V))_(S,N), mu = (pdv(U, N))_(S,V)
+$
+所以：$T,p,mu$不是独立变量，他们是共轭变量（conjugate variables）。
+
+#figure(
+  three-line-table[
+    | 原变量 | 共轭变量 |
+    | --- | ---- |
+    | $S$   | $T$    |
+    | $V$   | $-p$   |
+    | $N$   | $μ$    |
+  ],
+  caption: [特性函数的共轭变量],
+)
+虽然$U$是最基本的，但由于实验中很难控制$S$，所以通过Legendre变换给出其他的特性函数。不同势函数不是不同物理，只是同一函数在不同变量下的表示。
+
+#figure(
+  include "pic/1.5.typ",
+  caption: [特性函数之间的Legrendre变换],
+)
+
 == 复相系统的热力学性质
+
+#definition(subname: [复相系统])[
+  由几个物理性质均匀的部分构成，每一个均匀部分称为一相。
+]
+
+#definition(subname: [单元复相系统])[
+  化学成分相同，但由不同相构成。
+]
