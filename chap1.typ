@@ -1,6 +1,7 @@
 #import "@preview/scripst:1.1.1": *
 #import "@preview/physica:0.9.8": *
 #import "@preview/fletcher:0.5.8": diagram, edge, node
+#import "@preview/chemformula:0.1.2": ch
 
 = 热力学基础
 
@@ -990,6 +991,13 @@ $
   dd(S) = C_V/T dd(T) + (pdv(p, T))_V dd(V)
 $
 
+#theorem(subname: [熵的标准全微分式])[
+  熵可以用$T, V$的微分表示出来：
+  $
+    dd(S) = C_V/T dd(T) + (pdv(p, T))_V dd(V)
+  $
+]
+
 #newpara()
 
 还能给出*内能标准全微分式*，以$T, V$为自变量
@@ -998,6 +1006,12 @@ $
         & = T (pdv(S, T))_V dd(T) + (T (pdv(S, V))_T - p) dd(V) \
         & = C_V dd(T) + ((pdv(p, T))_V T - p) dd(V)
 $
+#theorem(subname: [内能标准全微分式])[
+  内能可以用$T, V$的微分表示出来：
+  $
+    dd(U)(T,V) = C_V dd(T) + ((pdv(p, T))_V T - p) dd(V)
+  $
+]
 前面还得到了
 $
   dd(U) = C_V dd(T) + ((C_p -C_V) (pdv(T, V))_p - p) dd(V)
@@ -1124,7 +1138,7 @@ $
   C_p - C_V = - T (pdv(p, T))_V^2 (pdv(V, p))_T = (V T alpha^2) / kappa_T >=0
 $
 #newpara()
-#example(subname: [水])[
+#example(subname: [水在4摄氏度的热容])[
   水的密度在4摄氏度时具有极大值
   $
     alpha = 1/V (pdv(V, T))_p = 0
@@ -1203,9 +1217,285 @@ $
 == 复相系统的热力学性质
 
 #definition(subname: [复相系统])[
-  由几个物理性质均匀的部分构成，每一个均匀部分称为一相。
+  由几个*物理性质均匀*的部分构成，每一个均匀部分称为一相。
 ]
 
 #definition(subname: [单元复相系统])[
-  化学成分相同，但由不同相构成。
+  *化学成分相同*，但由不同相构成。
 ]
+
+=== 粒子数可变系统的热力学方程
+
+前面我们研究了单组分，封闭，粒子数固定系统的热力学性质。在水蒸气与液水共存、盐溶于水、气体混合、化学反应、粒子穿过半透膜的场景下，离子数$N$不是常数。
+
+#definition(subname: [粒子数可变系统])[
+  即开放系统。
+]
+#newpara()
+
+设均匀系有$k$个组元(即*化学组分*)，粒子数分别记为$N_1, ..., N_k$，称之为*化学参量*。描述系统时，除几何，力学参量外，需加上化学参量。
+
+因为对于开放系统，最常见的实验条件是：温度可控、压强可控、组分可交换；以$T, p, {N_i}$为自变量
+$
+  G(T, p, {N_i}), V(T, P, {N_i}), ...
+$
+$G$为*广延量*，则有
+$
+  G(T, p, lambda {N_i}) = lambda G(T, p, {N_i})
+$
+即
+$
+  G = sum_(i=1)^k N_i (pdv(G, N_i))_(T,P,N_j!=N_i) = sum_(i=1)^k N_i mu_i
+$
+其中第$i$组元的化学势$mu_i$定义为
+$
+  mu_i = (pdv(G, N_i))_(T,P,N_j!=N_i)
+$
+表示$T,p$不变，其它组元数量不变下，增加一个$i$组元粒子引起的$G$变化。就像温度$T$控制热量交换方向，压强$p$控制体积变化方向一样，化学势$mu_i$控制$i$组元粒子数变化的方向。对于单组分系统，化学势就是每个粒子的Gibbs自由能。
+
+这里用到了Euler定理
+#theorem(subname: [Euler定理])[
+  如果齐次函数
+  $
+    f(lambda x_1, lambda x_2, ..., lambda x_n) = lambda^m f(x_1, x_2, ..., x_n)
+  $
+  则有
+  $
+    sum_i x_i (pdv(f, x_i)) = m f
+  $
+]
+
+
+#theorem(subname: [Gibbs自由能])[
+  Gibbs自由能的Euler定理
+  $
+    G = sum_i N_i mu_i
+  $
+  其中$N_i$是第$i$组元的粒子数，$mu_i$是第$i$组元的化学势。
+]
+这就是多组元系统最重要的Euler关系之一。这就很像
+$
+  E = sum_i epsilon_i n_i
+$
+但这里的$mu_i$不是单粒子能量，而是热力学边际量。
+
+#newpara()
+*粒子数可变系统的热力学方程*由此给出
+$
+  dd(G) = (pdv(G, T))_(p, N_i) dd(T) + (pdv(G, p))_(T, N_i) dd(p) + sum_i (pdv(G, N_i))_(T,p,N_j!=N_i) dd(N_i)
+$
+与封闭系统
+$
+  dd(G) = - S dd(T) + V dd(p)
+$
+比较知
+$
+  (pdv(G, T))_(p, N_i) = - S, (pdv(G, p))_(T, N_i) = V, (pdv(G, N_i))_(T,p,N_j!=N_i) = mu_i
+$
+即
+$
+  dd(G) = - S dd(T) + V dd(p) + sum_i mu_i dd(N_i)
+$
+#theorem(subname: [粒子数可变系统的热力学方程])[
+  对于开放系统，Gibbs自由能的全微分式为
+  $
+    dd(G) = - S dd(T) + V dd(p) + sum_i mu_i dd(N_i)
+  $
+]
+利用特性函数间关系得到
+$
+  dd(E) = T dd(S) - p dd(V) + sum_i mu_i dd(N_i)\
+  dd(H) = T dd(S) + V dd(p) + sum_i mu_i dd(N_i)\
+  dd(F) = - S dd(T) - p dd(V) + sum_i mu_i dd(N_i)\
+$
+其中
+$
+  mu_i = (pdv(E, N_i))_(S,V,N_j!=N_i) = (pdv(H, N_i))_(S,p,N_j!=N_i) = (pdv(F, N_i))_(T,V,N_j!=N_i) = (pdv(G, N_i))_(T,p,N_j!=N_i)
+$
+其中
+$
+  H = U + p V, F = U - T S, G = U - T S + p V
+$
+#newpara()
+
+之后还能给出*Mole Gibbs自由能*
+#definition(subname: [Mole Gibbs自由能])[
+  *Mole Gibbs自由能*是每mole的Gibbs自由能，定义为
+  $
+    G(T, p, n) = n G_m (T, p)
+  $
+  其中$n$是物质的mole数，$G_m$是每mole的Gibbs自由能。因此
+  $
+    G_m = (pdv(G, n))_(T,p) = mu_m = g
+  $
+  $
+    mu_m = N_A mu
+  $
+  其中$N_A$是Avogadro常数，$mu$是每粒子的化学势。对于单组分系统，Mole Gibbs自由能就是每mole的Gibbs自由能。
+]
+给出热力学方程：
+$
+  dd(G) = - S dd(T) + V dd(p) + sum_i mu_(m,i) dd(n_i)
+$
+#newpara()
+
+再给出*偏摩尔热力学函数*
+#definition(subname: [偏摩尔热力学函数])[
+  任何广延量是各组元物质的量的一次齐函数（例如：体积、能量、熵），由Euler定理：
+  $
+    G = sum_i n_i (pdv(G, n_i))_(T,p,n_j) = sum_i n_i g_i = sum_i n_i mu_(m,i)
+  $
+  类似地
+  $
+    V = sum_i n_i (pdv(V, n_i))_(T,p,n_j) = sum_i n_i v_i\
+    U = sum_i n_i (pdv(U, n_i))_(S,V,n_j) = sum_i n_i u_i\
+    S = sum_i n_i (pdv(S, n_i))_(U,V,n_j) = sum_i n_i s_i
+  $
+  其中$v_i, u_i, s_i$分别表示第$i$组元的*偏摩尔体积*、*偏摩尔能量*和*偏摩尔熵*，表示在 $T, p$固定、其它组分不变时多加一点$i$组分，系统总体积增加多少，是“组分在混合环境中的边际贡献”。
+]
+
+=== 单元复相系的平衡条件
+
+设孤立系有两相$alpha, beta$，系统约束有
+$
+  U^alpha + U^beta = U, V^alpha + V^beta = V, N^alpha + N^beta = N
+$
+即
+$
+  delta U^alpha + delta U^beta = 0, delta V^alpha + delta V^beta = 0, delta N^alpha + delta N^beta = 0
+$
+平衡时$S$取极大值
+$
+  delta S = delta S^alpha + delta S^beta = 0
+$
+利用热力学基本方程
+$
+  dd(S) = 1/T dd(U) + p/T dd(V) - mu/T dd(N)
+$
+有
+$
+  delta S = (1/T^alpha - 1/T^beta) delta U^alpha + (p^alpha/T^alpha - p^beta/T^beta) delta V^alpha - (mu^alpha/T^alpha - mu^beta/T^beta) delta N^alpha
+$
+其中$delta U^alpha, delta V^alpha, delta N^alpha$是独立的，因此
+#theorem(subname: [单元复相系的平衡条件])[
+  在单元相系中，平衡条件为：
+  - 热平衡：$T^alpha = T^beta$
+  - 力学平衡：$p^alpha = p^beta$
+  - 相变平衡：$mu^alpha = mu^beta$
+]
+非孤立系，如与热源接触，类似，结果一样。
+
+这三条条件分别对应：
+#figure(
+  three-line-table[
+    | 平衡类型 | 条件    |
+    | ---- | ----- |
+    | 热平衡  | 温度相同  |
+    | 力学平衡 | 压强相同  |
+    | 化学平衡 | 化学势相同 |
+  ],
+  numbering: none,
+)
+
+=== 多元复相系的平衡条件
+
+无化学反应下，如果系统有$k$个组元，$phi$个相，平衡条件为
+#theorem(subname: [多元复相系的平衡条件])[
+  在多元复相系中，平衡条件为：
+  - 热平衡：$T^1 = T^2 = ... = T^phi$
+  - 力学平衡：$p^1 = p^2 = ... = p^phi$
+  - 化学平衡：$mu_i^1 = mu_i^2 = ... = mu_i^phi, i=1,...,k$
+]
+有化学反应的系统还要考虑化学平衡条件。
+
+化学反应
+$
+  ch("2H2") + ch("O2") <-> ch("2H2O")
+$
+热力学中习惯写成
+$
+  ch("2H2O") - ch("2H2") - ch("O2") = 0
+$
+生成物系数为正，反应物系数为负，一般地：
+$
+  sum_(i=1)^k nu_i ch("A_i") = 0
+$
+其中$k$为组元总数，#ch("A_i")为第$i$组元分子式，$nu_i$为第$i$组元的化学反应系数，生成物系数为正，反应物系数为负。
+
+对于化学反应，考虑均匀系的平衡。反应时，每一组元按反应方程中相应系数的比例变化
+$
+  delta N_i = nu_i delta n
+$
+其中共同的比例因子$delta n$称为反应进度，如果$dd(n) > 0$，表示反应正向进行，$dd(n) < 0$表示反应逆向进行。等温等压条件下，Gibbs函数极小
+$
+  delta G = - S delta T + V delta p + sum_i mu_i delta N_i = sum_i mu_i nu_i delta n = dd(n) sum_i nu_i mu_i = 0
+$
+从而得到化学平衡条件
+#theorem(subname: [化学平衡条件])[
+  在化学反应中，化学平衡条件为
+  $
+    sum_i nu_i mu_i = 0
+  $
+]
+
+#newpara()
+
+由于自发过程满足$Delta G =< 0$，因此
+#theorem(subname: [化学反应的方向])[
+  - $sum_i nu_i mu_i < 0$，有$dd(n) > 0$，反应正向进行
+  - $sum_i nu_i mu_i > 0$，有$dd(n) < 0$，反应逆向进行
+]
+
+=== 相变热力学
+
+相变是物质从一种相转变为另一种相的过程，例如水从液态转变为气态。相变过程中，系统的热力学性质发生显著变化。
+
+#figure(
+  image("pic/1.6.pdf", width: 40%),
+  caption: [水的相图],
+)
+
+首先研究*相共存条件*，相变平衡条件给出一个方程
+$
+  mu^(("I")) (T,Y) = mu^(("II")) (T,Y) => Y = Y(T)
+$
+其中$Y$为压强$p$或体积$V$，这称为*两相共存曲线*。例如水的液-气共存曲线，固-液共存曲线等。
+
+而三相共存条件则给出两个方程
+$
+  mu^(("I")) (T,Y) = mu^(("II")) (T,Y) = mu^(("III")) (T,Y)
+$
+因此三相共存条件给出一个点，例如水的三相点。由此也可知道，单组分系统最多只能有三相共存。
+
+#theorem(subname: [Gibbs相律])[
+  $k$种组元，$phi$个共存相，的平衡条件为
+  $
+             T_1 = T_2 = ... = T_phi, & \
+             p_1 = p_2 = ... = p_phi, & \
+    mu_i^1 = mu_i^2 = ... = mu_i^phi, & i=1,...,k
+  $
+  独立变量数为变量数减去方程数，即为
+  $
+    f = (k + 1) phi - (k + 2)(phi - 1) = k + 2 - phi
+  $
+  也就给出了
+  $
+    phi <= k + 2
+  $
+]
+
+#proof[
+  系统是否达到平衡由强度量决定，除$T,p$外还有：
+  $
+    x_i = N_i/N, sum_i x_i = 1
+  $
+  所以所以独立成分只有$k-1$个，因此变量数为$(k-1) + 2 = k + 1$，方程数为$phi - 1$个热平衡方程，$phi - 1$个力学平衡方程，$k (phi - 1)$个化学平衡方程，共计$(k + 2)(phi - 1)$个方程，因此独立变量数为
+  $
+    f = (k + 1) phi - (k + 2)(phi - 1) = k + 2 - phi
+  $
+]
+
+#figure(
+  image("pic/1.6.1.svg", width: 80%),
+  caption: [水的相图],
+)
