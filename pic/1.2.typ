@@ -1,4 +1,5 @@
 #set page(height: auto, margin: 5pt)
+#set align(center)
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 #let thermo_panel(kind: "forward", prefix: "A") = diagram(
   spacing: (10mm, 10mm),
