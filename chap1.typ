@@ -2061,6 +2061,11 @@ $
   caption: [Landau自由能的解],
 )
 
+#figure(
+  include "pic/1.14.typ",
+  caption: [Landau自由能的图像],
+)
+
 从而在临界点附近
 $
   a(T) = a_0(T - T_c)/T_c = a_0 t, a_0 > 0\
