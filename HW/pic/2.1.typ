@@ -1,4 +1,4 @@
-#set page(width: auto, height: auto, margin: 0pt)
+#set page(height: auto, margin: 5pt)
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 
 #set text(size: 12pt)
