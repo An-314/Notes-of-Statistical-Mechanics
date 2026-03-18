@@ -570,7 +570,7 @@ $
 可逆机效率只与热源温度有关，与工作物质无关。
 
 #figure(
-  include "pic/1.4.typ",
+  image("pic/builds/1.4.pdf"),
   caption: [Carnot循环$p-V$图],
 )
 
@@ -760,7 +760,7 @@ $
 考虑热机和制冷机，重物下降做功，产生热，放热给热库；考虑相反过程是否可行。
 
 #figure(
-  include "pic/1.2.typ",
+  image("pic/builds/1.2.pdf"),
   numbering: none,
 )
 
@@ -787,7 +787,7 @@ $
   eta = w/q_1 <= 1 - T_2/T_1
 $
 #figure(
-  include "pic/1.3.typ",
+  image("pic/builds/1.3.pdf"),
   numbering: none,
 )
 #newpara()
@@ -1210,7 +1210,7 @@ $
 虽然$U$是最基本的，但由于实验中很难控制$S$，所以通过Legendre变换给出其他的特性函数。不同势函数不是不同物理，只是同一函数在不同变量下的表示。
 
 #figure(
-  include "pic/1.5.typ",
+  image("pic/builds/1.5.pdf"),
   caption: [特性函数之间的Legrendre变换],
 )
 
@@ -1619,7 +1619,7 @@ $
 Van de Waals气体的等温线与实际观测到的等温线很相像，不过在温度低于$T_c$时，Van de Waals在$p_1<p<p_2$的范围内有三个可能对应的$v_m$值。
 
 #figure(
-  include "pic/1.8.typ",
+  image("pic/builds/1.8.pdf"),
   caption: [Van de Waals气体的等温线],
 )
 
@@ -1643,7 +1643,7 @@ $
 - 根据Gibbs判据，在给定的$T$、$P$下，系统的稳定平衡状态是使Gibbs函数最小的状态，从而$O K B A M R$上各点代表系统的稳定平衡状态，而$J D N$上各点代表系统的不稳定状态
 
 #figure(
-  include "pic/1.9.typ",
+  image("pic/builds/1.9.pdf"),
   caption: [Van de Waals气体的等温线和化学势],
 )
 
@@ -1762,7 +1762,7 @@ $
   在顺磁相（高温）里，磁矩取向杂乱，平均磁化强度，$M=0$；在铁磁相（低温）里，即使没有外磁场，也会出现自发磁化，$M!=0$。所以$M$正好可以区分两相，是磁性系统的*序参量*。
 
   #figure(
-    include "pic/1.10.typ",
+    image("pic/builds/1.10.pdf"),
     caption: [磁性系统的相图和序参量],
   )
 
@@ -1796,7 +1796,7 @@ $
   $
 
   #figure(
-    include "pic/1.11.typ",
+    image("pic/builds/1.11.pdf"),
     caption: [液-气相变的相图和序参量],
   )
 
@@ -1869,7 +1869,7 @@ $
 
 #example(subname: [PVT系统——一级相变])[
   #figure(
-    include "pic/1.12.typ",
+    image("pic/builds/1.12.pdf"),
     caption: [PVT系统的$G-P, G-T, V-P, S-T$图],
   )
   在PVT系统中，Gibbs自由能$G$是压强$P$和温度$T$的函数
@@ -1892,7 +1892,7 @@ $
   $G$连续，一阶导数也连续，但二阶导数不连续。
 
   #figure(
-    include "pic/1.13.typ",
+    image("pic/builds/1.13.pdf"),
     caption: [二级相变的$G-T, S-T, C_p-T$图],
   )
 
@@ -2062,7 +2062,7 @@ $
 )
 
 #figure(
-  include "pic/1.14.typ",
+  image("pic/builds/1.14.pdf"),
   caption: [Landau自由能的图像],
 )
 

@@ -14,7 +14,7 @@
 #proof[
   如果两条绝热线相交，如下图所示
   #figure(
-    include "pic/2.1.typ",
+    image("pic/builds/2.1.pdf"),
     caption: [两条绝热线相交的情况],
   )
   两条绝热线交于$C$点，其中$A C$与$B C$是绝热线。

@@ -1,3 +1,4 @@
+#set page(width: auto, height: auto, margin: 0pt)
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 
 #let vdw(T, v) = 8 * T / (3 * v - 1) - 3 / (v * v)
