@@ -759,3 +759,48 @@ $
   Omega{a_i} / Omega{a_i^*} approx exp(- 1/2 sum_i a_i^* ((delta a_i) / a_i^*)^2) tilde exp(- 1/2 times 10^(15)) approx 0
 $
 从而对宏观系统来说，只要偏离最可几分布一点点，其概率就已经几乎为零。
+
+=== $alpha$与$beta$的物理意义
+
+下面以半经典分布为例，其它分布类似。
+
+对于半经典分布
+$
+  a_i = omega_i e^(- alpha - beta epsilon_i)
+$
+
+==== $beta$的物理意义
+
+考虑两个近独立粒子系统构成一复合系统。每个子系统先各自平衡，然后让它们热接触，最后达到总平衡。
+
+两个子系统的分布分别记成${a'_i}, {a''_i}$，则总热力学几率是
+$
+  Omega_"s" {a'_i, a''_i} = Omega_S {a'_i} Omega_S {a''_i} = product_i omega'_i^(a'_i) / (a'_i !) product_i omega''_i^(a''_i) / (a''_i !)
+$
+求最可几分布，约束条件
+- 子系统粒子数各自固定
+  $
+    N' = sum_i a'_i, N'' = sum_j a''_j
+  $
+- 有热量交换，但总能量守恒
+  $
+    E = sum_i a'_i epsilon'_i + sum_j a''_j epsilon''_j
+  $
+引入三个Lagrange乘子$alpha', alpha'', beta$，最可几条件
+$
+  pdv(ln Omega_S, a'_i) + alpha' pdv(, a'_i) (N' - sum_i a'_i) + alpha'' pdv(, a'_i) (N'' - sum_j a''_j) + beta pdv(, a'_i) (E - sum_i a'_i epsilon'_i - sum_j a''_j epsilon''_j) = 0\
+  pdv(ln Omega_S, a''_j) + alpha' pdv(, a''_j) (N' - sum_i a'_i) + alpha'' pdv(, a''_j) (N'' - sum_j a''_j) + beta pdv(, a''_j) (E - sum_i a'_i epsilon'_i - sum_j a''_j epsilon''_j) =
+$
+给出
+$
+  a'_i = omega'_i e^(- alpha' - beta epsilon'_i), a''_j = omega''_j e^(- alpha'' - beta epsilon''_j)
+$
+即，重达平衡后，两子系统有相同的$beta$，因此$beta$与温度相关
+$
+  beta = beta(T)
+$
+后面我们将证明$beta = 1/(k_B T)$。
+
+热力学第零定律告诉我们：两个系统若彼此热平衡，就有某个状态参量相同，而这个参量就是温度。现在统计力学推导发现：
+
+两个系统达到最可几平衡时，自动满足$beta$ 相同。
