@@ -676,7 +676,7 @@ $
 $
   a_i = omega_i / (e^(alpha + beta epsilon_i) plus.minus 1) approx omega_i /(e^(alpha + beta epsilon_i)) = omega_i e^(- alpha - beta epsilon_i)
 $
-这是*半经典分布*，这里体系本质上还是量子体系，单粒子态、简并度这些仍然是量子概念；分布公式和*Maxwell-Boltzmann分布*形式相同，适用于高温、低密度的情况。
+这是*半经典分布*，这里体系本质上还是*量子体系*，单粒子态、简并度这些仍然是量子概念；分布公式和*Maxwell-Boltzmann分布*形式相同，适用于高温、低密度的情况。
 
 *非简并条件*是
 $
@@ -777,7 +777,7 @@ $
 $
   Omega_"s" {a'_i, a''_i} = Omega_S {a'_i} Omega_S {a''_i} = product_i omega'_i^(a'_i) / (a'_i !) product_i omega''_i^(a''_i) / (a''_i !)
 $
-求最可几分布，约束条件
+*只允许热交换，不允许粒子交换*，求最可几分布，约束条件为
 - 子系统粒子数各自固定
   $
     N' = sum_i a'_i, N'' = sum_j a''_j
@@ -801,6 +801,130 @@ $
 $
 后面我们将证明$beta = 1/(k_B T)$。
 
-热力学第零定律告诉我们：两个系统若彼此热平衡，就有某个状态参量相同，而这个参量就是温度。现在统计力学推导发现：
+热力学第零定律告诉我们：两个系统若彼此热平衡，就有某个状态参量相同，而这个参量就是温度。现在统计力学推导发现：两个系统达到最可几平衡时，满足$beta$相同。温度高，高能级更容易被占据，分布衰减得慢；温度低，高能级更难被占据，分布衰减得快。
 
-两个系统达到最可几平衡时，自动满足$beta$ 相同。
+==== $alpha$的物理意义
+
+*两相系统达到平衡，允许粒子交换*，求最可几分布，约束条件为
+- 子系统粒子数不固定，但总粒子数守恒
+  $
+    N = sum_i a'_i + sum_j a''_j
+  $
+- 有热量交换，但总能量守恒
+  $
+    E = sum_i a'_i epsilon'_i + sum_j a''_j epsilon''_j
+  $
+引入两个Lagrange乘子$alpha, beta$，最可几条件为
+$
+  pdv(ln Omega_S, a'_i) + alpha pdv(, a'_i) (N - sum_i a'_i - sum_j a''_j) + beta pdv(, a'_i) (E - sum_i a'_i epsilon'_i - sum_j a''_j epsilon''_j) = 0\
+  pdv(ln Omega_S, a''_j) + alpha pdv(, a''_j) (N - sum_i a'_i - sum_j a''_j) + beta pdv(, a''_j) (E - sum_i a'_i epsilon'_i - sum_j a''_j epsilon''_j) = 0
+$
+给出
+$
+  a'_i = omega'_i e^(- alpha - beta epsilon'_i), a''_j = omega''_j e^(- alpha - beta epsilon''_j)
+$
+即，两相系统达到平衡时，有相同的$alpha$和$beta$。相平衡时$mu, T$相同，因此$alpha$与化学势相关
+$
+  alpha = alpha(mu, T)
+$
+后面我们将证明$alpha = - mu / (k_B T)$。
+
+从分布式子看：
+$
+  a_i prop e^(- alpha - beta epsilon_i)
+$
+代入
+$
+  beta = 1/(k_B T), alpha = - mu / (k_B T)
+$
+得到
+$
+  a_i prop e^( - (epsilon_i - mu) / (k_B T))
+$
+
+== Boltzmann分布
+
+Boltzmann分布是和前面半经典分布很像但又不完全一样的情形。核心对象是：*可分辨的经典粒子*。
+
+对于*定域系统*，每个粒子都被限制在一个特定的空间区域内，因此粒子是可分辨的。每个粒子占据一个单粒子态，整个系统的状态由每个粒子占据哪个单粒子态来描述。例如固体的晶格振动模式，每个模式对应一个单粒子态，粒子占据这些模式的分布决定了系统的状态。
+
+定域系统对粒子可作标记以区分，全同性原理限制性不强，有
+$
+  N = sum_i a_i, E = sum_i a_i epsilon_i
+$
+能给出Boltzmann分布的*热力学几率*，即分布${a_i}$对应的微观状态数$Omega{a_i}$，为
+$
+  Omega{a_i} = binom(N, a_1, a_2, ..., a_n) product_i omega_i^(a_i) = N! / (product_i a_i !) product_i omega_i^(a_i) = N! product_i omega_i^(a_i) / (a_i !)
+$
+下面求最可几分布，取对数
+$
+  ln Omega{a_i} = ln N! + sum_i a_i ln omega_i - sum_i ln a_i !\
+$
+对于$a_i >> 1$，利用Stirling公式
+$
+  ln Omega{a_i} & approx ln N! + sum_i a_i ln omega_i - sum_i (a_i ln a_i - a_i) \
+                & = ln N! + sum_i (a_i ln omega_i - a_i ln a_i + a_i) \
+                & = ln N! + sum_i (a_i ln(omega_i/a_i) + a_i)
+$
+求$ln Omega{a_i}$的条件极值，即满足条件
+$
+  sum_i a_i = N, sum_i a_i epsilon_i = E
+$
+引入两个Lagrange乘子$alpha, beta$，最可几条件为
+$
+  pdv(ln Omega, a_i) + alpha pdv(, a_i) (N - sum_i a_i) + beta pdv(, a_i) (E - sum_i a_i epsilon_i) = 0
+$
+即
+$
+  ln (omega_i/a_i) - alpha - beta epsilon_i = 0
+$
+得到
+$
+  a_i = omega_i e^(- alpha - beta epsilon_i)
+$
+
+#theorem(subname: [Boltzmann分布])[
+  Boltzmann系统的平衡态分布为
+  $
+    a_i = omega_i e^(- alpha - beta epsilon_i)
+  $
+  其中$alpha, beta$是待定乘子，满足
+  $
+    sum_i a_i = N, sum_i a_i epsilon_i = E
+  $
+]
+
+#theorem(subname: [Bose, Fermi, 半经典, Boltzmann 分布的热力学几率和最可几分布])[
+  - Bose系统的分布${a_i}$对应的微观状态数为
+    $
+      Omega{a_i} = product_i binom(a_i + omega_i - 1, a_i) = product_i (a_i + omega_i - 1)! / (a_i ! (omega_i - 1)!)
+    $
+    平衡态分布为
+    $
+      a_i = omega_i / (e^(alpha + beta epsilon_i) - 1)
+    $
+  - Fermi系统的分布${a_i}$对应的微观状态数为
+    $
+      Omega{a_i} = product_i binom(omega_i, a_i) = product_i (omega_i !) / (a_i ! (omega_i - a_i)!)
+    $
+    平衡态分布为
+    $
+      a_i = omega_i / (e^(alpha + beta epsilon_i) + 1)
+    $
+  - 半经典分布${a_i}$对应的微观状态数为
+    $
+      Omega{a_i} = product_i omega_i^(a_i) / (a_i !)
+    $
+    平衡态分布为
+    $
+      a_i = omega_i e^(- alpha - beta epsilon_i)
+    $
+  - Boltzmann系统的分布${a_i}$对应的微观状态数为
+    $
+      Omega{a_i} = N! / (product_i a_i !) product_i omega_i^(a_i)
+    $
+    平衡态分布为
+    $
+      a_i = omega_i e^(- alpha - beta epsilon_i)
+    $
+]
