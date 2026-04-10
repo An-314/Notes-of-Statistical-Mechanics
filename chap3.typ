@@ -35,6 +35,13 @@ $
 $
   e^(-alpha) = N / Z
 $
+#theorem(subname: [配分函数与总粒子数])[
+  配分函数$Z$与总粒子数$N$的关系为
+  $
+    N = e^(- alpha) Z
+  $
+]
+
 #newpara()
 
 *内能*
@@ -43,9 +50,17 @@ $
 $
 从而
 $
-  U = - pdv(ln Z, beta)
+  U = - N pdv(ln Z, beta)
 $
-下面求物态方程与熵，对于封闭系统
+#theorem(subname: [配分函数与内能])[
+  配分函数$Z$与内能$U$的关系为
+  $
+    U = - N pdv(ln Z, beta)
+  $
+]
+#newpara()
+
+下面求*物态方程与熵*，对于封闭系统
 $
   dd(U) = dd(W) + dd(Q)
 $
@@ -64,3 +79,58 @@ $
     dd(U) = dd(sum_i a_i epsilon_i) = sum_i epsilon_i dd(a_i) + sum_i a_i dd(epsilon_i)
   $
   - $y$变引起$epsilon_i$变即能级移动，传热引起分布$a_i$变
+从而
+$
+  sum_k Y_k dd(y_k) = sum_i a_i dd(epsilon_i) = sum_i a_i sum_k pdv(epsilon_i, y_k) dd(y_k)
+$
+有
+$
+  Y_k = sum_i a_i pdv(epsilon_i, y_k) = sum_i omega_i e^(- alpha - beta epsilon_i) pdv(epsilon_i, y_k) = -N/beta pdv(ln Z, y_k)
+$
+这就给出*物态方程*
+#theorem(subname: [配分函数与物态方程])[
+  配分函数$Z$与物态方程的关系为
+  $
+    Y_k = -N/beta pdv(ln Z, y_k)
+  $
+]
+例如
+$
+  p = -N/beta pdv(ln Z, V)
+$
+#newpara()
+
+$
+  T dd(S) & = dd(Q) = dd(U) - sum_k Y_k dd(y_k) \
+  & = sum_i epsilon_i dd(a_i) = dd(U) - sum_i a_i dd(epsilon_i) = - N dd((pdv(ln Z, beta))) + N/beta sum_k pdv(ln Z, y_k) dd(y_k)
+$
+利用
+$
+  dd(ln Z) = pdv(ln Z, beta) dd(beta) + sum_k pdv(ln Z, y_k) dd(y_k)
+$
+从而有
+$
+  T dd(S) = - N dd((pdv(ln Z, beta))) + N/beta (dd(ln Z) - pdv(ln Z, beta) dd(beta)) = N/beta dd((ln Z - beta pdv(ln Z, beta)))
+$
+给出*熵的表达式*
+#theorem(subname: [配分函数与熵])[
+  配分函数$Z$与熵$S$的关系为
+  $
+    dd(S) = N/(beta T) dd((ln Z - beta pdv(ln Z, beta))) = N k (ln Z - beta pdv(ln Z, beta))
+  $
+  两边都是全微分，要求$1/(beta T)$为常数，得到$k = 1/(beta T)$，其中$k$是Boltzmann常数。
+]
+可以得到
+$
+  S- S' = N k (ln Z - beta pdv(ln Z, beta))
+$
+#newpara()
+其它宏观量可由以上量表示，例如*自由能*
+$
+  F = U - T S = - N/beta ln Z - T S'
+$
+*化学势*
+$
+  mu = (pdv(F, N))_(T,y)
+$
+这就说明事实上*配分函数*$Z(beta,y)$是以$beta,y$为变量的*特性函数*。
