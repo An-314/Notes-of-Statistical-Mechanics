@@ -476,5 +476,192 @@ $
 $
 *粒子数*
 $
-  N = e^(- alpha) Z(beta, V) = e^(- alpha) Z_t (beta, V) Z_i (beta)
+  N = e^(- alpha) Z(beta, V) = sum_a omega_a e^(- alpha - beta epsilon_a)
 $
+*能量*
+$
+  U = - N pdv(ln Z, beta) = - N (pdv(ln Z_t, beta) + pdv(ln Z_i, beta)) = U_t + U_i
+$
+*物态方程*
+$
+  p = -N/beta pdv(ln Z, V) = -N/beta pdv(ln Z_t, V)
+$
+与内部运动无关，*熵*
+$
+    S & = N k_B (ln Z - beta pdv(ln Z, beta)) + N k_B (1 - ln N) = S_t + S_i \
+  S_t & = N k_B (ln Z_t - beta pdv(ln Z_t, beta)) + N k_B (1 - ln N) \
+  S_i & = N k_B (ln Z_i - beta pdv(ln Z_i, beta))
+$
+$S_t$有$1-ln N$是因为质心平动的粒子是不可区分的，而$S_i$没有$1-ln N$是因为内部运动的粒子是可区分的。*自由能*
+$
+    F & = - N k_B ln Z - N k_B T(1 - ln N) = F_t + F_i \
+  F_t & = - N k_B ln Z_t - N k_B T(1 - ln N) \
+  F_i & = - N k_B ln Z_i
+$
+*化学势*
+$
+  mu = - alpha k_B T
+$
+
+=== 质心平动
+
+从单原子分子的平动能量出发，$epsilon_t$准连续
+$
+  epsilon_t = (p_x^2 + p_y^2 + p_z^2) / (2 m) + U(x, y, z)
+$
+则有半经典配分函数
+$
+  Z_t (beta, V) &= integral h^(-3) e^(- beta epsilon_t) dd(omega) = h^(-3) integral dd(x, y, z) e^(- beta U(x, y, z)) dd(x, y, z) integral e^(- beta (p_x^2 + p_y^2 + p_z^2) / (2 m)) dd(p_x, p_y, p_z) \
+  &= h^(-3) V integral_0^oo 4 pi p^2 e^(- beta p^2 / (2 m)) dd(p) = V (2 pi m k_B T)^(3/2) / h^3
+$
+
+#theorem(subname: [理想气体质心平动的配分函数])[
+  理想气体质心平动的配分函数为
+  $
+    Z_t (beta, V) = V (2 pi m k_B T)^(3/2) / h^3
+  $
+]
+
+==== 单原子分子
+
+单原子分子没有内部自由度，只有质心平动
+$
+  N = e^(- alpha) Z_t (beta, V) => e^alpha = V/N ((2 pi m k_B T)/ (h^2))^(3/2)
+$
+在常$T$，常$p$下，一般$e^alpha tilde 10^5 >> 1$，满足*非简并条件*，因此可以使用*半经典分布*描述。稀薄、高温、粒子质量较大时：de Broglie波长较短，粒子波函数重叠很弱，粒子更容易区分，满足非简并条件。
+
+由配分函数可以得到
+- *内能*
+  $
+    U = E_t = - N pdv(ln Z_t, beta) = 3/2 N k_B T
+  $
+  能量均分：每个自由度平均分配$1/2k_B T$的能量，单原子分子有三个平动自由度，所以内能为$3/2 N k_B T$
+- *定容热容*
+  $
+    C_V = (pdv(U, T))_V = 3/2 N k_B
+  $
+- *物态方程*
+  $
+    p = -N/beta pdv(ln Z_t, V) = (N k_B T) / V
+  $
+  这是理气状态方程
+- *熵*（Sackur-Tetrode equation）
+  $
+    S & = S_t = N k_B (ln Z_t - beta pdv(ln Z_t, beta)) + N k_B (1 - ln N) \
+      & = N k_B (ln (V/N ((2 pi m k_B T)/ (h^2))^(3/2))) + 5/2 N k_B
+  $
+  - 熵是广延量
+  - 它自然避免了Gibbs悖论：只有在正确考虑$N!$和量子不可分辨性之后，熵才会有正确的广延性，不会出现混合相同气体还产生额外熵的假悖论
+  - 经典统计只能给出一些热力学关系，但要给出熵的绝对值，必须引入量子统计的概念，考虑粒子不可区分性，才能得到正确的Sackur-Tetrode方程
+- *自由能*
+  $
+    F & = F_t = - N k_B T ln Z_t - N k_B T(1 - ln N) \
+      & = - N k_B T ln (V/N ((2 pi m k_B T)/ (h^2))^(3/2)) - N k_B T
+  $
+- *化学势*
+  $
+    mu = (pdv(F, N))_(T,V) = - k_B T ln (V/N ((2 pi m k_B T)/ (h^2))^(3/2))
+  $
+
+==== Maxwell速度分布律
+
+Maxwell速度分布律描述了理想气体中粒子质心平动速度分布，与内部运动无关。
+
+相空间体积元$dd(vb(omega))$中的粒子数
+$
+  dd(N) = h^(-gamma) e^(- alpha - beta epsilon) dd(vb(omega))
+$
+积分去除坐标变量，得到按动量的分布
+$
+  h^(-3) dd(p_x, p_y, p_z) integral dd(x, y, z) e^(- alpha - beta epsilon) &= h^(-3) V e^(- alpha) e^(- beta ((p_x^2 + p_y^2 + p_z^2) / (2 m) + U)) dd(p_x, p_y, p_z)\
+  &= h^(-3) dd(p_x, p_y, p_z) e^(- alpha - beta (p_x^2 + p_y^2 + p_z^2) / (2 m)) integral dd(x, y, z) e^(- beta U) \
+  &= V/h^3 dd(p_x, p_y, p_z) e^(- alpha - beta (p_x^2 + p_y^2 + p_z^2) / (2 m))\
+  &= N (1/(2 pi m k_B T))^(3/2) e^(- beta (p_x^2 + p_y^2 + p_z^2) / (2 m)) dd(p_x, p_y, p_z)
+$
+如果用速度做变量，$v_x, v_y, v_z$是速度的三个分量
+$
+  p_k = m v_k, k = x, y, z
+$
+由此可得到在速度空间$dd(v_x, v_y, v_z)$范围内的分子数为
+$
+  N (m/(2 pi k_B T))^(3/2) e^(- 1/2 m (v_x^2 + v_y^2 + v_z^2) beta) dd(v_x, v_y, v_z)
+$
+设$n = N/V$为粒子数密度，则单位体积内，速度在$dd(v_x, v_y, v_z)$范围内的分子数为
+$
+  f(v_x, v_y, v_z) dd(v_x, v_y, v_z) = n (m/(2 pi k_B T))^(3/2) e^(- 1/2 m (v_x^2 + v_y^2 + v_z^2) beta) dd(v_x, v_y, v_z)
+$
+速度分布满足归一化条件
+$
+  integral f(v_x, v_y, v_z) dd(v_x, v_y, v_z) = n
+$
+
+- 速率的分布
+  $
+    integral dd(v_x, v_y, v_z) f(v_x, v_y, v_z) = integral dd(v) f(v)
+  $
+  所以可以写成
+  $
+    f(v) = 4 pi v^2 (m/(2 pi k_B T))^(3/2) e^(- 1/2 m v^2 beta)
+  $
+  - $4 pi v^2$是速度空间中半径为$v$的球壳面积因子
+  - 所以速率的分布是有峰值的
+- 最可几速率$v_m$
+  $
+    dv(f(v), v) = 0 => v_m = sqrt((2 k_B T) / m)
+  $
+  也就是最可能测量到的速率，也是速率分布的峰值位置
+- 平均速率$overline(v)$
+  $
+    overline(v) = integral v f(v) dd(v) = sqrt((8 k_B T) / (pi m))
+  $
+- 方均根速率$v_"rms"$
+  $
+    v_"rms" = sqrt(overline(v^2)) = sqrt(integral v^2 f(v) dd(v)) = sqrt((3 k_B T) / m)
+  $
+  - 能量均分定理：每个自由度平均分配$1/2 k_B T$的能量，单原子分子有三个平动自由度，所以平均动能为$3/2 k_B T$，从而方均根速率为$v_"rms" = sqrt((3 k_B T) / m)$
+- 有大小关系
+  $
+    v_m < overline(v) < v_"rms"
+  $
+
+对于#ch("H_2")，在$T=273$K，下$sqrt(overline(v^2)) = 10^3 "m/s"$
+
+气体分子通过碰撞使气体达致平衡，考虑*气体分子碰壁数*，定义$Gamma$为单位时间内碰到单位面积器壁上的分子数。
+
+考虑$vb(v) -> vb(v) + dd(vb(v))$的分子贡献$dd(Gamma)$，$dd(t)$内打到$dd(A)$上的分子数：
+$
+  dd(Gamma) dd(t) dd(A) & = f(vb(r), vb(v), t) dd(vb(v)) underbrace(v_x dd(t) dd(A), "柱体积") \
+              dd(Gamma) & = f(vb(r), vb(v), t) dd(vb(v)) v_x
+$
+从而
+$
+  Gamma(vb(r), t) & = integral dd(vb(v)) v_x f(vb(r), vb(v), t) \
+                  & = integral_0^oo dd(v_x) integral_(-oo)^oo dd(v_y) integral_(-oo)^oo dd(v_z) v_x f(vb(r), vb(v), t)
+$
+这对任意非平衡态也成立，对于平衡态，满足Maxwell分布
+$
+  f(vb(v)) = n (m/(2 pi k_B T))^(3/2) e^(- m (v_x^2 + v_y^2 + v_z^2)/(2 k_B T))
+$
+$
+  Gamma &= n (m/(2 pi k_B T))^(3/2) integral_0^oo dd(v_x) integral_(-oo)^oo dd(v_y) integral_(-oo)^oo dd(v_z) v_x e^(- m (v_x^2 + v_y^2 + v_z^2)/(2 k_B T)) \
+  & = n (m/(2 pi k_B T))^(1/2) integral_0^oo dd(v_x) v_x e^(- m/(2 k_B T) v_x^2) (m/(2 pi k_B T))^(1/2) integral_(-oo)^oo dd(v_y) e^(- m/(2 k_B T) v_y^2) (m/(2 pi k_B T))^(1/2) integral_(-oo)^oo dd(v_z) e^(- m/(2 k_B T) v_z^2) \
+$
+积分得到
+$
+  Gamma & = n ((k_B T) / (2 pi m))^(1/2) = 1/4 n overline(v)
+$
+其中
+$
+  overline(v) = integral_0^oo dd(v) v f(v) = sqrt((8 k_B T) / (pi m))
+$
+是平均速率。
+
+例如#ch("N2")，1atm，$0℃$下
+$
+  n = p/(k_B T) = (1 times 760 times 133 "Pa")/(1.38 times 10^(-23) "J/K" times 273 "K") = 2.68 times 10^25 "m"^(-3)\
+  overline(v) = sqrt((8 k_B T) / (pi m)) = sqrt((8 times 1.38 times 10^(-23) "J/K" times 273 "K") / (pi times 4.65 times 10^(-26) "kg")) = 4.53 times 10^2 "m/s"\
+  Gamma = 1/4 n overline(v) tilde 3.03 times 10^27 "m"^(-2) "s"^(-1)
+$
+
+=== 内部运动
+
