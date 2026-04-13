@@ -665,3 +665,230 @@ $
 
 === 内部运动
 
+对双原子分子，如果不考虑原子内部电子激发，那么每个原子可以先看成质点。分子的能量主要来自两类运动：
+- 质心平动：3个平动自由度
+- 分子内部运动：2个转动自由度+1个振动模
+
+总能量能拆成
+$
+  epsilon_a = epsilon_t + epsilon_i, epsilon_i = epsilon_r + epsilon_v
+$
+$
+  omega_a = omega_t omega_i, omega_i = omega_r omega_v
+$
+配分函数也能拆成
+$
+  Z(beta, V) &= sum_a omega_a e^(- beta epsilon_a) = sum_t omega_t e^(- beta epsilon_t) sum_i omega_i e^(- beta epsilon_i) \
+  &= Z_t (beta, V) Z_i (beta) = Z_t (beta, V) Z_r (beta) Z_v (beta)
+$
+即独立的运动对$Z(beta,V)$的贡献是相乘关系。下面讨论$C_V$
+$
+  E = - N pdv(ln Z, beta) = E_t + E_r + E_v\
+  C_V = (pdv(E, T))_V = C_V^t + C_V^r + C_V^v
+$
+
+==== 平动
+
+同单原子分子
+$
+  E_t = 3/2 N k_B T, C_V^t = 3/2 N k_B
+$
+
+==== 振动
+
+双原子分子的振动近似成一维简谐振子，两原子的相对运动可用约化质量
+$
+  mu = (m_1 m_2) / (m_1 + m_2)
+$
+来描述。振动能级是
+$
+  epsilon_n = (n + 1/2) hbar omega, n = 0, 1, 2, ..., omega_n = 1
+$
+间隔
+$
+  Delta epsilon = h nu tilde 0.1 "eV"
+$
+室温下
+$
+  k_B T tilde 0.025 "eV" << Delta epsilon
+$
+所以*能级分立性必须考虑*。定义*振动特征温度*
+$
+  theta_v = (Delta epsilon_n) / k_B = (h nu)/k_B tilde 1000 "K"
+$
+对平动、常温下的转动，常常可以把能级看得几乎连续；但振动的量子间隔太大了，室温热能往往不够把分子激发到更高振动态。于是就出现“冻结”现象：平动、转动常温通常激发，振动常温往往激发不上去。
+
+#figure(
+  three-line-table[
+    | Gas | $theta_v$ (K) | $e^(- theta_v / T)$at $T=300$K | $e^(- theta_v / T)$at $T=1000$K |
+    | --- | --- | --- | --- |
+    | #ch("H2") | 6215 | $1.04 times 10^(-9)$ | $2.03 times 10^(-3)$ |
+    | #ch("HCl") | 4227 | $1.02 times 10^(-6)$ | $1.59 times 10^(-2)$ |
+    | #ch("N2") | 3374 | $1.51 times 10^(-5)$ | $3.55 times 10^(-2)$ |
+    | #ch("CO") | 3100 | $3.71 times 10^(-5)$ | $4.65 times 10^(-2)$ |
+    | #ch("Cl2") | 810 | $6.72 times 10^(-2)$ | $4.45 times 10^(-1)$ |
+    | #ch("I2") | 310 | $3.56 times 10^(-1)$ | $7.33 times 10^(-1)$ |
+  ],
+  caption: [The fraction of molecules in excited vibrational state at 300K and 1000K],
+)
+
+
+*配分函数*
+$
+  Z_v (beta) & = sum_n e^(- beta epsilon_n) = e^(- 1/2 beta h nu) sum_(n=0)^oo e^(- n beta h nu) \
+             & = e^(- 1/2 beta h nu) / (1 - e^(- beta h nu)) = e^(- theta_v / (2 T)) / (1 - e^(- theta_v / T))
+$
+由此得到*能量*
+$
+  E_v = - N pdv(ln Z_v, beta) = N h nu (1/2 + e^(- beta h nu) / (1 - e^(- beta h nu))) = N overline(epsilon_v)
+$
+其中$1/2$是零点能，$e^(- beta h nu) / (1 - e^(- beta h nu))$是激发项，而$overline(epsilon_v)$是平均振动能量。振动*热容*
+$
+  C_V^v = (pdv(E_v, T))_V = N k_B epsilon(theta/T)
+$
+其中$epsilon(x)$是Einstein函数
+$
+  epsilon(x) = (x^2 e^x) / (e^x - 1)^2
+$
+
+#newpara()
+*振动的低温极限*有$theta_v/T >> 1$
+$
+  C_V^v approx N k_B (theta_v/T)^2 e^(- theta_v/T)
+$
+低温下热运动能量太低，振子被激发的概率很小，所以振动自由度对热容贡献很小。热运动能量太低，振子吸收能量被激发的几率很小。
+
+*振动的高温极限*有
+$
+  Z_v & = h^(-1) integral dd(vb(omega)) e^(- beta epsilon_v) \
+      & = h^(-1) integral dd(x) integral dd(p_x) e^(- beta (p_x^2/(2 mu) + 1/2 m omega^2 x^2)) \
+      & = 1/(beta h nu) = T/theta_v
+$
+从而
+$
+  E_v = - N pdv(ln Z_v, beta) = N k_B T, C_V^v = (pdv(E_v, T))_V = N k_B
+$
+这是经典极限，热运动能量足够大，振子被激发的几率接近$1$，每个振动自由度平均分配$k_B T$的能量。符合*能量均分定理*。
+
+==== 转动
+
+以*异核双原子分子*为例。
+
+同核需考虑全同性原理：
+- 正氢：两个氢核自旋平行，$l$为奇数，$3/4$
+- 反氢：两个氢核自旋反平行，$l$为偶数，$1/4$
+
+双原子分子刚体*转动的量子能级*是
+$
+  epsilon_r (l) = l(l + 1) hbar^2/(2 I), l = 0, 1, 2, ..., omega_n (l) = 2 l + 1
+$
+由此可以定义*转动特征温度*
+$
+  theta_r = hbar^2/(2 I k_B) tilde 10 "K"
+$
+*转动配分函数*为
+$
+  Z_r (beta) & = sum_l (2 l + 1) e^(- beta epsilon_r (l)) \
+             & = sum_(l=0)^oo (2 l + 1) e^(- theta_r / T l(l + 1))
+$
+对很多双原子气体，室温$T tilde 300"K"$时，转动已经处在高温极限。
+
+*高温极限*下
+$
+  theta_r / T << 1
+$
+能级准连续
+$
+  epsilon_r = 1/(2 I) (p_theta^2 + 1/(sin^2 theta) p_phi^2)
+$
+有
+$
+  Z_r &= h^(-2) integral dd(vb(omega)) e^(- beta epsilon_r) = h^(-2) integral dd(theta, phi) integral dd(p_theta, p_phi) e^(- beta (p_theta^2/(2 I) + p_phi^2/(2 I sin^2 theta)))\
+  &= h^(-2) integral dd(theta, phi) sqrt(pi/(beta/(2I))) sqrt(pi/(beta/(2I sin^2 theta))) = T/theta_r
+$
+或者也可以用Euler-Maclaurin公式
+$
+  sum_(l=0)^oo f(l) = integral_0^oo f(x) dd(x) + 1/2 f(0) + sum_(k=1)^oo (- B_(2k))/(2k)! f^(2k-1)(0)
+$
+求和
+$
+  Z_r & = sum_(l=0)^oo omega_r (l) e^(- beta epsilon_r (l)) \
+      & = sum_(l=0)^oo (2 l + 1) e^(- theta_r / T l(l + 1)) \
+      & approx integral_0^oo (2 x + 1) e^(- theta_r / T x(x + 1)) dd(x) = T/theta_r
+$
+从而可以得到*转动能量*
+$
+  E_r = - N pdv(ln Z_r, beta) = N k_B T
+$
+*转动热容*
+$
+  C_V^r = (pdv(E_r, T))_V = N k_B
+$
+符合*能量均分定理*：每个转动自由度平均分配$k_B T$的能量。
+
+*低温极限*下$theta_r / T >> 1$，分立性必须考虑
+$
+  Z_r = 1 + 3 e^(- 2 theta_r / T) ... tilde 1
+$
+得到能量
+$
+  E_r = - N pdv(ln Z_r, beta) = 6 N k_B T theta_r/T e^(- 2 theta_r / T)
+$
+以及热容
+$
+  C_V^r = (pdv(E_r, T))_V = 12 N k_B (theta_r/T)^2 e^(- 2 theta_r / T)
+$
+这说明低温时转动激发被强烈压低，热容迅速趋近于0。高（低）温极限是相对特征温度而言的，300 K 对振动是低温，对转动是高温。
+
+把前面的振动和现在的转动合起来，就得到双原子气体最经典的温度图景：
+- 很低温：平动有贡献，转动冻结，振动冻结
+  $
+    Z(beta, V) = Z_t (beta, V) = V (2 pi m k_B T)^(3/2) / h^3\
+    E = E_t = 3/2 N k_B T, C_V = C_V^t = 3/2 N k_B
+  $
+- 常温：平动有贡献，转动有贡献，振动冻结
+  $
+    Z(beta, V) = Z_t (beta, V) Z_r (beta) = V (2 pi m k_B T)^(3/2) / h^3 T/theta_r\
+    E = E_t + E_r = 5/2 N k_B T, C_V = C_V^t + C_V^r = 5/2 N k_B
+  $
+- 高温：平动有贡献，转动有贡献，振动有贡献
+  $
+    Z(beta, V) = Z_t (beta, V) Z_r (beta) Z_v (beta) = V (2 pi m k_B T)^(3/2) / h^3 T/theta_r T/theta_v\
+    E = E_t + E_r + E_v = 7/2 N k_B T, C_V = C_V^t + C_V^r + C_V^v = 7/2 N k_B
+  $
+
+至此，原子看作质点，无结构，但原子有内部结构，这些自由度对宏观量特别是$C_V$无贡献，这是因为：
+- 稳定性：分子 < 原子 < 原子核 < ...
+- 结合能，能级间距同上
+- 特征温度：分子 < 原子 < 原子核 < ...
+- 激发难易程度：易、难、更难
+结合的紧的内部结构被冻结了，它们通常不激发对$C_V$无贡献，有效自由度：被激发自由度，对$C_V$有贡献。
+
+== 晶体振动的Einstein模型
+
+本节用最简单的量子振动模型，解释固体热容为什么在常温接近常数，而在低温会下降。
+
+各种运动近似独立时，对配分函数$Z$的贡献是相乘，对能量$E$、比热$C_V$的贡献是相加。对于有$N$个晶格原子的固体，总共有$4N$个自由度。其中：
+- 整体平动 + 整体转动：$3 + 3 = 6$
+- 内部振动：$3N - 6$
+所以固体的热容主要由内部振动决定。
+
+=== 简谐近似
+
+晶格间强耦合，从而当温度不太高时，原子偏离平衡位置的振幅很小，因此可以把势能在平衡位置附近展开，只保留到二次项，这就是*简谐近似*。
+$
+  Phi(x_1, x_2, ..., x_(3N)) = eval(phi)_(x_i = 0) + sum_i eval(pdv(phi, x_i))_(x_i = 0) x_i + 1/2 sum_(i,j) eval(pdv(phi, x_i, x_j))_(x_i = 0) x_i x_j + ...
+$
+简谐近似，只保留至二次项
+$
+  H = sum_i p_i^2/(2 m) + 1/2 sum_(i,j) eval(pdv(phi, x_i, x_j))_(x_i = 0) x_i x_j + phi_0
+$
+
+=== Einstein模型
+
+=== 高温极限
+
+=== 低温极限
+
+
+== 顺磁物质的磁性
