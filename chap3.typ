@@ -881,12 +881,59 @@ $
 $
 简谐近似，只保留至二次项
 $
-  H = sum_i p_i^2/(2 m) + 1/2 sum_(i,j) eval(pdv(phi, x_i, x_j))_(x_i = 0) x_i x_j + phi_0
+  H = sum_i p_i^2/(2 m) + 1/2 sum_(i,j) C_(i j) x_i x_j + phi_0, C_(i j) = eval(pdv(phi, x_i, x_j))_(x_i = 0)
 $
+正交变换使其对角化
+$
+  mat(q_1; q_2; ...; q_(3N)) = O mat(x_1; x_2; ...; x_(3N)), O^TT O = I
+$
+对角化后
+$
+  mat(x_1, x_2, ..., x_(3N)) mat(C_(i j)) mat(x_1; x_2; ...; x_(3N)) = mat(q_1, q_2, ..., q_(3N)) Omega mat(q_1; q_2; ...; q_(3N))
+$
+其中$Omega$是对角矩阵，对角元为振动频率的平方。每个$q_i$都是一个独立的简谐振子
+$
+  H = sum_i ( p_i^2/(2 m) + 2 pi^2 m nu_i^2 q_i^2 ) + phi_0, nu_i = sqrt(Omega_(i i)) / (2 pi), p_i = m dot(q_i)
+$
+解耦晶格振动约化为$3N$个独立，可区别的*简谐振子的振动*（简正模（集体振动）），统计力学就能直接对每个模式用 Boltzmann 分布来算。
 
 === Einstein模型
 
+*Einstein模型*核心假设是
+$
+  nu_i = nu
+$
+所有$3N$个简正模的频率都相同，单个振子的量子能级
+$
+  epsilon_n = (n + 1/2) h nu, n = 0, 1, 2, ...
+$
+就有*配分函数*
+$
+  Z(beta) = sum_(n=0)^oo e^(- beta epsilon_n) = e^(- 1/2 beta h nu) / (1 - e^(- beta h nu))
+$
+整个晶体的*内能*为$3N$个这样的振子
+$
+  E & = - 3 N pdv(ln Z, beta) = 3 N h nu (1/2 + 1 / (e^(beta h nu) - 1)) + phi_0 \
+    & = 3 N h nu 1/(e^(beta h nu) - 1) + E_0
+$
+其中$3/2 N h nu$为振动零点能，$3 N h nu 1/(e^(beta h nu) - 1)$为振动激发能，$phi_0$为晶格势能的零点，$E_0$为振动零点能加上晶格势能的零点。*热容*为
+$
+  C_V = (pdv(E, T))_V = 3 N k_B epsilon(theta_E / T)
+$
+其中$theta_E = h nu / k_B$是Einstein特征温度，是振动特征温度，$epsilon(x)$是Einstein函数
+$
+  epsilon(x) = (x^2 e^x) / (e^x - 1)^2
+$
+$nu$为$V/N$的函数。
+
 === 高温极限
+
+高温极限有$theta_E / T << 1$，能级准连续，*热容*满足能量均分定理（Law of Dulong and Petit）
+$
+  C_V = 3 N k_B epsilon(theta_E / T) approx 3 N k_B
+$
+每个简谐振子再高温及线下贡献$1/2 k_B$的动能和$1/2 k_B$的势能。
+
 
 === 低温极限
 
