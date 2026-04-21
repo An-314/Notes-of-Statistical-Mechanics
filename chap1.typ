@@ -427,7 +427,7 @@ $
   $
   也可以$T$，$p$或$p$，$V$为变量类似做。
 
-  对其它单项功系流类似：$V -> y , - p -> Y$。
+  对其它单项功：$V -> y , - p -> Y$。
 ]
 
 ==== 绝热过程
@@ -873,7 +873,6 @@ $
 
 #definition(subname: [Gibbs自由能])[
   *Gibbs自由能*是一个状态函数，定义为内能与温度-熵乘积之差再加上压力-体积乘积：
-  node((0, 0), $V$),
   $
     G = U - T S + p V
   $
@@ -932,10 +931,10 @@ $
 #theorem(subname: [Maxwell关系])[
   热力学量的二阶偏导数满足交换律，给出热力学量的偏导数之间的关系，例如
   $
-    (pdv(T, V))_S = - (pdv(p, T))_V
+    (pdv(T, V))_S = - (pdv(p, S))_V
   $
   $
-    (pdv(T, p))_S = (pdv(V, T))_p
+    (pdv(T, p))_S = (pdv(V, S))_p
   $
   $
     (pdv(S, V))_T = (pdv(p, T))_V
@@ -950,7 +949,7 @@ $
     dd(U) = T dd(S) - p dd(V) = (pdv(U, S))_V dd(S) + (pdv(U, V))_S dd(V)
   $
   $
-    (pdv(T, V))_S = pdv(U, S, V) = pdv(U, V, S) = - (pdv(p, T))_V
+    (pdv(T, V))_S = pdv(U, S, V) = pdv(U, V, S) = - (pdv(p, S))_V
   $
   同理可以得到其它Maxwell关系。
 ]
@@ -1514,7 +1513,7 @@ $
 - 如果给定$T, P$：$mu^(("I")) = mu^(("II"))$ 相I与相II平衡
   - 这给出一条相平衡线$P(T)$，即*相界线*
 
-  我们考虑边界点$A: mu^(("I")) (T, P) = mu^(("II")) (T, P)$，在边界点$A$附近的$B$，$mu^(("I")) (T + dd(T), P + dd(P)) = mu^(("II")) (T + dd(T), P + dd(P))$，相减得到$dd(mu^((I))_m) = dd(mu^((II))_m)$，其中$mu^((i))_m$是第$i$相的每mole的化学势。根据热力学方程
+  我们考虑边界点$A: mu^(("I")) (T, P) = mu^(("II")) (T, P)$，在边界点$A$附近的$B$，$mu^(("I")) (T + dd(T), P + dd(P)) = mu^(("II")) (T + dd(T), P + dd(P))$，相减得到$dd(mu^(("I"))_m) = dd(mu^(("II"))_m)$，其中$mu^((i))_m$是第$i$相的每mole的化学势。根据热力学方程
   $
     dd(mu^((i))_m) = (pdv(mu^((i))_m, T))_P dd(T) + (pdv(mu^((i))_m, P))_T dd(P) = - s^(("i"))_m dd(T) + v^(("i"))_m dd(P)
   $
@@ -1721,14 +1720,14 @@ $
 $
 Van de Waals方程化为
 $
-  (p^* + 3/v^*^2) (v^* - 1/3) = 8 t^* / 3
+  (p^* + 3/v^*^2) (v^* - 1/3) = (8 t^*) / 3
 $
 为*Van de Waals对比方程*。这个方程中不含与具体物质性质有关的常量，这就是说，如果采用对比变量，Van de Waals方程是普适的，各种气（液）体的物态方程相同。这个结果称为*对应态定律*。
 
 #theorem(subname: [对应态定律])[
   如果采用对比变量，Van de Waals方程是普适的，各种气（液）体的物态方程相同。Van de Waals比对方程为
   $
-    (p^* + 3/v^*^2) (v^* - 1/3) = 8 t^* / 3
+    (p^* + 3/v^*^2) (v^* - 1/3) = (8 t^*) / 3
   $
 ]
 
@@ -1838,7 +1837,7 @@ $
 
 当系统的自然变量是$T$、外场$Y_i$和粒子数$N_i$时，最合适的热力学势就是Gibbs自由能
 $
-  G = U - T S - Y y = sum_i mu_i N_id
+  G = U - T S - Y y = sum_i mu_i N_i
 $
 微分形式为
 $

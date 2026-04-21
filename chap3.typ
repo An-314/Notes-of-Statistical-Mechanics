@@ -178,7 +178,7 @@ $
 $
 从而
 $
-  S' = N k_B(1 - ln N) = - k_B ln N!
+  S' = N k_B (1 - ln N) = - k_B ln N!
 $
 #newpara()
 对*Boltzmann分布*
@@ -226,13 +226,13 @@ $
 
   设粒子自由度为$gamma$，则$2 gamma$维相体积元
   $
-    dd(omega) = product_(i=1)^gamma dd(q_i, p_i)
+    dd(vb(omega)) = product_(i=1)^gamma dd(q_i, p_i)
   $
 ]
 
-*经典*情况下一个状态对应$mu$空间中的一点。而对于*半经典*情况，一个状态对应大小为$h^gamma$的相体积元（测不准关系$Delta q Delta p = h$）于是相体积元$dd(omega)$中包含的量子态数大约是
+*经典*情况下一个状态对应$mu$空间中的一点。而对于*半经典*情况，一个状态对应大小为$h^gamma$的相体积元（测不准关系$Delta q Delta p = h$）于是相体积元$dd(vb(omega))$中包含的量子态数大约是
 $
-  dd(N) = h^(- gamma) dd(omega)
+  dd(N) = h^(- gamma) dd(vb(omega))
 $
 这就是半经典近似的核心思想：量子力学指出不能无限精细地区分相空间中的点，每一个独立量子态，大致占据一个最小的相空间体积$h^gamma$。
 
@@ -265,27 +265,27 @@ $
 
 全同粒子的近独立系统$μ$空间也可描述系统的状态。
 
-现在计算*相空间体积元$dd(omega)$中的粒子数*，每个状态上的粒子数
+现在计算*相空间体积元$dd(vb(omega))$中的粒子数*，每个状态上的粒子数
 $
   a_i/omega_i = e^(- alpha - beta epsilon_i)
 $
-从而体积元$dd(omega)$中粒子数
+从而体积元$dd(vb(omega))$中粒子数
 $
-  dd(N) = h^(-gamma) e^(- alpha - beta epsilon) dd(omega)
+  dd(N) = h^(-gamma) e^(- alpha - beta epsilon) dd(vb(omega))
 $
 从而
 $
-  N = integral h^(-gamma) e^(- alpha - beta epsilon) dd(omega) = e^(-alpha) Z(beta, y)
+  N = integral h^(-gamma) e^(- alpha - beta epsilon) dd(vb(omega)) = e^(-alpha) Z(beta, y)
 $
 其中
 $
-  Z(beta, y) = integral h^(-gamma) e^(- beta epsilon) dd(omega), epsilon = H(q, p, y)
+  Z(beta, y) = integral h^(-gamma) e^(- beta epsilon) dd(vb(omega)), epsilon = H(q, p, y)
 $
 在*半经典近似*下
 #theorem(subname: [半经典近似下配分函数的表达式])[
   半经典近似下配分函数的表达式为
   $
-    Z(beta, y) = integral h^(-gamma) e^(- beta H(q, p, y)) dd(omega)
+    Z(beta, y) = integral h^(-gamma) e^(- beta H(q, p, y)) dd(vb(omega))
   $
 ]
 #newpara()
@@ -324,7 +324,7 @@ $
 #definition(subname: [能态密度])[
   能态密度$g(epsilon)$定义为能量在$epsilon -> epsilon + dd(epsilon)$的状态数，即
   $
-    g(epsilon) dd(epsilon) = integral_(epsilon ->epsilon + dd(epsilon)) h^(-gamma) dd(omega)
+    g(epsilon) dd(epsilon) = integral_(epsilon ->epsilon + dd(epsilon)) h^(-gamma) dd(vb(omega))
   $
   有
   $
@@ -440,7 +440,7 @@ $
   $
     epsilon_n = (n_x^2 + n_y^2 + n_z^2) hbar^2/(2 m), n_x, n_y, n_z = 0, 1, 2, ...
   $
-  近似计算$omega_n$：小方格体积为$1$，故：能量曲面与坐标平面所夹体积=包含的状态数$G(epsilon)$
+  近似计算$omega_n$：小方格体积为$1$，故能量曲面与坐标平面所夹体积=包含的状态数$G(epsilon)$
   $
     G(epsilon) = 4/3 pi ((8 m L^2 epsilon) / hbar^2)^(3/2) 1 / 8 = 4/3 pi (2 m epsilon)^(3/2) V / h^3
   $
@@ -868,7 +868,7 @@ $
 
 本节用最简单的量子振动模型，解释固体热容为什么在常温接近常数，而在低温会下降。
 
-各种运动近似独立时，对配分函数$Z$的贡献是相乘，对能量$E$、比热$C_V$的贡献是相加。对于有$N$个晶格原子的固体，总共有$4N$个自由度。其中：
+各种运动近似独立时，对配分函数$Z$的贡献是相乘，对能量$E$、比热$C_V$的贡献是相加。对于有$N$个晶格原子的固体，总共有$3N$个自由度。其中：
 - 整体平动 + 整体转动：$3 + 3 = 6$
 - 内部振动：$3N - 6$
 所以固体的热容主要由内部振动决定。
@@ -920,7 +920,7 @@ $
 $
   C_V = (pdv(E, T))_V = 3 N k_B epsilon(theta_E / T)
 $
-其中$theta_E = h nu / k_B$是Einstein特征温度，是振动特征温度，$epsilon(x)$是Einstein函数
+其中$theta_E = (h nu) / k_B$是Einstein特征温度，是振动特征温度，$epsilon(x)$是Einstein函数
 $
   epsilon(x) = (x^2 e^x) / (e^x - 1)^2
 $
@@ -1137,7 +1137,7 @@ $
 $
 所以这个系统的能量被限制在$-N epsilon <= E <= N epsilon$的范围内，这是负温可能出现的必要条件：*能量有上界*。*系统的熵*
 $
-  S = k ln Omega = k ln (N!/(N_+! N_-!))
+  S = k ln Omega = k ln (N!/(N_+ ! N_- !))
 $
 将*熵用能量表示*，即粒子数用能量表示
 $
