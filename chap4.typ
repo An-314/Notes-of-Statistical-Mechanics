@@ -592,3 +592,157 @@ $lambda$相变和理想 Bose 气体的 BEC 有相似性，但不能完全等同
   - 液态#ch("^4 He")是强相互作用的量子液体，发生的是空间上的凝聚
 
 == 光子气体
+
+黑体辐射可以看成由大量光子组成的气体。光子有几个特殊性质：
+$
+        m & = 0 \
+  epsilon & = hbar omega = hbar c k \
+        p & = h/lambda = hbar k \
+        c & = lambda nu
+$
+光子是自旋为 1 的Boson
+$
+  s= 1
+$
+但由于光子只有两个横向偏振态，所以自旋简并度为
+$
+  g_s = 2
+$
+所以光子气体是：*理想Bose气体*，它和前面讲的普通有质量Bose气体有一个巨大区别——光子数不守恒。
+
+普通粒子气体，粒子数$N$是固定的。所以在统计分布中需要用化学势$mu$，或者用：
+$
+  alpha = - mu/(k_B T)
+$
+来控制粒子数。但是黑体辐射中的光子可以被腔壁吸收，也可以由腔壁发射。因此光子总数不是守恒量。也就是说，平衡时固定的是$T,V$，或者固定总能量对应的温度，而不是固定光子数。
+
+所以光子气体中
+$
+  mu = 0, alpha = 0
+$
+光子数不守恒导致没有$alpha$，因此光子的 Bose 分布为
+$
+  a_i = omega_i/(e^(beta epsilon_i) - 1)
+$
+
+=== 黑体辐射公式
+
+能完全吸收照射到它上面的各种波长电磁波的物体，称为黑体。理想黑体有两个含义：
+- 它吸收所有入射光，不反射、不透射
+- 它在热平衡时发出的辐射只由温度决定，与材料细节无关
+
+当体积$V$很大时，能级近似准连续。单粒子相空间$dd(vb(omega))$中，每个量子态占据体积$h^3$，状态数
+$
+  dd(vb(omega))/h^3
+$
+光子数
+$
+  dd(N) = g_s dd(vb(omega))/h^3 1/(e^(beta epsilon) - 1)
+$
+利用
+$
+  epsilon = c p = h nu
+$
+所以动量空间中，$p$到$p+dd(p)$之间的状态数为：
+$
+  h^(-3) g_s integral dd(vb(x), 3) integral dd(vb(p), 3) = h^(-3) g_s V 4 pi p^2 dd(p)
+$
+有
+$
+  p = epsilon/c = (h nu)/c
+$
+在频率空间中，$nu$到$nu + dd(nu)$之间的状态数为
+$
+  g(nu) dd(nu) = h^(-3) g_s V 4 pi (h/c)^3 nu^2 dd(nu) = g_s (4 pi V)/(c^3) nu^2 dd(nu)
+$
+光子数
+$
+  n(nu) dd(nu) = g_s (4 pi V)/(c^3) nu^2 1/(e^(beta h nu) - 1) dd(nu)
+$
+能量
+$
+  U(nu) dd(nu) = h nu n(nu) dd(nu) = 8 pi V h nu^3/c^3 1/(e^(beta h nu) - 1) dd(nu)
+$
+这是*Planck黑体辐射公式*。
+
+在低频高$T$极限$h nu << k_B T$时，Planck公式近似为经典的Ray leigh-Jeans定律
+$
+  U(nu) dd(nu) approx 8 pi V nu^2/c^3 k_B T dd(nu)
+$
+在高频低$T$极限$h nu >> k_B T$时，Planck公式近似为量子的Wien定律
+$
+  U(nu) dd(nu) approx 8 pi V h nu^3/c^3 e^(- beta h nu) dd(nu)
+$
+#newpara()
+
+*辐射场总能量*
+$
+  E = integral_0^oo U(nu) dd(nu) = V u
+$
+$
+  u = b R^4, b = (8 pi^5 k_B^4)/(c^3 h^3) integral_0^oo x^3/(e^x - 1) dd(x) = (8 pi^5 k_B^4)/(15 c^3 h^3)
+$
+经典发散，不能与其他物体（壁）达到热平衡。
+
+*辐射通量密度*是单位时间通过单位面积小孔辐射出的能量满足Stefan-Boltzmann定律
+$
+  J = c/4 u = sigma T^4, sigma = (2 pi^5 k_B^4)/(15 c^2 h^3)
+$
+
+#newpara()
+对于能量密度按波长的分布
+$
+  u(nu) dd(nu) = u(lambda) dd(lambda)
+$
+有
+$
+  dd(nu) = - c/lambda^2 dd(lambda)
+$
+就给出
+$
+  u(lambda) dd(lambda) = (8 pi h c)/lambda^5 1/(e^(beta h c/lambda) - 1) dd(lambda)
+$
+现在求波长$lambda_m$处的峰值满足
+$
+  dd(u(lambda))/dd(lambda) = 0
+$
+给出
+$
+  lambda_m T = (h c)/(4.96 k) = 0.2898 "cm K"
+$
+这就是Wien位移定律，最可几波随温度增加向短波方向移动。
+
+=== 热力学
+
+由于光子数不守恒，化学势$mu=0$，所以巨配分函数为
+$
+  ln Xi(beta, V) & = - integral_0^oo g(epsilon) ln (1 - e^(- beta epsilon)) dd(epsilon)
+$
+其中
+$
+  g(epsilon) dd(epsilon) = g(nu) dd(nu) = g_s (4 pi V)/(c^3) nu^2 dd(nu) = 2 (4 pi V)/(c^3 h^3) epsilon^2 dd(epsilon)
+$
+则有
+$
+  ln Xi(beta, V) & = - (8 pi V)/(c^3 h^3 beta^3) integral_0^oo dd(x) x^2 ln (1 - e^(- x)) \
+                 & = (8 pi V)/(c^3 h^3 beta^3) integral_0^oo dd(x) x^3/(e^x - 1) \
+                 & = (8 pi V k_B^3 T^3)/(c^3 h^3) integral_0^oo dd(x) x^3/(e^x - 1) \
+                 & = (8 pi^5 k_B^3 T^3 V)/(45 c^3 h^3)
+$
+可以求出热力学量
+$
+  U & = - pdv(ln Xi, beta) = (8 pi^5 k_B^4 T^4 V)/(15 c^3 h^3) \
+  p & = 1/beta pdv(ln Xi, V) = (8 pi^5 k_B^4 T^4)/(45 c^3 h^3) = 1/3 E/V = 1/3 b T^4 \
+  S & = k_B (ln Xi + beta U) = 4 k_B ln Xi = 4/3 b V T^3
+$
+以及
+$
+  C_V & = (pdv(U, T))_V = (32 pi^5 k_B^4 T^3 V)/(15 c^3 h^3) = 4 b V T^3
+$
+在$T$增大时，$C_V$也增大，说明系统的热涨落增强，因光子数不守恒
+$
+  F = U - T S = - 1/3 U
+$
+$
+  G = F + p V = 0 => mu = 0
+$
