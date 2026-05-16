@@ -746,3 +746,204 @@ $
 $
   G = F + p V = 0 => mu = 0
 $
+
+== 声子气体
+
+前面讲固体热容时，曾经用过 Einstein 模型。Einstein 模型把固体中每个原子近似看成频率相同的谐振子。这个模型能解释低温热容趋于零，但和实验定量不完全符合。
+
+Debye模型改进的关键是：固体中的振动频率不是单一的，而是一整套连续分布的简正模式。
+
+处理方法有两种：一种是把每个振动模式当成谐振子，用Boltzmann分布求平均能量；另一种就是本节方法：把振动量子看成声子，用Bose分布处理。
+
+=== 声子气体
+
+简谐近似下，固体中原子的集体振动可以分解成许多独立的简正振动模式。每个模式就是一个量子谐振子。
+
+频率为$nu_i$的谐振子，其能级为
+$
+  epsilon_i (n_i) = h nu_i (n_i + 1/2), n_i = 0, 1, 2, ...
+$
+如果这个模式处在第$n_i$个激发态，就可以说它有$n_i$个能量为$h nu_i$的声子。
+
+它有几个特点：振子间独立$n_i$为任意非负整数，声子彼此不可分辨；一个模式中可以有任意多个声子，所以声子服从Bose统计。
+
+而且声子数不守恒。固体振动的激发可以产生，也可以湮灭，平衡态中没有固定声子总数，所以：
+$
+  mu = 0
+$
+如果频率$nu_i$的模式有简并度$omega_i$
+$
+  a_i = omega_i/(e^(beta h nu_i) - 1)
+$
+这和光子气体非常像：
+$
+  overline(n) = 1/(e^(beta epsilon) - 1)
+$
+但光子存在于电磁场中，声子存在于固体晶格振动中。
+
+=== Debye模型
+
+Einstein 模型和实验定量不符，原因是它忽略了低频振动。
+
+低温时，热激发能量很小，主要激发的是：低频、长波振动，即
+$
+  lambda >> "原子间距"
+$
+当波长远大于晶格常数时，固体可以近似看成连续介质。连续介质中的弹性波就是声波，因此低频晶格振动可以近似看成声波。
+
+Debye的想法是：把固体低频振动看成连续弹性介质中的声波，振动频率从$0$到$omega_D$，即Debye频率。Debye频率是一个截止频率，表示固体中最高的振动频率。
+
+声学振动模式对应
+- 纵波：纵波中，原子位移方向和波传播方向平行。它有一种偏振方式，声速记为：$v_l$
+- 横波：横波中，原子位移方向和波传播方向垂直，在三维空间中，对于一个传播方向，有两个相互独立的横向偏振方向。它有两种偏振方式，声速记为：$v_t$
+因此一个三维固体中，每个波矢方向有：1个纵波模式+2个横波模式。
+
+声子的能量和频率关系是
+$
+  epsilon = h nu = hbar omega
+$
+声子的准动量为
+$
+  p = h/lambda = hbar k
+$
+对于声学声子，低频时色散关系近似线性
+$
+  omega = v k
+$
+所以
+$
+  epsilon = v p
+$
+这和光子气体的关系$epsilon = c p$很像。
+
+相空间中每个量子态占据体积$h^3$，所以在$p -> p + dd(p)$中的状态数为：
+$
+  dd(vb(omega)) = V/h^3 4 pi p^2 dd(p)
+$
+对纵波$p = (hbar omega)/v_l$，状态数为
+$
+  g_l (omega) dd(omega) = V/(2 pi^2 v_l^3) omega^2 dd(omega)
+$
+而对横波$p = (hbar omega)/v_t$，状态数为
+$
+  g_t (omega) dd(omega) = V/(pi^2 v_t^3) omega^2 dd(omega)
+$
+因此总态密度为
+$
+  g(omega) dd(omega) = g_l (omega) dd(omega) + g_t (omega) dd(omega) = V/(2 pi^2) (1/v_l^3 + 2/v_t^3) omega^2 dd(omega) = B V omega^2 dd(omega)
+$
+其中
+$
+  B = 1/(2 pi^2) (1/v_l^3 + 2/v_t^3)
+$
+#newpara()
+
+$N$原子固体，有$3N$个简正模，这对应$3N$个声子模式。每个模式的频率从$0$到$omega_D$，所以
+$
+  integral_o^omega_D g(omega) dd(omega) = 3N
+$
+给出
+$
+  omega_D = ((9 N)/B)^(1/3) <=> B = (9 N)/(omega_D^3)
+$
+这就是 Debye 频率的定义。
+
+于是态密度可以写成更常用的形式——Debye频谱
+$
+  g(omega) = cases(
+    (9 N)/(omega_D^3) omega^2\, & omega <= omega_D,
+    0\, & omega > omega_D
+  )
+$
+且有
+$
+  omega_D <=> lambda tilde ((4 pi V)/(3 N))^(1/3) tilde (V/N)^(1/3)
+$
+是一个与原子间距同数量级的长度尺度。
+
+注意到声子服从Bose统计，且化学势$mu=0$，所以频率在$omega$到$omega + dd(omega)$之间的声子数为
+$
+  n(omega) dd(omega) = g(omega) dd(omega) 1/(e^(beta hbar omega) - 1)
+$
+#newpara()
+
+下面计算$C_V$与物态方程。
+
+考虑到
+$
+  U & = U_0 + U_"ph" = U_0 + integral_0^oo hbar omega n(omega) dd(omega) \
+    & = U_0 + (9 N hbar)/(omega_D^3) integral_0^omega_D (omega^3 dd(omega))/(e^(beta hbar omega) - 1) \
+$
+则
+$
+  C_V & = (pdv(U, T))_V = (9 N k_B)/(omega_D^3) integral_0^omega_D (beta hbar omega)^2 e^(beta hbar omega) omega^3 dd(omega)/(e^(beta hbar omega) - 1)^2 \
+  & = (9 N k_B)/(omega_D^3) integral_0^omega_D omega^2 epsilon(beta hbar omega) dd(omega)
+$
+其中
+$
+  epsilon(x) = x^2 e^x/(e^x - 1)^2
+$
+是Einstein函数
+$
+  C_V & = 3 N k_B 3/y_D^3 integral_0^y_D dd(x) (x^4 e^x)/(e^x - 1)^2 \
+$
+其中
+$
+  y_D = Theta_D/T, Theta_D = (hbar omega_D)/k_B
+$
+$Theta_D$是Debye温度，$y_D$是一个无量纲参数，表示温度与Debye温度的比值。
+- 当$T >> Theta_D$时，$y_D << 1$，说明温度足够高，几乎所有振动模式都能被热激发
+- 当$T << Theta_D$时，$y_D >> 1$，说明温度很低，只有频率远小于$omega_D$的低频模式能被热激发
+
+考虑积分
+$
+  integral_0^y_D dd(x) (x^4 e^x)/(e^x - 1)^2 = - integral x^4 dd(1/(e^x - 1)) = - y_D^4/(e^(y_D) - 1) + 4 integral_0^y_D x^3/(e^x - 1) dd(x)
+$
+从而
+$
+  C_V = 3 N k_B (4 D(y_D) - 3 y_D/(e^(y_D) - 1))
+$
+其中Debye函数
+$
+  D(y) = 3/y^3 integral_0^y x^3/(e^x - 1) dd(x)
+$
+也能给出内能
+$
+  U = U_0 + (9 N hbar)/(omega_D^3) integral_0^omega_D (omega^3 dd(omega))/(e^(beta hbar omega) - 1) = U_0 + 3 N k_B T D(y_D)
+$
+- 高$T$极限$y_D = Theta_D/T << 1$
+  $
+    C_V & approx 3 N k_B (4 - 3 y_D/2) approx 3 N k_B
+  $
+  满足Dulong-Petit定律，能量均分
+- 低$T$极限$y_D = Theta_D/T >> 1$
+  $
+    C_V & approx 3 N k_B 3/y_D^3 integral_0^oo x^4 e^x/(e^x - 1)^2 dd(x) \
+        & = 3 N k_B 3/y_D^3 ((4 pi^4)/15) \
+        & = 3 N k_B (4 pi^4)/5 (T/Theta_D)^3 prop T^3
+  $
+  与实验符合与光子气类似
+
+固体中原子之间相互作用很强，因此不能简单把每个原子看成近独立粒子来统计。但是在低温、小振幅振动时，简谐近似成立。*固体振动可以分解为独立简正模式*。这些简正模式的量子化激发就叫声子。所以声子是*准粒子*，不是像电子、原子那样可以脱离体系独立存在的真实粒子。
+
+声子具有：能量$epsilon = hbar omega$；准动量$p = hbar k$但它只存在于固体中，是晶格振动激发的等效粒子。并且声子的色散关系可以和普通粒子不同。普通非相对论粒子是：
+$
+  epsilon = p^2/(2 m)
+$
+而声子在低频时近似线性
+$
+  omega = v k => epsilon = hbar omega = v p
+$
+因此声子气体在低频时和光子气体非常类似，都是线性色散的Bose气体，且声子数不守恒，化学势$mu=0$。但声子存在于固体中，是晶格振动的量子激发，而光子存在于电磁场中，是电磁波的量子激发。
+
+真实固体热容不一定只有Debye声子贡献
+- 金属中有自由电子贡献
+
+  金属除了晶格振动，还有电子气。低温下金属热容常写成：
+  $
+    C_V = gamma T + beta T^3
+  $
+  第一项来自电子贡献，第二项来自声子贡献。通常$gamma T$项在低温占主导，$beta T^3$项在更低温占主导。
+- 化合物有多种振动模式
+  - 分子间振动一般频率低，属于声学支，适合用Debye模型描述。
+  - 分子内振动一般频率较高，类似局域振动，适合用Einstein模型描述。
