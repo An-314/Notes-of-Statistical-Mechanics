@@ -947,3 +947,431 @@ $
 - 化合物有多种振动模式
   - 分子间振动一般频率低，属于声学支，适合用Debye模型描述。
   - 分子内振动一般频率较高，类似局域振动，适合用Einstein模型描述。
+
+== Fermi气体
+
+所谓简并，仍然看量子简并参数：
+$
+  n lambda_T^3 >= 1
+$
+当这个量不小于$1$时，粒子的热 de Broglie 波长和粒子间距同量级，量子统计效应不可忽略。
+
+对于Fermi气体，平均粒子数服从Fermi-Dirac分布：
+$
+  a_i = omega_i/(e^(alpha + beta epsilon_i) + 1)
+$
+其中$omega_i$是能级$epsilon_i$的简并度，$epsilon_i$是能级，$f_i$是能级$epsilon_i$的每个量子态上的平均粒子数
+$
+  f_i = a_i/omega_i = 1/(e^(alpha + beta epsilon_i) + 1)
+$
+
+=== 完全简并Fermi气
+
+根据Pauli原理，粒子不能都处于$epsilon=0$态，但尽可能低：
+- $epsilon_i < mu_0$：各量子态各有一个粒子
+- $epsilon_i > mu_0$：各量子态都没有粒子
+其中
+$
+  mu_0 = mu(T=0) = epsilon_F
+$
+称为Fermi能。绝对零度$T = 0$时Fermi分布变成阶跃函数
+$
+  lim_(T -> 0) f_i = lim_(T -> 0) 1/(e^((epsilon_i - mu_0)/(k_B T)) + 1) = cases(
+    1\, & epsilon_i < mu_0,
+    0\, & epsilon_i > mu_0
+  )
+$
+Fermion从最低能级开始，一个量子态一个粒子地往上填，一直填到最高被占据能级，这个能级的能量就是Fermi能$epsilon_F$。
+
+单原子为例，能量准连续，三维非相对论自由粒子的能态密度为
+$
+  g(epsilon) dd(epsilon) = C V sqrt(epsilon) dd(epsilon)
+$
+其中
+$
+  C = g_s (2 pi m)^(3/2)/(h^3)
+$
+从而
+$
+  N = integral_0^oo g(epsilon) eval(f(epsilon))_(T=0) dd(epsilon) = integral_0^epsilon_F C V sqrt(epsilon) dd(epsilon) = 2/3 C V epsilon_F^(3/2)
+$
+从而得到Fermi能
+$
+  epsilon_F = ((3N)/(2C V))^(2/3) = h^2/(2 m) (3/(4g_s pi) N/V)^(2/3)
+$
+进一步得到其他宏观量。*零点能*
+$
+  U_0 = integral_0^epsilon_F epsilon g(epsilon) dd(epsilon) = 3/5 N epsilon_F
+$
+其中
+$
+  epsilon_0 = F_0/N = 3/5 epsilon_F = 1/2 m vb(v)_0^2
+$
+是粒子平均能量，其中$vb(v)_0$是均方根速度。*零点压强*也被称为简并压
+$
+  p_0 = - (pdv(F, V))_T = - pdv(U_0, V) = - dv(epsilon_F, V) dv(U_0, epsilon_F) = 2/3 U_0/V = 2/5 n epsilon_F
+$
+*熵*为
+$
+  S = k_B ln Omega_F = k_B ln 1 = 0
+$
+#newpara()
+
+#example(subname: [金属中电子气])[
+  金属中有大量自由电子，这些电子可以近似看成一个三维非相对论的完全简并Fermi气体。
+  $
+    m_e tilde 10^(-30) "kg", N/V tilde 10^28 "m"^(-3), g_s = 2
+  $
+  这就得到
+  $
+    epsilon_F tilde 1 "eV", v_F tilde 10^6 "m/s", p_0 tilde 10^9 "Pa" tilde 10^4"大气压"
+  $
+  这个压强的来源是纯粹的量子效应。
+]
+
+=== 低温情形（强简并Fermi气）
+
+对于温度在
+$
+  0 < T << T_F = epsilon_F/k_B
+$
+中的低温气体，其中$T_F$是Fermi温度，热运动能量小，粒子分布基本不变，只有$epsilon_F$附近的粒子可能是跳到高能级态上：
+$
+  f_i = 1/(e^((epsilon_i - mu)/(k_B T)) + 1) ==>^(0 < T << T_F) cases(
+    1\, & epsilon_i << mu - k_B T,
+    1/2\, & epsilon_i = mu,
+    0\, & epsilon_i >> mu + k_B T
+  )
+$
+只有在$epsilon tilde mu$附近、宽度大约为$k_B T$的范围内，分布才会明显变化。
+
+#figure(
+  image("pic/2026-05-24-02-02-14.png", width: 80%),
+  caption: [Fermi分布在低温下的形状],
+)
+
+三维单原子自由Fermi气的态密度为
+$
+  g(epsilon) dd(epsilon) = C V sqrt(epsilon) dd(epsilon)
+$
+则可以写出宏观量。*粒子数*
+$
+  N = integral_0^oo g(epsilon) f(epsilon) dd(epsilon) = C V integral_0^oo dd(epsilon) sqrt(epsilon) f(epsilon)
+$
+*内能*
+$
+  U = integral_0^oo epsilon g(epsilon) f(epsilon) dd(epsilon) = C V integral_0^oo dd(epsilon) epsilon^(3/2) f(epsilon)
+$
+以及*配分函数*
+$
+  ln Xi = integral_0^oo g(epsilon) ln (1 + e^(- beta (epsilon - mu))) dd(epsilon) = C V integral_0^oo dd(epsilon) sqrt(epsilon) ln (1 + e^(- beta (epsilon - mu))) =^"分部积分" 2/3 beta U
+$
+需计算积分
+$
+  Q_l = integral_0^oo dd(epsilon) epsilon^l f(epsilon) = integral_0^oo dd(epsilon) epsilon^l 1/(e^((epsilon - mu)/(k_B T)) + 1), l = 1/2, 3/2
+$
+先讨论一下Fermi函数的特点
+- $f$仅在$epsilon tilde mu$附近有明显变化，宽度大约为$k_B T$
+- $dv(f, epsilon)$在$epsilon = mu$附近不等于0
+对于积分
+$
+  integral_0^oo dd(epsilon) nu(epsilon) dv(f, epsilon)
+$
+其中$nu(epsilon)$可在$epsilon = mu$附近展开，收敛很快，这就是 Sommerfeld展开的思想
+$
+  Q_l & = integral_0^oo dd(epsilon) epsilon^l f(epsilon) \
+  & = 1/(l + 1) (epsilon^(l + 1) f(epsilon))_0^oo - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
+  & = - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
+  & = integral_0^oo dd(epsilon) nu(epsilon) f'(epsilon), nu(epsilon) = - 1/(l + 1) epsilon^(l + 1)\
+  & = sum_(n=0)^oo (nu^((n))(mu))/(n!) integral_0^oo dd(epsilon) (epsilon - mu)^n f'(epsilon) \
+$
+令
+$
+  eta = beta (epsilon - mu) = (epsilon - mu)/(k_B T)
+$
+就有
+$
+  f(epsilon) = 1/(e^eta + 1), dv(f, epsilon) = - beta e^eta/(e^eta + 1)^2\
+  dd(epsilon) = 1/beta dd(eta)
+$
+就有
+$
+  Q_l = - sum_(n=0)^oo (nu^((n))(mu))/(n!) beta^(-n) integral_(- beta mu)^oo dd(eta) e^eta/(e^eta + 1)^2 eta^n
+$
+#newpara()
+低温：$k_B T << mu, mu beta >> 1$
+$
+  Q_l & = - sum_(n=0)^oo (nu^((n))(mu))/(n!) beta^(-n) integral_(- beta mu)^oo dd(eta) e^eta/(e^eta + 1)^2 eta^n
+$
+考虑到$e^eta$指数衰减
+$
+  Q_l & = - sum_(n=0)^oo (nu^((n))(mu))/(n!) beta^(-n) integral_(- oo)^oo dd(eta) e^eta/(e^eta + 1)^2 eta^n
+$
+以及积分
+$
+  integral_(- oo)^oo dd(eta) e^eta/(e^eta + 1)^2 = 1\
+  integral_(- oo)^oo dd(eta) e^eta/(e^eta + 1)^2 eta^2 = (pi^2)/3
+$
+就有
+$
+  Q_l & = - (nu(mu) + (pi^2)/6 nu''(mu) (beta)^(-2) + ...) \
+$
+从而得到
+$
+  N = C V Q_(1/2) = 2/3 C V mu^(3/2) (1 + (pi^2)/8 ((k_B T)/mu)^2 + O(((k_B T)/mu)^4)) \
+$
+$
+  U = C V Q_(3/2) = 2/5 C V mu^(5/2) (1 + (5 pi^2)/8 ((k_B T)/mu)^2 + O(((k_B T)/mu)^4)) \
+$
+从而
+$
+  ln Xi = 2/3 beta U = 4/15 C V mu^(5/2) (1 + (5 pi^2)/8 ((k_B T)/mu)^2 + O(((k_B T)/mu)^4))
+$
+$
+  p = 1/beta pdv(ln Xi, V) = 2/5 C mu^(5/2) (1 + (5 pi^2)/8 ((k_B T)/mu)^2 + O(alpha^(-4)))
+$
+$
+  S & = k_B (ln Xi - alpha pdv(ln Xi, alpha) - beta pdv(ln Xi, beta)) \
+    & = k_B 4/15 C V beta^(-3/2) (-alpha)^(5/2) (0 + (5 pi^2)/4 alpha^(-2) + O(alpha^(-4))) \
+    & = (pi^2)/3 C V k_B^2 T mu^(1/2) (1 + O(alpha^(-2)))
+$
+利用$N$反解出$mu$
+$
+  mu^(3/2) (1 + (pi^2)/8 ((k_B T)/mu)^2 + O(((k_B T)/mu)^4)) = mu_0^(3/2)
+$
+得到
+$
+  mu = mu_0 (1 - (pi^2)/12 ((k_B T)/mu_0)^2 + O(((k_B T)/mu_0)^4))
+$
+可正可负，这是不同于Bose气的。
+- $T=0$：$mu = mu_0 > 0$
+- $T$增大：$mu$减小，甚至可能变负，但在低温范围内仍然是正的
+- $T >> T_F$：$e^alpha >> 1$，$mu < 0$，Fermi分布近似为半经典分布$alpha = - mu beta >1$
+
+#figure(
+  image("pic/2026-05-24-03-23-17.png", width: 50%),
+  caption: [Fermi能$mu$和温度$T$的关系],
+)
+
+低温内能
+$
+  U & = 2/5 C V mu_0^(5/2) (1 - (5 pi^2)/24 ((k_B T)/mu_0)^2 + ...)(1 + (5 pi^2)/8 ((k_B T)/mu_0)^2 + ...) \
+    & = U_0 (1 + (5 pi^2)/12 ((k_B T)/mu_0)^2 + O((T/T_F)^4)) \
+$
+其中
+$
+  U_0 = 3/5 N epsilon_F = 3/5 N k_B T_F
+$
+只 Fermi面附近比例约为
+$
+  (k_B T)/mu_0 = T/T_F
+$
+的粒子能被激发，而每个被激发粒子的能量增加约为$k_B T$，所以
+$
+  Delta U tilde N T/T_F K_B T prop T^2
+$
+
+#figure(
+  image("pic/2026-05-24-03-25-54.png", width: 50%),
+  caption: [Fermi气体$U$和$T$的关系],
+)
+
+低温压强
+$
+  p & = 4/15 C mu_0^(5/2) (1 - (5 pi^2)/24 ((k_B T)/mu_0)^2 + ...)(1 + (5 pi^2)/8 ((k_B T)/mu_0)^2 + ...) \
+    & = p_0 (1 + (5 pi^2)/12 ((k_B T)/mu_0)^2 + O((T/T_F)^4))
+$
+其中
+$
+  p = (2 U)/(3 V)
+$
+
+#figure(
+  image("pic/2026-05-24-03-27-18.png", width: 80%),
+  caption: [Fermi气体$p$和$T$的关系],
+)
+
+低温熵
+$
+  S = (pi^2)/3 C V k_B^2 T mu_0^(1/2) (1 + O((T/T_F)^2))
+$
+
+#figure(
+  image("pic/2026-05-24-03-27-50.png", width: 40%),
+  caption: [Fermi气体$S$和$T$的关系],
+)
+
+以及低温热容
+$
+  C_V & = (pdv(U, T))_V = U_0 ((5 pi^2)/6 ((k_B T)/mu_0)^2 + O((T/T_F)^4) ) \
+      & = N k_B (pi^2)/2 (k_B T)/mu_0 (1 + O((T/T_F)^2))
+$
+电子气对金属热容量的贡献首先由Sommerfeld解决（电子自由，服从Fermi分布），低温电子气热容与温度成正比。
+
+#figure(
+  image("pic/2026-05-24-03-29-25.png", width: 40%),
+  caption: [Fermi气体$C_V$和$T$的关系],
+)
+
+
+低温和高温的过渡
+- 低温时$0<T<<T_F$：系统是强简并 Fermi 气，分布接近阶跃函数，只有 Fermi 面附近的粒子参与热激发。
+- 高温时$T>>T_F$：量子简并消失，Fermi分布趋于Boltzmann分布：$f(epsilon) approx e^(-beta(epsilon - mu))$这时系统恢复普通经典理想气体性质。
+#figure(
+  image("pic/2026-05-24-13-32-15.png", width: 80%),
+  caption: [Fermi分布在不同温度下的形状],
+)
+
+金属的比热实验值
+- 常温下，金属的总热容主要由晶格振动贡献，数量级是：
+  $
+    C_V tilde N k_B
+  $
+  也就是接近 Dulong-Petit 定律。
+- 低温下，数量级是：
+  $
+    C_V tilde alpha_1 T + alpha_2 T^3
+  $
+  其中$alpha_1 T$项来自电子贡献、Sommerfeld结果，$alpha_2 T^3$项来自晶格振动的声子贡献、Debye结果。
+- 电子热容和晶格热容
+  $
+    C_(V,e)/C_(V,"ph") = (3/2 N k_B pi^2/3 T/T_F)/(3 N k_B (4 pi^4)/5 (T/Theta_D)^3) = 5/(24 pi^2) T/T_F (Theta_D/T)^3
+  $
+  对#ch("Cu")，$Theta_D tilde 300 "K", T_F tilde 8 times 10^4 "K"$，
+  - $T<3"K"$时，电子热容占主导
+  - $T>3"K"$时，晶格热容占主导
+
+== 金属中的电子气的磁性
+
+Pauli在1927年提出：金属自由电子的自旋磁矩会导致顺磁性，也称为非铁磁金属的顺磁性(Pauli paramagnetism)。
+
+电子自旋为$s=1/2$，在外磁场$vb(B)$中，电子自旋磁矩有平行和反平行两种取向，对应能量分别为
+$
+  Delta E = minus.plus mu_B B
+$
+其中$-$对应平行取向，$+$对应反平行取向，$mu_B$是Bohr magneton
+$
+  mu_B = (e hbar)/(2 m_e)
+$
+后面分析重新选取能量零点，把平行磁场的那一支能量最低点取为0。
+
+#figure(
+  image("pic/2026-05-24-13-52-30.png", width: 80%),
+  caption: [电子自旋在磁场中的能级分裂],
+)
+
+没有磁场时，电子自旋上、下两个方向能量相同，态密度完全重合。有磁场后，自旋平行和反平行两类电子的能量不一样。重新选取势能零点后写成：
+- 平行磁场：
+  $
+    epsilon = p^2/(2 m)
+  $
+- 反平行磁场：
+  $
+    epsilon = p^2/(2 m) + 2 mu_B B
+  $
+重新分配后，态密度为
+$
+  g(epsilon) dd(epsilon) = cases(
+    1/2 C V sqrt(epsilon) dd(epsilon)\, & 0 <= epsilon <= 2 mu_B B & "只有平行贡献",
+    1/2 C V (sqrt(epsilon) + sqrt(epsilon - 2 mu_B B)) dd(epsilon)\, & epsilon >= 2 mu_B B & "平行和反平行贡献"
+  )
+$
+其中
+$
+  C = g_s 2 pi (m)^(3/2)/(h^3), g_s = 2
+$
+物理上：磁场让两类自旋电子的态密度错开，从而使低能自旋态稍微多占一些，高能自旋态少占一些，产生净磁矩。
+
+*$T=0"K"$时*。没
+
+有磁场时，电子从最低能态填充到Fermi能：$mu_0 = epsilon_F$。加磁场后，由于两支自旋能带错开，为了保持总电子数$N$不变，化学势会从：$mu_0 -> mu'_0$
+$
+  N = integral_0^mu'_0 dd(epsilon) g(epsilon) dd(epsilon) = integral_0^(2 mu_B B) dd(epsilon) g(epsilon) dd(epsilon) + integral_(2 mu_B B)^mu'_0 dd(epsilon) g(epsilon) dd(epsilon)
+$
+即
+$
+  (mu'_0)^(3/2) + (mu'_0 - 2 mu_B B)^(3/2) = (3 N)/(C V) = 2 mu_0^(3/2)
+$
+通常磁场能量远小于Fermi能
+$
+  mu_B B << epsilon_F = mu_0
+$
+从而展开有
+$
+  mu'_0 = mu_0 + mu_B B
+$
+由于我们把平行分支的能量零点重新设为 0，整体化学势相对于这个新零点略微上移。真实可观测的是两支自旋电子数的差别，而不是这个能量零点选择本身。
+
+*磁矩*
+$
+  M & = (N_"up" - N_"down") mu_B \
+  &= mu_B integral_0^mu'_0 dd(epsilon) 1/2 C V sqrt(epsilon)- mu_B integral_(2 mu_B B)^mu'_0 dd(epsilon) 1/2 C V sqrt(epsilon - 2 mu_B B)\
+  &approx C V mu_B^2 mu_0^(1/2) B
+$
+*磁化强度*
+$
+  m = M/V = C mu_B^2 mu_0^(1/2) B = n mu_B 3/2 (mu_B B)/mu_0
+$
+其中
+$
+  mu_0 = epsilon_F = ((3 N)/(2 C V))^(2/3)
+$
+于是Pauli顺磁磁化率为
+$
+  chi_P = mu_0^"vac" pdv(m, B) = 3/2 mu_0^"vac" (n mu_B^2)/mu_0
+$
+真空磁导率$mu_0^"vac"$是一个常数，$n$是电子数密度，$mu_B$是Bohr magneton，$mu_0$是Fermi能。这个结果表明：金属中电子的顺磁性与电子密度和Fermi能有关。
+
+Pauli顺磁为什么很小：如果所有电子都能自由转向磁场方向，那么磁化强度会很大。但金属电子是强简并Fermi气。真正能响应磁场的，主要是Fermi面附近能量范围约为：$mu_B B$的电子。比例为$(mu_B B)/mu_0$很小。
+
+经典顺磁性中，温度越低越容易排列，磁化率一般服从 Curie 定律：
+$
+  chi prop 1/T
+$
+但Pauli顺磁性在低温下几乎与温度无关，主要由Fermi能决定。
+
+即使$T=0"K"$，电子气磁矩也不会出现饱和，且实际上很小。在常温下对金属电子气来说仍然有$T<<T_F$，所以可以按$(T/T_F)^2$展开。热运动会让Pauli顺磁磁化率略微减小，但修正很小。对其他金属，除了Pauli顺磁性，还需要考虑Landau抗磁性。
+
+Pauli顺磁性来自电子自旋磁矩，Landau抗磁性来自带电电子在磁场中的轨道运动量子化。所以金属电子气的磁性不是只有自旋贡献，也有轨道贡献。
+
+*高温非简并极限。*
+
+高温情形，也就是电子气变成近似经典气体。高温时，两个自旋分支可以分别看成两个组分。平行电子数为$N_+$，反平行电子数为$N_-$，则两支之间的平衡条件为
+$
+  mu(N_+) - mu(N_-) = 2 mu_B B
+$
+定义极化率
+$
+  r = (N_+ - N_-)/(N_+ + N_-) = (2 N_+)/N - 1
+$
+高温经典极限下，化学势近似为
+$
+  mu tilde k_B T ln (N/V lambda_T^3/2)
+$
+代入经典理想气体形式后得到
+$
+  ln((N lambda_T^3 (1 + r))/(2 V)) - ln((N lambda_T^3 (1 - r))/(2 V)) = (2 mu_B B)/(k_B T)
+$
+高温时
+$
+  r = tanh((mu_B B)/(k_B T)) approx (mu_B B)/(k_B T)
+$
+有
+$
+  M = (mu_B r N)/V = (mu_B^2 N B)/(k_B T)
+$
+得到磁化率
+$
+  chi = mu_0^"vac" pdv(M, B) = (mu_0^"vac" mu_B^2 n)/(k_B T) = (mu_0^"vac" mu_B^2)/(k_B T v), v=V/N
+$
+这就是Curie型顺磁性。这适用于高温非简并极限。金属电子在通常温度下不是这个极限，而是强简并Fermi气，所以实际金属自由电子顺磁性更接近Pauli结果，而不是Curie定律。
+
+下面对物质磁性的来源做出总结。物质磁性：
+- 原子核运动
+- 电子运动（主要）
+  - 自旋磁矩，通常给顺磁性
+  - 轨道磁矩，通常给抗磁性
+Landau在1930年指出：带电粒子在磁场中的轨道运动会量子化，产生抗磁性，称为Landau diamagnetism。
+$
+  chi_"Landau" = - 1/3 chi_"Pauli"
+$
