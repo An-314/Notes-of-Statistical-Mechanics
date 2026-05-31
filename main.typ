@@ -63,3 +63,7 @@
 #pagebreak()
 
 #include "chap4.typ"
+
+#pagebreak()
+
+#include "chap5.typ"
