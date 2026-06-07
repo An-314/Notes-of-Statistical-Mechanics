@@ -371,7 +371,7 @@ $
 
 如果系统能级$E_s$依赖某个外参量$y_i$，例如体积$V$，那么改变$y_i$会使能级发生变化
 $
-  E_s = E_s(y_i)
+  E_s = E_s (y_i)
 $
 正则系综中，与$y_i$共轭的广义力为
 $
@@ -1009,3 +1009,474 @@ $
   T_(c)^"平均场" > T_(c)
 $
 涨落破坏有序。
+
+== 巨正则系综
+
+#definition(subname: [巨正则系综])[
+  $V,T,mu$恒定的系统组成的统计系综为*巨正则系综*。描述的是开放系统，可以与外界交换能量和粒子。
+
+  $V$恒定，并与恒$T$粒子源接触而达平衡系统服从的分布为*巨正则分布*（Grand canonical）。
+]
+正则分布中，系统只和热源交换能量，所以概率只和能量有关：
+$
+  rho_s = Z^(-1) e^(-beta E_s)
+$
+巨正则分布中，系统还可以交换粒子，所以概率要同时依赖：
+$
+  E_s, N
+$
+因此巨正则分布为
+$
+  rho_N_s
+$
+
+=== 系统与粒子源之间的平衡
+
+系统$A: N, E_S, T$的$V$恒定；热源$A_r: N_r, E_r, T$。整体$A+A_r$是孤立系统
+$
+  E^((0)) = E_S + E_r\
+  N^((0)) = N + N_r
+$
+外源很大
+$
+  E_s << E^((0)) approx E_r , N << N^((0)) approx N_r
+$
+小系统交换一点能量或粒子，不会明显改变热源温度和粒子源化学势。这和正则分布推导非常类似，只是正则分布只展开能量，这里要同时展开能量和粒子数。
+
+$rho_(N_s)$是系统处粒子数为$N$，能量为$E_s$的某一量子态的几率。大源在这个条件下的微观状态数是：
+$
+  Omega_r (N_r, E_r) = Omega_r (N^((0)) - N, E^((0)) - E_s)
+$
+由于整体$A+A_r$是孤立系统，可以用微正则等概率假设，所以小系统处于$(N,E_s)$这个态的概率正比于大源的可取状态数：
+$
+  rho_(N_s) prop Omega_r (N^((0)) - N, E^((0)) - E_s)
+$
+物理意义是小系统某个状态越容易被外界源配合，也就是源还能有越多微观状态，这个小系统状态的概率越大。
+
+因为$Omega_r$非常大，在$(N^((0)),E^((0)))$附近展开$ln Omega_r$：
+$
+  ln Omega_r (N^((0)) - N, E^((0)) - E_s) &= ln Omega_r (N^((0)), E^((0))) + (pdv(ln Omega_r, N))_(N_r = N^((0))) (-N) + (pdv(ln Omega_r, E))_(E_r = E^((0))) (-E_s) + ...\
+  &= ln Omega_r (N^((0)), E^((0))) - alpha N - beta E_s + ...
+$
+其中定义：
+$
+  alpha = (pdv(ln Omega_r, N))_(N_r = N^((0)))\
+  beta = (pdv(ln Omega_r, E))_(E_r = E^((0)))
+$
+所以：
+$
+  rho_(N_s) prop e^(- alpha N - beta E_s)
+$
+这就是巨正则分布的基本形式。其中$alpha,beta$只与源有关，平衡时$T, µ$相等，有
+$
+  beta = beta(T), alpha = alpha(T, mu)
+$
+为了归一化，需要让所有粒子数、所有微观态的概率总和为 1：
+$
+  sum_(N=0)^oo sum_s rho_(N_s) = 1
+$
+于是定义*巨配分函数*：
+#definition(subname: [巨配分函数])[
+  巨配分函数$Xi$定义为
+  $
+    Xi = sum_(N=0)^oo sum_s e^(- alpha N - beta E_s)
+  $
+]
+所以巨正则分布为
+$
+  rho_(N_s) = Xi^(-1) e^(- alpha N - beta E_s)
+$
+
+=== 连续形式
+
+对不同粒子数$N$, 需定义不同维数的$Gamma$空间。设粒子自由度为$r$，粒子数为$N$时：
+$
+  rho_N dd(q, p, [f,f]) = 1/(N! h^f) Xi^(-1) e^(- alpha N - beta E(q, p, y)) product_i dd(q, p, [f,f])
+$
+其中
+$
+  f = r N
+$
+则有
+$
+  Xi = sum_(N=0)^oo 1/(N! h^(r N)) e^(- alpha N) integral e^(- beta E(q, p, y)) dd(q, p, [r N,r N])
+$
+
+=== 巨配分函数与配分函数的关系
+
+对于固定粒子数$N$，正则配分函数是：
+$
+  Z_N = sum_s e^(- beta E_s)
+$
+这里下标$N$表示这个正则配分函数是在粒子数固定为$N$的条件下计算的。巨配分函数为：
+$
+  Xi(alpha, beta, y) & = sum_(N=0)^oo sum_s e^(- alpha N - beta E_s) \
+                     & = sum_(N=0)^oo e^(- alpha N) sum_s e^(- beta E_s) \
+                     & = sum_(N=0)^oo q^N Z_N (beta, y)
+$
+其中
+$
+  q = e^(- alpha)
+$
+为易逸度（fugacity）。这说明：巨配分函数是所有固定粒子数正则配分函数的加权和。如果化学势较大，则较大粒子数的项权重更高；如果化学势较小，则高粒子数项被压低。
+
+有时，如量子统计情形，$Xi$比$Z$计算方便。
+
+== 巨正则分布的热力学公式
+
+=== 热力学
+
+由巨配分函数得到宏观量
+- 平均粒子数$macron(N)$
+  $
+    macron(N) & = sum_(N=0)^oo sum_s N rho_(N_s) = 1/Xi sum_(N=0)^oo sum_s N e^(- alpha N - beta E_s) \
+              & = - 1/Xi pdv(Xi, alpha) = - pdv(ln Xi, alpha)
+  $
+- 平均能量$overline(E)$
+  $
+    U & = overline(E) = sum_(N=0)^oo sum_s E_s rho_(N_s) = 1/Xi sum_(N=0)^oo sum_s E_s e^(- alpha N - beta E_s) \
+      & = - 1/Xi pdv(Xi, beta) = - pdv(ln Xi, beta)
+  $
+- 广义力
+  $
+    macron(Y) & = sum_(N=0)^oo sum_s pdv(E_s, y) rho_(N_s) = 1/Xi sum_(N=0)^oo sum_s pdv(E_s, y) e^(- alpha N - beta E_s) \
+              & = 1/(beta Xi) sum_(N=0)^oo sum_s pdv(e^(- beta E_s), y) e^(- alpha N) = 1/beta pdv(ln Xi, y)
+  $
+  例如
+  $
+    p = 1/beta (pdv(ln Xi, V))_(T, mu)
+  $
+- 熵$S$
+  $
+      T dd(S) & = dd(macron(E)) - macron(Y) dd(y) - mu dd(macron(N)) \
+    dd(ln Xi) & = - macron(N) dd(alpha) - macron(E) dd(beta) - beta macron(Y) dd(y) \
+  $
+  考虑
+  $
+    dd((ln Xi + alpha macron(N) + beta macron(E))) & = alpha dd(macron(N)) + beta dd(macron(E)) - beta macron(Y) dd(y) \
+                                                   & = beta (dd(macron(E)) - macron(Y) dd(y) + alpha/beta dd(macron(N)))
+  $
+  比较两式（三个独立变量$macron(N), y, macron(Y)$）
+  $
+    mu = - alpha / beta, beta = 1/(k_B T)
+  $
+  以及
+  $
+    S - S' = k_B (ln Xi + alpha macron(N) + beta macron(E))
+  $
+  比正则分布多了$alpha macron(N)$这一项，反映了粒子数的涨落对熵的贡献。
+
+  由Boltzmann关系得
+  $
+    Omega{M_N_s} = M!/(product_(N,s) M_N_s!), M_N_s/M = rho_(N_s) = Xi^(-1) e^(- alpha N - beta E_s)
+  $
+  可由Boltzmann关系直接求$S$
+  $
+    ln Omega{M_N_s} & = ln M! - sum_(N,s) ln M_N_s ! \
+                    & = M (ln M - 1) - sum_(N,s) M_N_s (- ln Xi - alpha N - beta E_s + ln M - 1) \
+                    & = M (ln Xi + alpha macron(N) + beta macron(E))
+  $
+  得到$S'=0$的结果，其中$M$对应系综的熵
+  $
+    S = k_B ln Omega{M_N_s} = k_B (ln Xi + alpha macron(N) + beta macron(E)) = k_B ln Xi + (macron(E) - mu macron(N)) / T
+  $
+- 巨热力学势$J$
+
+  $G$是Gibbs自由能，$F$是Helmholtz自由能，二者的定义分别为
+  $
+    G = mu macron(N) = E + p V - T S\
+    F = E - T S
+  $
+  由$S$可知
+  $
+    ln Xi = (S T + mu macron(N) - macron(E)) / (k_B T) = (G - F) / (k_B T) = (p V) / (k_B T)
+  $
+  定义巨热力学势$J$为
+  $
+    J = - p V = - k_B T ln Xi
+  $
+  有
+  $
+    J(T, V, mu) = E - T S - mu macron(N) = F - G
+  $
+  由于
+  $
+    dd(F) = - p dd(V) - S dd(T) + mu dd(macron(N))\
+    dd(G) = mu dd(N) + N dd(mu)
+  $
+  就有
+  $
+    dd(J) = - p dd(V) - S dd(T) - N dd(mu)
+  $
+  所以$J(T, V, mu)$是特性函数
+  $
+    S = - (pdv(J, T))_(V, mu) = k_B (pdv(T ln Xi, T))_(V, mu)\
+    p = - (pdv(J, V))_(T, mu) = k_B T (pdv(ln Xi, V))_(T, mu)\
+    macron(N) = - (pdv(J, mu))_(T, V) = k_B T (pdv(ln Xi, mu))_(T, V)
+  $
+  所以$J$是巨正则系综的特性函数，就像正则系综中$F(T,V,N)$是特性函数一样。
+
+=== 粒子数和能量的涨落
+
+原则上，巨正则系综的各系统可有不同$N, E$，有涨落。
+
+==== 粒子数涨落
+
+定义均方根差
+$
+  overline((Delta N)^2) = overline((N - macron(N))^2) = overline(N^2) - macron(N)^2
+$
+其中
+$
+  macron(N) = - pdv(ln Xi, alpha), Xi = sum_(N=0)^oo sum_s e^(- alpha N - beta E_s)
+$
+以及
+$
+  macron(N^2) & = Xi^(-1) sum_(N=0)^oo sum_s N^2 e^(- alpha N - beta E_s) \
+              & = 1/Xi pdv(Xi, alpha, 2) = pdv(ln Xi, alpha, 2) + (pdv(ln Xi, alpha))^2
+$
+从而
+$
+  overline((Delta N)^2) = pdv(ln Xi, alpha, 2) + (pdv(ln Xi, alpha))^2 - (pdv(ln Xi, alpha))^2 = pdv(ln Xi, alpha, 2) = - pdv(macron(N), alpha) = k_B T (pdv(macron(N), mu))_(T, V)
+$
+粒子数涨落由粒子数对化学势的响应决定。也就是说，如果化学势稍微改变一点，粒子数变化很大，那么粒子数涨落也大。
+
+#newpara()
+
+化为常见量$p,V,T$的形式。由巨热力学势
+$
+  J = - p V => dd(J) = - p dd(V) - V dd(p)
+$
+以及
+$
+  dd(J) = - p dd(V) - S dd(T) - N dd(mu)
+$
+从而
+$
+  N dd(mu) = V dd(p) - S dd(T)
+$
+记
+$
+  v = V/N
+$
+有
+$
+  dd(mu) = v dd(p) - S/N dd(T) = v((pdv(p, T))_V dd(T) + (pdv(p, v))_T dd(v)) - S/N dd(T)
+$
+从而
+$
+  (pdv(mu, v))_T = v (pdv(p, v))_T ==> - N^2/V (pdv(mu, N))_(T,V) = V (pdv(p, V))_(T,N)
+$
+从而
+$
+  (pdv(N, mu))_(T, V) = - N^2/V^2 (pdv(V, p))_(T,N)
+$
+从而
+$
+  overline((Delta N)^2) = - k_B T macron(N)^2/V^2 (pdv(V, p))_(T,N)
+$
+就有
+$
+  overline((Delta N)^2)/macron(N)^2 = - (k_B T) / V^2 (pdv(V, p))_(T,N)
+$
+或
+$
+  overline((Delta rho)^2)/macron(rho)^2 = - (k_B T) / V^2 (pdv(V, p))_(T,N)
+$
+其中
+$
+  rho = N/V
+$
+是密度。等温压缩系数
+$
+  kappa_T = - 1/V (pdv(V, p))_(T,N)
+$
+从而
+$
+  overline((Delta rho)^2)/macron(rho)^2 = (k_B T) / V kappa_T
+$
+压缩系数越大，密度涨落越大。对于液体和固体，等温压缩系数$kappa_T$很小，也就是说它们不容易被压缩。如果系统体积与粒子数成正比，即密度恒定，那么
+$
+  V prop N
+$
+所以密度涨落的均方根相对大小为
+$
+  overline((Delta rho)^2)/macron(rho)^2 prop 1/N
+$
+平常我们认为宏观热力学量稳定，就是因为相对涨落极小。在气—液相变区，涨落会变大，出现临界乳光现象，乳白浑浊正是密度涨落增强后对光强烈散射的结果。原因是临界点附近等温压缩系数变大$kappa_T -> oo$。
+
+物理图像是：临界点附近，气相和液相之间的差别快要消失，系统中会出现大尺度的密度起伏。一些区域像气体，另一些区域像液体，密度涨落很强，于是光被强烈散射，系统看起来浑浊，这就是临界乳光。
+
+==== 能量涨落
+
+能量涨落定义为
+$
+  overline((Delta E)^2) = overline((E - overline(E))^2) = overline(E^2) - overline(E)^2
+$
+其中
+$
+  overline(E) = - pdv(ln Xi, beta), Xi = sum_(N=0)^oo sum_s e^(- alpha N - beta E_s)
+$
+以及
+$
+  overline(E^2) & = Xi^(-1) sum_(N=0)^oo sum_s E_s^2 e^(- alpha N - beta E_s) \
+                & = 1/Xi pdv(Xi, beta, 2) = pdv(ln Xi, beta, 2) + (pdv(ln Xi, beta))^2
+$
+从而
+$
+  overline((Delta E)^2) = pdv(ln Xi, beta, 2) + (pdv(ln Xi, beta))^2 - (pdv(ln Xi, beta))^2 = pdv(ln Xi, beta, 2) = - pdv(overline(E), beta) = k_B T^2 (pdv(overline(E), T))_(V, mu)
+$
+以及
+$
+  overline((Delta E)^2)/overline(E)^2 = (k_B T^2) / overline(E)^2 (pdv(overline(E), T))_(V, mu)
+$
+
+#newpara()
+对于固定$N$的系统，平均能量为
+$
+  E_N = - pdv(ln Z_N, beta)
+$
+有
+$
+  overline((Delta E)^2)_N & = pdv(ln Z_N, beta, 2) = - pdv(E_N, beta) = k_B T^2 (pdv(E_N, T))_(V, N) \
+                          & = k_B T^2 C_(V, N)
+$
+巨正则系综中的总能量偏离平均值可以写成：
+$
+  E_N_s - overline(E) = (E_N_s - E_N) + (E_N - overline(E))
+$
+从而
+$
+  overline((Delta E)^2) &= overline((E_N - overline(E))^2) + overline((E_N_s - E_N)^2) + 2 overline((E_N - overline(E)) (E_N_s - E_N))\
+  & = overline((E_N - overline(E))^2) + overline((E_N_s - E_N)^2) \
+$
+其中
+$
+  overline((E_N - overline(E))^2) = overline(k_B T^2 C_(V, N)) = k_B T^2 C_(V, macron(N))
+$
+以及
+$
+  E_N = E_macron(N) + (pdv(E_N, N))_(T,V) (N - macron(N))
+$
+从而
+$
+  E_N - overline(E) = (pdv(E_N, N))_(T,V) (N - macron(N))
+$
+从而
+$
+  overline((E_N - overline(E))^2) = (pdv(E_N, N))_(T,V)^2 overline((N - macron(N))^2) = (pdv(E_N, N))_(T,V)^2 overline((Delta N)^2)
+$
+最终得到
+$
+  overline((Delta E)^2) = k_B T^2 C_(V, macron(N)) + (pdv(E_N, N))_(T,V)^2 overline((Delta N)^2)
+$
+$
+  overline((Delta E)^2)/overline(E)^2 = (k_B T^2) / overline(E)^2 C_(V, macron(N)) + (pdv(E_N, N))_(T,V)^2 overline((Delta N)^2) / overline(E)^2
+$
+巨正则能量涨落是固定$N$时的热涨落以及粒子数涨落引起的能量涨落构成。通常情况下，涨落小，故系统基本处$macron(N)$和$overline(E)$附近。
+
+== 由巨正则分布导出近独立粒子系统的平衡分布
+
+系统处粒子数$N$，能量$E_s$的某一量子态$s$的概率为
+$
+  rho_(N_s) = Xi^(-1) e^(- alpha N - beta E_s)
+$
+系统处粒子数$N$，能量$E_s$的几率
+$
+  rho_N_a = sum_{s|E_s = E_a} rho_(N_s) = Xi^(-1) Omega_s e^(- alpha N - beta E_a)
+$
+其中$Omega_s$是能量$E_s$的简并度。
+
+对近独立粒子系统，考虑单粒子能级$epsilon_i$；每个能级的简并度为$omega_i$；若第$i$个能级上有$a_i$个粒子，对应分布${a_i}$，则整个系统的粒子数和能量为
+$
+  N_{a_i} & = sum_i a_i \
+  E_{a_i} & = sum_i a_i epsilon_i
+$
+微观态数
+$
+  Omega_{a_i} = product_i Omega_a_i
+$
+其中$Omega_a_i$是第$i$个能级上$a_i$个粒子的微观态数。
+
+系统具有分布${a_i}$的几率为
+$
+  rho_({a_i}) & = Xi^(-1) Omega_{a_i} e^(- alpha N_{a_i} - beta E_{a_i}) \
+              & = Xi^(-1) product_i Omega_a_i e^(- alpha a_i - beta a_i epsilon_i) \
+$
+巨配分函数
+$
+  Xi & = sum_{a_i} product_i Omega_a_i e^(- alpha a_i - beta a_i epsilon_i) \
+     & = product_i sum_{a_i} Omega_a_i e^(- alpha a_i - beta a_i epsilon_i) \
+     & = product_i Xi_i
+$
+其中
+$
+  Xi_i = sum_{a_i} Omega_a_i e^(- alpha a_i - beta a_i epsilon_i)
+$
+是第$i$个能级的巨配分函数。于是第$i$个能级上的平均粒子数为
+$
+  overline(a_i) &= sum_{a_i} a_i rho_({a_i}) = 1/Xi sum_{a_i} a_i Omega_a_i e^(- alpha a_i - beta a_i epsilon_i) product_(j!=i) Omega_a_j e^(- alpha a_j - beta a_j epsilon_j) \
+  & = 1/Xi (sum_a_i a_i Omega_a_i e^(- alpha a_i - beta a_i epsilon_i)) product_(j!=i) Xi_j \
+  & = 1/Xi_i sum_{a_i} a_i Omega_a_i e^(- alpha a_i - beta a_i epsilon_i) \
+  & = 1/Xi_i pdv(Xi_i, alpha) = - pdv(ln Xi_i, alpha) = - pdv(ln Xi_i, beta epsilon_i)
+$
+
+=== Bose分布
+
+对于 Bose 粒子，同一个单粒子态可以容纳任意多个粒子。
+
+如果第$i$个能级有简并度$ω_i$，把$a_i$个不可分辨的 Bose 粒子放进去。
+
+微观方式数为
+$
+  Omega_(a_i)^"Bose" = binom(a_i + omega_i - 1, a_i) = (a_i + omega_i - 1)! / (a_i! (omega_i - 1)!)
+$
+从而
+$
+  Xi_i &= sum_a_i Omega_(a_i)^"Bose" e^(- alpha a_i - beta a_i epsilon_i) = sum_a_i binom(a_i + omega_i - 1, a_i) (e^(- alpha - beta epsilon_i))^(a_i)\
+  &= (1 - e^(- alpha - beta epsilon_i))^(- omega_i)
+$
+从而
+$
+  overline(a_i) & = - pdv(ln Xi_i, alpha) = omega_i / (e^(alpha + beta epsilon_i) - 1) = omega_i / (e^((epsilon_i - mu) / (k_B T)) - 1)
+$
+
+=== Fermi分布
+
+对于 Fermi 粒子，同一个单粒子态最多只能容纳一个粒子。
+
+如果第$i$个能级有简并度$ω_i$，把$a_i$个不可分辨的 Fermi 粒子放进去。
+
+微观方式数为
+$
+  Omega_(a_i)^"Fermi" = binom(omega_i, a_i) = omega_i! / (a_i! (omega_i - a_i)!)
+$
+从而
+$
+  Xi_i & = sum_a_i Omega_(a_i)^"Fermi" e^(- alpha a_i - beta a_i epsilon_i) = sum_a_i binom(omega_i, a_i) (e^(- alpha - beta epsilon_i))^(a_i) \
+  & = (1 + e^(- alpha - beta epsilon_i))^(omega_i)
+$
+从而
+$
+  overline(a_i) & = - pdv(ln Xi_i, alpha) = omega_i / (e^(alpha + beta epsilon_i) + 1) = omega_i / (e^((epsilon_i - mu) / (k_B T)) + 1)
+$
+
+=== 半经典分布
+
+对于半经典粒子，同一个单粒子态可以容纳任意多个粒子，但粒子之间是可区分的。
+
+如果第$i$个能级有简并度$ω_i$，把$a_i$个可分辨的半经典粒子放进去。
+
+微观方式数为
+$
+  Omega_(a_i)^"S" = omega_i^(a_i)/(a_i !)
+$
+从而
+$
+  Xi_i & = sum_a_i Omega_(a_i)^"S" e^(- alpha a_i - beta a_i epsilon_i) = sum_a_i (omega_i e^(- alpha - beta epsilon_i))^(a_i) / (a_i !) \
+  & = exp(omega_i e^(- alpha - beta epsilon_i))
+$
+从而
+$
+  overline(a_i) & = - pdv(ln Xi_i, alpha) = omega_i e^(- alpha - beta epsilon_i) = omega_i e^((mu - epsilon_i) / (k_B T))
+$
