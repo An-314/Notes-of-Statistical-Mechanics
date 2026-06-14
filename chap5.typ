@@ -1480,3 +1480,298 @@ $
 $
   overline(a_i) & = - pdv(ln Xi_i, alpha) = omega_i e^(- alpha - beta epsilon_i) = omega_i e^((mu - epsilon_i) / (k_B T))
 $
+
+== 巨正则分布的简单应用
+
+=== 理想气体
+
+巨正则系综中，粒子数$N$可以涨落。巨配分函数为
+$
+  Xi(alpha, beta, V) = sum_(N=0)^oo q^N Z_N (beta, V)
+$
+其中
+$
+  q = e^(- alpha) = e^(beta mu)
+$
+这里：
+$
+  beta = 1/(k_B T), alpha = - beta mu
+$
+$Z_N$是正则系综中$N$个粒子的配分函数。
+
+对于经典Boltzmann理想气体
+$
+  Z_N (beta, V) = (z^N (beta, V))/ N!
+$
+其中$z$是单粒子配分函数。这里的$1/N!$是因为气体分子不可分辨。从而
+$
+  Xi = sum_(N=0)^oo (q z)^N / N! = e^(q z)
+$
+#newpara()
+
+现在考虑单粒子的配分函数
+$
+  z(beta, V) = V f(T)
+$
+也就是说，单粒子配分函数与体积成正比。对于平动自由度，
+$
+  z = V/h^3 integral e^(- beta epsilon(vb(p))) dd(vb(p), 3)
+$
+从而
+$
+  f(T) = 1/h^3 integral e^(- beta epsilon(vb(p))) dd(vb(p), 3)
+$
+从而
+$
+  Xi = e^(q V f(T))
+$
+#newpara()
+
+这样我们就可以求各种热力学量
+- 平均粒子数
+  $
+    overline(N) = - pdv(ln Xi, alpha) = V f(T) e^(- alpha) = V f(T) e^(beta mu)
+  $
+  得到
+  $
+    e^(- alpha) = overline(N) / (V f(T))
+  $
+  也就是说，对于经典理想气体
+  $
+    overline(N) = q z
+  $
+  这和我们前面看到的结果一致：巨正则分布里，$q$控制平均粒子数
+- 内能
+
+  巨正则系综中
+  $
+    overline(E) & = - pdv(ln Xi, beta) = k_B T^2 V e^(- alpha) pdv(f(T), T) = k_B T^2 V f'(T) e^(beta mu) \
+                & = overline(N) k_B T^2 (f'(T)) / (f(T))
+  $
+  只要知道$f(T)$随温度的幂次，就能立刻得到内能
+- 压强
+  $
+    p V = k_B T ln Xi = overline(N) k_B T
+  $
+  这就是理想气体状态方程
+- 巨热力学势
+  $
+    J = - p V = - overline(N) k_B T = - k_B T ln Xi
+  $
+- 熵
+  $
+    S & = k_B (ln Xi + alpha overline(N) + beta overline(E)) \
+      & = k_B (overline(N) - overline(N) ln (overline(N))/(V f(T)) + overline(N) ln (T f'(T) )/(f(T))) \
+      & = k_B overline(N) (1 - ln (overline(N))/(V f(T)) + ln (T f'(T) )/(f(T)))
+  $
+
+当
+$ f(T) prop T^n $时，内能为
+$
+  overline(E) = overline(N) k_B T^2 (f'(T)) / (f(T)) = n overline(N) k_B T
+$
+对于
+$
+  epsilon prop p^alpha
+$
+有
+$
+  f(T) prop T^n, n = 3/alpha
+$
+- 对于非相对论粒子
+  $
+    epsilon = p^2/(2 m) => f(T) prop T^(3/2)
+  $
+  从而
+  $
+    overline(E) = 3/2 overline(N) k_B T
+  $
+- 对于相对论粒子
+  $
+    epsilon = p c => f(T) prop T^3
+  $
+  从而
+  $
+    overline(E) = 3 overline(N) k_B T
+  $
+
+=== 理想固体
+
+模型是：$N$个原子振动对应到$N$个近独立三维谐振子，也就是 Einstein 固体模型。
+
+巨配分函数为
+$
+  Z_N = z^N
+$
+其中刚才的气体分子在空间中自由运动，位置可以互换，粒子不可分辨，所以要除以$N!$；但固体中每个原子固定在晶格附近振动，每个格点是可区分的，所以不再除以 $N!$。
+
+三维谐振子的单粒子配分函数我们前面也给出
+$
+  epsilon = (n + 1/2) h nu
+$
+一维谐振子的配分函数是
+$
+  z_1 = sum_(n=0)^oo e^(- beta (n + 1/2) h nu) = e^(- beta h nu / 2) / (1 - e^(- beta h nu))
+$
+三维谐振子的单粒子配分函数是
+$
+  z = (z_1)^3 = e^(- 3 beta h nu / 2) / (1 - e^(- beta h nu))^3
+$
+巨配分函数为
+$
+  Xi = sum_(N=0)^oo e^(- alpha N) z^N = 1 / (1 - e^(- alpha) z)
+$
+#newpara()
+也可以求热力学量
+- 平均粒子数
+  $
+    overline(N) = - pdv(ln Xi, alpha) = (q z)/(1 - q z)
+  $
+  由此解得
+  $
+    q z = overline(N) / (1 + overline(N)) approx 1 - 1/overline(N)
+  $
+- 内能
+  $
+    overline(E) & = - pdv(ln Xi, beta) = k_B T^2 (q z')/(1 - q z) \
+                & = overline(N) k_B T^2 (z')/z
+  $
+  其中
+  $
+    z' = pdv(z, T)
+  $
+  代入配分函数得到
+  $
+    z'/z = pdv(ln z, T) = 3/(k_B T^2) (1/2 h nu + (h nu)/(e^(beta h nu) - 1))
+  $
+  则有
+  $
+    overline(E) = 3 N (1/2 h nu + (h nu)/(e^(beta h nu) - 1))
+  $
+  这正是Einstein固体模型的内能表达式
+- 压强
+  $
+    p V = k_B T ln Xi = - k_B T ln (1 - q z) (approx k_B T ln overline(N))
+  $
+- 熵
+  $
+    S & = k_B (ln Xi + alpha overline(N) + beta overline(E)) \
+      & = k_B (- ln (1 - q z) - overline(N) ln q + (T q z')/(1 - q z)) \
+      & = k_B (- ln (q z)/overline(N) - overline(N) ln (q z)/z + T z'/z overline(N)) \
+      & approx overline(N) k_B (ln z + (T z')/z)
+  $
+
+=== 气体的吸附
+
+经典理想气体的巨配分函数
+$
+  Xi(alpha, beta, V) = sum_(N=0)^oo q^N Z_N (beta, V) = sum_(N=0)^oo (q z)^N / N! = e^(q z)\
+  q = e^(- alpha) = e^(beta mu)
+$
+如果系统可以和外界交换粒子，就应当用巨正则分布。
+
+气体吸附问题正是这样：气体分子可以进入或离开固体表面。当气体与固体或液体表面接触时，气体分子可能被吸附到表面上。这时有两个相：
+- 气体分子
+- 被吸附分子
+达到平衡时，两个相之间可以交换分子，因此平衡条件是：
+$
+  mu_"gas" = mu_"ads"
+$
+也就是说，气体分子和表面吸附分子的化学势相等。
+
+吸附模型的简化假设
+- 表面有固定吸附位置
+
+  设固体表面有$N_0$个等价固定位置可以吸附分子，这些位置类似晶格点，每个位置最多吸附一个分子。每个分子和固体表面的结合能为
+  $
+    epsilon_0 > 0
+  $
+- 吸附分子之间相互作用可以忽略
+
+  即被吸附分子数$N<<N_0$，可以忽略它们之间的相互作用。
+
+如前所述，单原子理想气体，单粒子平动配分函数为
+$
+  Z' = V/h^3 integral e^(- beta vb(p)^2/(2 m) ) dd(vb(p), 3) = V ((2 pi m k_B T)/ h^2)^(3/2)
+$
+从而
+$
+  p V = N' k_B T
+$
+以及化学势
+$
+  mu' = - k_B T ln Z'/N' = - k_B T ln ((2 pi m)^(3/2) (k_B T)^(5/2))/ (p h^3)
+$
+被吸附分子的巨配分函数为
+$
+  Xi(alpha, beta, V) = sum_(N) q^N Z_N (beta, V), q = e^(- alpha) = e^(beta mu)
+$
+配分函数
+$
+  Z = sum_i Omega_i e^(- beta E_i)
+$
+其中
+$
+  E_i = epsilon_(i_1)^((1)) + epsilon_(i_2)^((2)) + ... + epsilon_(i_N)^((N)) - N epsilon_0
+$
+其中，$epsilon_(i j)^((j))$是第$j$个被吸附分子占据的单粒子态$i_j$的震动能；$epsilon_0$是结合能。位置选择数表面有$N_0$个可吸附位置，放入$N$个不可分辨分子，位置选择数为
+$
+  Omega_i = binom(N_0, N) omega_(i_1)^((1)) omega_(i_2)^((2)) ... omega_(i_N)^((N))
+$
+表示$N_0$个吸附位置中选择$N$个位置来吸附分子；每个位置上有$omega_(i_j)^((j))$个单粒子态可供第$j$个被吸附分子占据。
+
+得到配分函数
+$
+  Z & = sum_i Omega_i e^(- beta E_i) \
+    & = (N_0 !) / (N! (N_0 - N)!) (Z_v)^N e^(beta N epsilon_0)
+$
+其中
+$
+  Z_v = sum_i omega_i^((i)) e^(- beta sum_j epsilon_(i_j)^((j)))
+$
+是振动对应的单粒子配分函数。巨配分函数为
+$
+  Xi(alpha, beta, V) & = sum_(N=0)^N_0 q^N Z_N (beta, V) \
+                     & = sum_N e^(-alpha N) (N_0 !) / (N! (N_0 - N)!) (Z_v)^N e^(beta N epsilon_0) \
+                     & = sum_N (N_0 !) / (N! (N_0 - N)!) (Z_v)^N e^(beta N (mu + epsilon_0)) \
+                     & = (1 + Z_v e^(beta (mu + epsilon_0)))^(N_0)
+$
+它说明每一个吸附位置都有两种状态：空着或被一个分子占据。单个位置的配分函数是
+$
+  Xi_1 = 1 + Z_v e^(beta (mu + epsilon_0))
+$
+整个表面有$N_0$个独立位置，所以总巨配分函数就是它的$N_0$次方。
+
+考虑其热力学量
+- 平均被吸附分子数
+  $
+    overline(N) & = - pdv(ln Xi, alpha) = k_B T pdv(ln Xi, mu) \
+                & = N_0 /(1 + (Z_v)^(-1) e^(- beta (mu + epsilon_0)))
+  $
+- 吸附分数或者覆盖率为
+  $
+    theta = overline(N) / N_0 = 1 / (1 + (Z_v)^(-1) e^(- beta (mu + epsilon_0))) = p/(p + f(T))
+  $
+  其中
+  $
+    mu = mu', e^(beta mu') = (p h^3)/((2 pi m)^(3/2) (k_B T)^(5/2))\
+    Z_v e^(beta (epsilon_0 + mu)) = Z_v e^(beta epsilon_0) (p h^3)/((2 pi m)^(3/2) (k_B T)^(5/2)) = p/(f(T))
+  $
+  其中
+  $
+    f(T) = ((2 pi m)^(3/2) (k_B T)^(5/2)) / (Z_v h^3 e^(beta epsilon_0))
+  $
+  是Langmuir吸附等温式。
+
+  吸附分数$theta$是被吸附分子数占总吸附位置数的比例。它由化学势和结合能决定。结合能越大，吸附分子越容易占据位置，$theta$越大；化学势越大，$theta$也越大。
+- 低压极限$p << f(T)$
+  $
+    theta approx p/f(T)
+  $
+  吸附分数与压力成正比。
+- 高压极限$p >> f(T)$
+  $
+    theta approx 1
+  $
+  吸附分数趋近于1，表面几乎完全被吸附分子占据。
+以上与实验定性符合，定量不符，因过于简化了。
