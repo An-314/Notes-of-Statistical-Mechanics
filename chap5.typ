@@ -203,7 +203,7 @@ $
 
 下面求小系统$A$处于某一个指定微观态$s$的概率$rho_s$。如果$A$固定在态$s$，那么它的能量就是$E_s$。这时热源必须有能量：$E_r = E^((0)) - E_s$。热源在这个能量下可能的微观状态数是：
 $
-  Omega_r(E_r)
+  Omega_r (E_r)
 $
 由于整体$A+A_r$是孤立系统，可以用微正则系综的等概率假设
 $
@@ -211,7 +211,7 @@ $
 $
 因为热源状态数$Omega_r$非常大，直接处理它不方便，所以处理它的对数，在$E^((0))$展开
 $
-  ln Omega_r(E^((0)) - E_s) = ln Omega_r(E^((0))) + beta (-E_s)
+  ln Omega_r (E^((0)) - E_s) = ln Omega_r (E^((0))) + beta (-E_s)
 $
 其中
 $
@@ -1215,6 +1215,17 @@ $
     macron(N) = - (pdv(J, mu))_(T, V) = k_B T (pdv(ln Xi, mu))_(T, V)
   $
   所以$J$是巨正则系综的特性函数，就像正则系综中$F(T,V,N)$是特性函数一样。
+
+#theorem(subname: [巨正则分布的热力学公式])[
+  巨正则分布的热力学公式为
+  $
+    macron(N) = - pdv(ln Xi, alpha) = k_B T (pdv(ln Xi, mu))_(T, V)\
+    overline(E) = - pdv(ln Xi, beta) = k_B T^2 (pdv(ln Xi, T))_(V, mu)\
+    macron(Y) = 1/beta pdv(ln Xi, y) = k_B T (pdv(ln Xi, y))_(T, mu)\
+    S = k_B (ln Xi + alpha macron(N) + beta macron(E))\
+    J = - k_B T ln Xi
+  $
+]
 
 === 粒子数和能量的涨落
 

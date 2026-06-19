@@ -29,7 +29,7 @@ $
 $
 给出量子浓度(quantum concentration)
 $
-  n_Q = 1/lambda_T^3 = (2 pi m k_B T/h^2)^(3/2)
+  n_Q = 1/lambda_T^3 = ((2 pi m k_B T)/h^2)^(3/2)
 $
 当原子之间的平均距离与热de Broglie波长相当时，气体便进入*简并态*。此时，*量子统计学*开始起作用。这时Bose统计和Fermi统计都被近似为半经典Boltzmann统计。
 
@@ -45,6 +45,24 @@ $
   n lambda_T^3 > 1
 $
 Bose气与Fermi气性质完全不同。
+
+#definition(subname: [非简并气与简并气])[
+  非简并气与简并气是根据粒子间平均距离与热de Broglie波长的比较来区分的。当
+  $
+    n lambda_T^3 < 1
+  $
+  时，气体处于非简并态，量子统计效应不显著，宏观量可对$n lambda_T^3$作展开；当
+  $
+    n lambda_T^3 > 1
+  $
+  时，气体处于简并态，量子统计效应显著，Bose气与Fermi气性质完全不同。
+
+  其中
+  $
+    lambda_T = h/sqrt(2 pi m k_B T)
+  $
+  为热de Broglie波长，$n$为粒子数密度。
+]
 
 == Bose系统与Fermi系统的宏观量统计表达式
 
@@ -129,16 +147,48 @@ $
     & = k_B (ln Xi - alpha pdv(ln Xi, alpha) - beta pdv(ln Xi, beta))
   $
   因此$S' = 0$。$S$是态函数，状态一定，其值完全确定，以上利用封闭系统得到
+- *自由能*
+  $
+    F = U - T S = - k_B T ln Xi - mu N
+  $
+- *化学势*
+  $
+    mu = - alpha k_B T
+  $
 
 #note[
   $ln Xi$是以$alpha, beta, y$为参量的特性函数， 计算宏观量步骤: $epsilon_i , omega_i -> ln Xi ->$ 宏观量。但$mu$不可测，原则上可由$N = - pdv(ln Xi, alpha)$反解出$alpha(beta, y)$，得到用可测量表示的宏观量。
+]
+
+#theorem(subname: [巨配分函数给出的热力学量])[
+  巨配分函数$ln Xi$给出热力学量的统计表达式
+  - 粒子数
+    $
+      N = - pdv(ln Xi, alpha)
+    $
+  - 内能
+    $
+      U = - pdv(ln Xi, beta)
+    $
+  - 物态方程
+    $
+      Y_k = - 1/beta pdv(ln Xi, y_k)
+    $
+  - 熵
+    $
+      S = k_B (ln Xi - alpha pdv(ln Xi, alpha) - beta pdv(ln Xi, beta))
+    $
+  - 化学势
+    $
+      mu = - alpha k_B T
+    $
 ]
 
 == 弱简并理想Bose气体和Fermi气体
 
 在$n lambda_T^3 < 1$的条件下，气体处于弱简并状态。宏观量可对$n lambda_T^3$展开。此时，Bose气体和Fermi气体的性质与经典气体有显著差异。
 
-例如单原子气体，只有平动，能量准连续。
+例如*单原子气体*，只有平动，能量准连续。
 
 先求巨配分函数
 $
@@ -170,6 +220,16 @@ $
 $
   ln Xi(alpha, beta, V) = C V sqrt(pi/beta) beta^(-3/2) f(alpha) = ((2 pi m)/(beta h^2))^(3/2) V g_s f(alpha) = lambda_T^(-3) V g_s f(alpha)
 $
+#theorem(subname: [弱简并理想Bose气体和Fermi气体的巨配分函数])[
+  对于弱简并理想Bose气体和Fermi气体，只考虑平动，能量准连续，巨配分函数为
+  $
+    ln Xi(alpha, beta, V) = ((2 pi m)/(beta h^2))^(3/2) V g_s f(alpha)
+  $
+  其中
+  $
+    f(alpha) = sum_(n = 1)^oo (minus.plus)^(n-1) (e^(- n alpha))/n^(5/2)
+  $
+]
 #newpara()
 *反解出$e^(-alpha)$*
 $
@@ -193,28 +253,28 @@ $
 $
 #newpara()
 进一步可以求解*宏观量*
-$
-  U &= - pdv(ln Xi, beta) = - ln Xi pdv(ln ln Xi, beta) = 3/2 (ln Xi)/beta = 3/2 n k_B (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...)
-$
-我们说$1$是半经典近似，$2^(-5/2) 1/g_s n lambda_T^3$是量子修正项。
-
-以及热容
-$
-  C_V & = (pdv(U, T))_V = 3/2 n k_B (1 + plus.minus 2^(-7/2) 1/g_s n lambda_T^3 + ...)
-$
-与物态方程
-$
-  p = 1/beta pdv(ln Xi, V) = (ln Xi)/(beta V) = 2/3 U/V = (N k_B T)/V (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...)
-$
-其中用到了
-$
-  ln Xi prop V, ln Xi = 2/3 U beta
-$
-以及熵
-$
-  S & = k_B (ln Xi - alpha pdv(ln Xi, alpha) - beta pdv(ln Xi, beta)) = k_B (5/3 beta U + N alpha) \
-    & = N k_B ((ln g_s/(n lambda_T^3) + 5/2) plus.minus 2^(-7/2) 1/g_s n lambda_T^3 + ...)
-$
+- *内能*
+  $
+    U &= - pdv(ln Xi, beta) = - ln Xi pdv(ln ln Xi, beta) = 3/2 (ln Xi)/beta = 3/2 n k_B (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...)
+  $
+  我们说$1$是半经典近似，$2^(-5/2) 1/g_s n lambda_T^3$是量子修正项。
+- 以及*热容*
+  $
+    C_V & = (pdv(U, T))_V = 3/2 n k_B (1 + plus.minus 2^(-7/2) 1/g_s n lambda_T^3 + ...)
+  $
+- 与*物态方程*
+  $
+    p = 1/beta pdv(ln Xi, V) = (ln Xi)/(beta V) = 2/3 U/V = (N k_B T)/V (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...)
+  $
+  其中用到了
+  $
+    ln Xi prop V, ln Xi = 2/3 U beta
+  $
+- 以及*熵*
+  $
+    S & = k_B (ln Xi - alpha pdv(ln Xi, alpha) - beta pdv(ln Xi, beta)) = k_B (5/3 beta U + N alpha) \
+      & = N k_B ((ln g_s/(n lambda_T^3) + 5/2) plus.minus 2^(-7/2) 1/g_s n lambda_T^3 + ...)
+  $
 #newpara()
 - 对于半经典修正和量子修正
   - $(n lambda_T^3)^0$是半经典近似
@@ -224,12 +284,15 @@ $
   - 由于Pauli不相容，两个Fermion不能占据同一个量子态，相斥；对应波函数是反对称的。
   - Boson可以占据同一个量子态，相吸；对应波函数是对称的。
 
-$
-    U & = 3/2 n k_B T (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...) \
-  C_V & = 3/2 n k_B (1 + minus.plus 2^(-7/2) 1/g_s n lambda_T^3 + ...) \
-    p & = (N k_B T)/V (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...) \
-    S & = N k_B ((ln g_s/(n lambda_T^3) + 5/2) plus.minus 2^(-7/2) 1/g_s n lambda_T^3 + ...)
-$
+#theorem(subname: [弱简并理想Bose气体和Fermi气体的宏观量])[
+  对于弱简并理想Bose气体和Fermi气体，内能、热容、物态方程、熵的统计表达式为
+  $
+      U & = 3/2 n k_B T (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...) \
+    C_V & = 3/2 n k_B (1 + minus.plus 2^(-7/2) 1/g_s n lambda_T^3 + ...) \
+      p & = (N k_B T)/V (1 + plus.minus 2^(-5/2) 1/g_s n lambda_T^3 + ...) \
+      S & = N k_B ((ln g_s/(n lambda_T^3) + 5/2) plus.minus 2^(-7/2) 1/g_s n lambda_T^3 + ...)
+  $
+]
 
 Bose分布的奇异性会导致*Bose-Einstein凝聚*。
 
@@ -296,7 +359,7 @@ $
 $
 这就是BEC发生的前兆。
 
-下面求在$mu -> 0$时，所有激发态最多能容纳多少粒子。如果总粒子数超过激发态能容纳的最大数，多出来的粒子只能进入基态，于是发生凝聚。对于三维自由粒子，单粒子能量为
+下面求在$mu -> 0$时，所有激发态最多能容纳多少粒子。如果总粒子数超过激发态能容纳的最大数，多出来的粒子只能进入基态，于是发生凝聚。对于*三维自由粒子*，单粒子能量为
 $
   epsilon = p^2/(2m)
 $
@@ -333,6 +396,13 @@ $
   T_c = h^2/(2 pi m k_B) ((N/V)/(g_s zeta(3/2)))^(2/3)
 $
 
+#theorem(subname: [Bose-Einstein凝聚的临界温度])[
+  Bose-Einstein凝聚时，$mu -> 0$，如果总粒子数超过激发态能容纳的最大数，多出来的粒子只能进入基态，于是发生凝聚。临界温度与粒子数密度$n = N/V$的关系为
+  $
+    N = C V (k_B T_c)^(3/2) Gamma(3/2) zeta(3/2)
+  $
+]
+
 === Bose-Einstein凝聚
 
 $T -> T_c$时$mu->0$，$epsilon_0 = 0$上的粒子数显著增加；另一方面，准连续近似时，$g(epsilon) prop epsilon^(1/2)$是忽略了$ε = 0$态。故：
@@ -347,6 +417,17 @@ $
 $
   N_(epsilon = 0) = N - N_(epsilon > 0) = N (1 - (T/T_c)^(3/2))
 $
+
+#theorem(subname: [Bose-Einstein凝聚的基态粒子数])[
+  当$T < T_c$时，Bose-Einstein凝聚发生，基态粒子数为
+  $
+    N_(epsilon = 0) = N - N_(epsilon > 0) = N (1 - (T/T_c)^(3/2))
+  $
+  激发态粒子数为
+  $
+    N_(epsilon > 0) = C V (k_B T)^(3/2) Gamma(3/2) zeta(3/2) (n lambda_T^3)/g_s = N (T/T_c)^(3/2)
+  $
+]
 
 #figure(
   image("pic/2026-05-10-16-18-10.png", width: 30%),
@@ -436,7 +517,15 @@ Rb-87原子的Bose-Einstein凝聚实验图像。温度降低到$T_c$附近时，
   $
     C_V = (pdv(U, T))_V = 5/2 k_B C V beta^(-3/2) (3 sqrt(pi))/4 times 1.341 = 1.926 N k_B (T/T_c)^(3/2)
   $
-  它说明 BEC 凝聚相低温热容不是经典理想气体的常数，而是随温度降低而降低的函数，且在$T=0$时趋近于零。这是因为随着温度降低，越来越多的粒子进入基态，激发态粒子数减少，系统的热容也随之减少
+  它说明 BEC 凝聚相低温热容不是经典理想气体的常数，而是随温度降低而降低的函数，且在$T=0$时趋近于零。这是因为随着温度降低，越来越多的粒子进入基态，激发态粒子数减少，系统的热容也随之减少。
+
+#theorem(subname: [Bose-Einstein凝聚的配分函数以及宏观量])[
+  - $epsilon=0$态对$U, p, S$无贡献，系统的内能、压强、熵、热容等宏观量，主要由激发态粒子贡献
+  - $epsilon>0$态的巨配分函数为
+    $
+      ln Xi & = 2/3 C V beta^(-3/2) Gamma(5/2) zeta(5/2) \
+    $
+]
 
 关于BEC的讨论：
 - 当$T -> 0$时，$U, p, S$都趋于零
@@ -596,7 +685,7 @@ $lambda$相变和理想 Bose 气体的 BEC 有相似性，但不能完全等同
 黑体辐射可以看成由大量光子组成的气体。光子有几个特殊性质：
 $
         m & = 0 \
-  epsilon & = hbar omega = hbar c k \
+  epsilon & = hbar omega = hbar c k = h nu \
         p & = h/lambda = hbar k \
         c & = lambda nu
 $
@@ -639,11 +728,7 @@ $
 $
   dd(N) = g_s dd(vb(omega))/h^3 1/(e^(beta epsilon) - 1)
 $
-利用
-$
-  epsilon = c p = h nu
-$
-所以动量空间中，$p$到$p+dd(p)$之间的状态数为：
+动量空间中，$p$到$p+dd(p)$之间的状态数为：
 $
   h^(-3) g_s integral dd(vb(x), 3) integral dd(vb(p), 3) = h^(-3) g_s V 4 pi p^2 dd(p)
 $
@@ -664,6 +749,21 @@ $
   U(nu) dd(nu) = h nu n(nu) dd(nu) = 8 pi V h nu^3/c^3 1/(e^(beta h nu) - 1) dd(nu)
 $
 这是*Planck黑体辐射公式*。
+#theorem(subname: [Planck黑体辐射公式])[
+  黑体辐射的能态密度
+  $
+    g(nu) dd(nu) = g_s (4 pi V)/(c^3) nu^2 dd(nu)
+  $
+  光子数密度
+  $
+    n(nu) dd(nu) = g_s (4 pi V)/(c^3) nu^2 1/(e^(beta h nu) - 1) dd(nu)
+  $
+  能量密度
+  $
+    U(nu) dd(nu) = h nu n(nu) dd(nu) = 8 pi V h nu^3/c^3 1/(e^(beta h nu) - 1) dd(nu)
+  $
+]
+
 
 在低频高$T$极限$h nu << k_B T$时，Planck公式近似为经典的Ray leigh-Jeans定律
 $
@@ -680,7 +780,7 @@ $
   E = integral_0^oo U(nu) dd(nu) = V u
 $
 $
-  u = b R^4, b = (8 pi^5 k_B^4)/(c^3 h^3) integral_0^oo x^3/(e^x - 1) dd(x) = (8 pi^5 k_B^4)/(15 c^3 h^3)
+  u = b T^4, b = (8 pi^5 k_B^4)/(c^3 h^3) integral_0^oo x^3/(e^x - 1) dd(x) = (8 pi^5 k_B^4)/(15 c^3 h^3)
 $
 经典发散，不能与其他物体（壁）达到热平衡。
 
@@ -731,7 +831,7 @@ $
 $
 可以求出热力学量
 $
-  U & = - pdv(ln Xi, beta) = (8 pi^5 k_B^4 T^4 V)/(15 c^3 h^3) \
+  U & = - pdv(ln Xi, beta) = (8 pi^5 k_B^4 T^4 V)/(15 c^3 h^3) = b V T^4 \
   p & = 1/beta pdv(ln Xi, V) = (8 pi^5 k_B^4 T^4)/(45 c^3 h^3) = 1/3 E/V = 1/3 b T^4 \
   S & = k_B (ln Xi + beta U) = 4 k_B ln Xi = 4/3 b V T^3
 $
@@ -746,6 +846,29 @@ $
 $
   G = F + p V = 0 => mu = 0
 $
+
+#theorem(subname: [光子气体的配分函数与热力学量])[
+  - 光子气体的巨配分函数为
+    $
+      ln Xi(beta, V) = (8 pi^5 k_B^3 T^3 V)/(45 c^3 h^3)
+    $
+  - 内能
+    $
+      U = (8 pi^5 k_B^4 T^4 V)/(15 c^3 h^3)
+    $
+  - 压强
+    $
+      p = (8 pi^5 k_B^4 T^4)/(45 c^3 h^3) = 1/3 E/V
+    $
+  - 熵
+    $
+      S = 4/3 b V T^3
+    $
+  - 热容
+    $
+      C_V = (pdv(U, T))_V = (32 pi^5 k_B^4 T^3 V)/(15 c^3 h^3) = 4 b V T^3
+    $
+]
 
 == 声子气体
 
@@ -847,6 +970,21 @@ $
   omega_D = ((9 N)/B)^(1/3) <=> B = (9 N)/(omega_D^3)
 $
 这就是 Debye 频率的定义。
+
+#theorem(subname: [Debye模型的态密度与Debye频率])[
+  声子态密度为
+  $
+    g(omega) dd(omega) = B V omega^2 dd(omega)
+  $
+  其中
+  $
+    B = 1/(2 pi^2) (1/v_l^3 + 2/v_t^3)
+  $
+  声子频率的截止频率为
+  $
+    omega_D = ((9 N)/B)^(1/3)
+  $
+]
 
 于是态密度可以写成更常用的形式——Debye频谱
 $
@@ -989,7 +1127,7 @@ $
 $
 其中
 $
-  C = g_s (2 pi m)^(3/2)/(h^3)
+  C = g_s 2 pi (2 m)^(3/2)/(h^3)
 $
 从而
 $
@@ -999,6 +1137,16 @@ $
 $
   epsilon_F = ((3N)/(2C V))^(2/3) = h^2/(2 m) (3/(4g_s pi) N/V)^(2/3)
 $
+#theorem(subname: [Fermi气体的能态密度以及Fermi能])[
+  三维非相对论自由Fermi气体的能态密度为
+  $
+    g(epsilon) dd(epsilon) = C V sqrt(epsilon) dd(epsilon), C = g_s (2 pi m)^(3/2)/(h^3)
+  $
+  Fermi能为
+  $
+    epsilon_F = ((3N)/(2C V))^(2/3) = h^2/(2 m) (3/(4g_s pi) N/V)^(2/3)
+  $
+]
 进一步得到其他宏观量。*零点能*
 $
   U_0 = integral_0^epsilon_F epsilon g(epsilon) dd(epsilon) = 3/5 N epsilon_F
@@ -1080,7 +1228,7 @@ $
 其中$nu(epsilon)$可在$epsilon = mu$附近展开，收敛很快，这就是 Sommerfeld展开的思想
 $
   Q_l & = integral_0^oo dd(epsilon) epsilon^l f(epsilon) \
-  & = 1/(l + 1) (epsilon^(l + 1) f(epsilon))_0^oo - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
+  & = 1/(l + 1) eval(epsilon^(l + 1) f(epsilon))_0^oo - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
   & = - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
   & = integral_0^oo dd(epsilon) nu(epsilon) f'(epsilon), nu(epsilon) = - 1/(l + 1) epsilon^(l + 1)\
   & = sum_(n=0)^oo (nu^((n))(mu))/(n!) integral_0^oo dd(epsilon) (epsilon - mu)^n f'(epsilon) \
@@ -1213,6 +1361,26 @@ $
   caption: [Fermi气体$C_V$和$T$的关系],
 )
 
+#theorem(subname: [低温强简并Fermi气体的热力学量])[
+  低温强简并Fermi气体的热力学量为
+  $
+    N = C V Q_(1/2) = 2/3 C V mu^(3/2) (1 + (pi^2)/8 ((k_B T)/mu)^2 + O(((k_B T)/mu)^4)) \
+  $
+  $
+    U = C V Q_(3/2) = 2/5 C V mu^(5/2) (1 + (5 pi^2)/8 ((k_B T)/mu)^2 + O(((k_B T)/mu)^4)) \
+  $
+  $
+    ln Xi = 2/3 beta U = 4/15 C V mu^(5/2) (1 + (5 pi^2)/8 ((k_B T)/mu)^2 + O(((k_B T)/mu)^4))
+  $
+  $
+    p = 1/beta pdv(ln Xi, V) = 2/5 C mu^(5/2) (1 + (5 pi^2)/8 ((k_B T)/mu)^2 + O(alpha^(-4)))
+  $
+  $
+    S & = k_B (ln Xi - alpha pdv(ln Xi, alpha) - beta pdv(ln Xi, beta)) \
+      & = k_B 4/15 C V beta^(-3/2) (-alpha)^(5/2) (0 + (5 pi^2)/4 alpha^(-2) + O(alpha^(-4))) \
+      & = (pi^2)/3 C V k_B^2 T mu^(1/2) (1 + O(alpha^(-2)))
+  $
+]
 
 低温和高温的过渡
 - 低温时$0<T<<T_F$：系统是强简并 Fermi 气，分布接近阶跃函数，只有 Fermi 面附近的粒子参与热激发。
@@ -1278,13 +1446,11 @@ $
 $
 其中
 $
-  C = g_s 2 pi (m)^(3/2)/(h^3), g_s = 2
+  C = g_s (2 pi m)^(3/2)/(h^3), g_s = 2
 $
 物理上：磁场让两类自旋电子的态密度错开，从而使低能自旋态稍微多占一些，高能自旋态少占一些，产生净磁矩。
 
-*$T=0"K"$时*。没
-
-有磁场时，电子从最低能态填充到Fermi能：$mu_0 = epsilon_F$。加磁场后，由于两支自旋能带错开，为了保持总电子数$N$不变，化学势会从：$mu_0 -> mu'_0$
+*$T=0"K"$时*。没有磁场时，电子从最低能态填充到Fermi能：$mu_0 = epsilon_F$。加磁场后，由于两支自旋能带错开，为了保持总电子数$N$不变，化学势会从：$mu_0 -> mu'_0$
 $
   N = integral_0^mu'_0 dd(epsilon) g(epsilon) dd(epsilon) = integral_0^(2 mu_B B) dd(epsilon) g(epsilon) dd(epsilon) + integral_(2 mu_B B)^mu'_0 dd(epsilon) g(epsilon) dd(epsilon)
 $
@@ -1301,6 +1467,25 @@ $
   mu'_0 = mu_0 + mu_B B
 $
 由于我们把平行分支的能量零点重新设为 0，整体化学势相对于这个新零点略微上移。真实可观测的是两支自旋电子数的差别，而不是这个能量零点选择本身。
+
+#theorem(subname: [金属中电子气的态密度和Fermi能])[
+  金属中电子气在磁场下的态密度为
+  $
+    g(epsilon) dd(epsilon) = cases(
+      1/2 C V sqrt(epsilon) dd(epsilon)\, & 0 <= epsilon <= 2 mu_B B & "只有平行贡献",
+      1/2 C V (sqrt(epsilon) + sqrt(epsilon - 2 mu_B B)) dd(epsilon)\, & epsilon >= 2 mu_B B & "平行和反平行贡献"
+    )
+  $
+  其中
+  $
+    C = g_s 2 pi (2 m)^(3/2)/(h^3), g_s = 2
+  $
+  Fermi能为
+  $
+    mu'_0 = mu_0 + mu_B B
+  $
+]
+#newpara()
 
 *磁矩*
 $
