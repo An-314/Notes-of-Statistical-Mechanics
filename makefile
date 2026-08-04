@@ -65,4 +65,4 @@ clean:
 	$(call RM_RF,pic/builds)
 	$(call RM_RF,HW/pic/builds)
 
-include ./notes.mk
+-include ./notes.mk
