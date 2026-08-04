@@ -36,7 +36,7 @@ HW_PDF := $(patsubst HW/%.typ,$(BUILD_DIR)/HW/%.pdf,$(HW_SRC))
 HW_PIC_SRC := $(wildcard HW/pic/*.typ)
 HW_PIC_PDF := $(patsubst HW/pic/%.typ,HW/pic/builds/%.pdf,$(HW_PIC_SRC))
 
-.PHONY: all clean
+.PHONY: all clean publish ssh-test
 
 all: $(PIC_PDF) $(HW_PIC_PDF) $(MAIN_PDF) $(HW_PDF)
 
@@ -64,3 +64,5 @@ clean:
 	$(call RM_RF,$(BUILD_DIR))
 	$(call RM_RF,pic/builds)
 	$(call RM_RF,HW/pic/builds)
+
+include ./notes.mk
