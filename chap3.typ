@@ -1,5 +1,5 @@
-#import "@preview/scripst:1.1.1": *
-#import "@preview/physica:0.9.8": *
+#import "@preview/scripst:1.1.2": *
+
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 #import "@preview/chemformula:0.1.2": ch
 
@@ -877,11 +877,11 @@ $
 
 晶格间强耦合，从而当温度不太高时，原子偏离平衡位置的振幅很小，因此可以把势能在平衡位置附近展开，只保留到二次项，这就是*简谐近似*。
 $
-  Phi(x_1, x_2, ..., x_(3N)) = eval(phi)_(x_i = 0) + sum_i eval(pdv(phi, x_i))_(x_i = 0) x_i + 1/2 sum_(i,j) eval(pdv(phi, x_i, x_j))_(x_i = 0) x_i x_j + ...
+  Phi(x_1, x_2, ..., x_(3N)) = evaluated(phi)_(x_i = 0) + sum_i evaluated(pdv(phi, x_i))_(x_i = 0) x_i + 1/2 sum_(i,j) evaluated(pdv(phi, x_i, x_j))_(x_i = 0) x_i x_j + ...
 $
 简谐近似，只保留至二次项
 $
-  H = sum_i p_i^2/(2 m) + 1/2 sum_(i,j) C_(i j) x_i x_j + phi_0, C_(i j) = eval(pdv(phi, x_i, x_j))_(x_i = 0)
+  H = sum_i p_i^2/(2 m) + 1/2 sum_(i,j) C_(i j) x_i x_j + phi_0, C_(i j) = evaluated(pdv(phi, x_i, x_j))_(x_i = 0)
 $
 正交变换使其对角化
 $

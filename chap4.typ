@@ -1,5 +1,5 @@
-#import "@preview/scripst:1.1.1": *
-#import "@preview/physica:0.9.8": *
+#import "@preview/scripst:1.1.2": *
+
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 #import "@preview/chemformula:0.1.2": ch
 
@@ -993,7 +993,7 @@ $
 $
 从而
 $
-  N = integral_0^oo g(epsilon) eval(f(epsilon))_(T=0) dd(epsilon) = integral_0^epsilon_F C V sqrt(epsilon) dd(epsilon) = 2/3 C V epsilon_F^(3/2)
+  N = integral_0^oo g(epsilon) evaluated(f(epsilon))_(T=0) dd(epsilon) = integral_0^epsilon_F C V sqrt(epsilon) dd(epsilon) = 2/3 C V epsilon_F^(3/2)
 $
 从而得到Fermi能
 $

@@ -1,5 +1,5 @@
-#import "@preview/scripst:1.1.1": *
-#import "@preview/physica:0.9.8": *
+#import "@preview/scripst:1.1.2": *
+
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 #import "@preview/chemformula:0.1.2": ch
 
@@ -727,11 +727,11 @@ $
 
 在最可几分布${a_i^*}$处展开
 $
-  ln Omega{a_i} = ln Omega{a_i^*} + sum_i eval(pdv(ln Omega, a_i))_(a_i^*) (a_i - a_i^*) + 1/2 sum_i eval(pdv(ln Omega, a_i, 2))_(a_i^*) (a_i - a_i^*)^2
+  ln Omega{a_i} = ln Omega{a_i^*} + sum_i evaluated(pdv(ln Omega, a_i))_(a_i^*) (a_i - a_i^*) + 1/2 sum_i evaluated(pdv(ln Omega, a_i, 2))_(a_i^*) (a_i - a_i^*)^2
 $
 因为${a_i^*}$是极值点，所以
 $
-  eval(pdv(ln Omega, a_i))_(a_i^*) = 0, pdv(ln Omega, a_i, 2) = - 1/a_i^* < 0
+  evaluated(pdv(ln Omega, a_i))_(a_i^*) = 0, pdv(ln Omega, a_i, 2) = - 1/a_i^* < 0
 $
 从而
 $

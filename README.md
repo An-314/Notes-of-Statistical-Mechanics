@@ -83,7 +83,7 @@ typst c i.typ i.pdf
   * 引入
 
     ```typst
-    #import "@preview/scripst:1.1.1": *
+    #import "@preview/scripst:1.1.2": *
     ```
 
 
