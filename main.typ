@@ -48,6 +48,8 @@
   matheq-depth: 3,
   lang: "zh",
   preface: preface,
+  par-leading: 0.8em,
+  font-size: 12pt,
 )
 
 #include "chap1.typ"
