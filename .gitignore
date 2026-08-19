@@ -2,3 +2,4 @@ files/
 builds/
 *.pdf
 !pic/*.pdf
+notes.mk
