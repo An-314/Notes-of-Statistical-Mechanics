@@ -1228,7 +1228,7 @@ $
 其中$nu(epsilon)$可在$epsilon = mu$附近展开，收敛很快，这就是 Sommerfeld展开的思想
 $
   Q_l & = integral_0^oo dd(epsilon) epsilon^l f(epsilon) \
-  & = 1/(l + 1) eval(epsilon^(l + 1) f(epsilon))_0^oo - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
+  & = 1/(l + 1) evaluated(epsilon^(l + 1) f(epsilon))_0^oo - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
   & = - 1/(l + 1) integral_0^oo dd(epsilon) epsilon^(l + 1) dv(f, epsilon) \
   & = integral_0^oo dd(epsilon) nu(epsilon) f'(epsilon), nu(epsilon) = - 1/(l + 1) epsilon^(l + 1)\
   & = sum_(n=0)^oo (nu^((n))(mu))/(n!) integral_0^oo dd(epsilon) (epsilon - mu)^n f'(epsilon) \
