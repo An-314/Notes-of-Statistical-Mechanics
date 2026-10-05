@@ -1409,6 +1409,71 @@ $
   - $T<3"K"$时，电子热容占主导
   - $T>3"K"$时，晶格热容占主导
 
+#note(subname: [晶体的热容])[
+  金属热容：主要是声子 + 电子。金属的定容热容可以粗略分成
+  $
+    C_V & = C_(V,"phonon") + C_(V,"electron") \
+        & = gamma T + beta T^3
+  $
+  - Einstein 模型：最简单的晶格振动模型
+
+    Einstein 模型把固体中每个原子看成同频率的量子谐振子。每个振动模式的能级为
+    $
+      epsilon_i = h nu (n_i + 1/2), n_i = 0, 1, 2, ...
+    $
+    定义 Einstein 温度
+    $
+      Theta_E = (h nu)/k_B
+    $
+    则
+    $
+      C_V = 3 N k_B (Theta_E/T)^2 e^(Theta_E/T)/(e^(Theta_E/T) - 1)^2
+    $
+    它的两个极限是：
+    - $T >> Theta_E$时，$C_V approx 3 N k_B$，满足Dulong-Petit定律
+    - $T << Theta_E$时，$C_V approx 3 N k_B (Theta_E/T)^2 e^(- Theta_E/T)$，热容指数衰减，趋于零；但不符合实验上的$T^3$行为，因为Einstein 模型忽略了低频振动
+  - Debye 模型：解释晶格热容的主模型
+
+    Debye 模型认为固体振动不是一个频率，而是一整套连续分布的简正模式。每个简正模式量子化后就是声子。声子服从 Bose 统计，而且声子数不守恒，因此
+    $
+      mu_"phonon" = 0
+    $
+    声子是晶格振动的量子激发，不是可以脱离固体独立存在的真实粒子；低频声子的色散近似线性：
+    $
+      omega = v k => epsilon = hbar omega = v p
+    $
+    定义 Debye 频率 $omega_D$，Debye 温度
+    $
+      Theta_D = (hbar omega_D)/k_B
+    $
+    则
+    $
+      C_V = 9 N k_B (T/(Theta_D))^3 integral_0^(Theta_D/T) (x^4 e^x)/(e^x - 1)^2 dd(x)
+    $
+    它的两个极限是：
+    - $T >> Theta_D$时，$C_V approx 3 N k_B$，满足Dulong-Petit定律
+    - $T << Theta_D$时，$C_V approx 3 N k_B (4 pi^4)/5 (T/Theta_D)^3$，热容随$T^3$增加，符合实验
+  - Fermi 气体模型：解释电子热容
+
+    如果把金属电子当成经典理想气体，每个电子会给出大约$3/2k_B T$的热容贡献，这显然太大，不符合实验。正确解释是：金属电子是强简并 Fermi 气体。Fermi-Dirac 分布为
+    $
+      f(epsilon) = 1/(e^((epsilon - mu)/(k_B T)) + 1)
+    $
+    在 $T=0$ 时，电子从低能态一直填到 Fermi 能
+    $
+      epsilon_F = h^2/(2 m) (3/(4 g_s pi) N/V)^(2/3)
+    $
+    定义
+    $
+      T_F = epsilon_F/k_B
+    $
+    一般低于常温，绝大多数电子被 Pauli 不相容原理“锁住”，不能被热激发；只有 Fermi 面附近能量宽度约$k_B T$的电子能参与热运动。低温强简并 Fermi 气中只有 Fermi 面附近粒子参与热激发，高温时才恢复 Boltzmann 分布。低温电子热容为
+    $
+      C_V = pi^2/2 N k_B (T/T_F)
+    $
+]
+
+
 == 金属中的电子气的磁性
 
 Pauli在1927年提出：金属自由电子的自旋磁矩会导致顺磁性，也称为非铁磁金属的顺磁性(Pauli paramagnetism)。
@@ -1560,3 +1625,90 @@ Landau在1930年指出：带电粒子在磁场中的轨道运动会量子化，�
 $
   chi_"Landau" = - 1/3 chi_"Pauli"
 $
+
+#note(subname: [金属磁性：电子自旋、电子轨道、局域磁矩、交换作用])[
+
+  金属磁性比热容更复杂。大致可以分成四类贡献：
+  $
+    chi = chi_"Pauli" + chi_"Landau" + chi_"core" + chi_"local/exchange"
+  $
+  - 经典顺磁模型：局域磁矩的 Curie 定律
+
+    如果有一批互不相互作用的磁矩 $μ$，在磁场 $B$ 中有两能级
+    $
+      E = - μ B, + μ B
+    $
+    单个磁矩配分函数
+    $
+      z = 2 cosh(beta μ B)
+    $
+    总磁化强度
+    $
+      M = pdv(ln Z, B) = N μ tanh(beta μ B)
+    $
+    弱场高温极限$beta μ B << 1$下，磁化强度近似为
+    $
+      M approx N μ^2 B/(k_B T)
+    $
+    所以磁化率满足
+    $
+      chi = mu_0^"vac" pdv(M, B) = (mu_0^"vac" N μ^2)/(k_B T)
+    $
+    这就是 Curie 定律。
+
+    这个模型适合解释稀磁离子、局域磁矩体系、顺磁盐等，但不能直接解释普通非铁磁金属中传导电子的顺磁性，因为金属电子不是经典可分辨粒子，而是强简并 Fermi 气体。
+
+  - Pauli 顺磁性：普通金属电子自旋磁性
+
+    Pauli 顺磁性来自传导电子的自旋磁矩。外磁场使自旋平行和反平行的电子能级发生微小分裂，但由于电子气强简并，真正能改变自旋占据的主要只有 Fermi 面附近的电子。Pauli 顺磁磁化率
+    $
+      chi_P = 3/2 mu_0^"vac" (n mu_B^2)/mu_0 approx "constant"
+    $
+    其中$mu_0$是Fermi能，$n$是电子数密度，$mu_B$是Bohr magneton。Pauli 顺磁性很小，因为只有 Fermi 面附近、能量范围约$mu_B B$的电子能响应外场；它在低温下几乎与温度无关，主要由 Fermi 能决定。
+
+  - Landau 抗磁性：传导电子轨道运动
+
+    Pauli 顺磁性只考虑电子自旋。带电电子在磁场中还有轨道运动，量子化后产生 Landau 能级，由此给出 Landau 抗磁性。
+
+    物理图像是：磁场让电子轨道运动发生量子化，这个轨道响应倾向于削弱外磁场，所以是抗磁性的。笔记中也指出，金属电子气的磁性不仅有 Pauli 自旋贡献，还要考虑 Landau 抗磁性；Pauli 顺磁性来自电子自旋磁矩，Landau 抗磁性来自带电电子在磁场中的轨道运动量子化。
+
+    对于理想自由电子气，常见结果是
+    $
+      chi_"Landau" = - 1/3 chi_"Pauli"
+    $
+    不过真实金属中还有能带结构、离子实抗磁性、杂质、相互作用等，实际磁化率可以是顺磁，也可以是抗磁。
+
+  - Ising 模型：解释铁磁相变和自发磁化
+
+    对于 Fe、Co、Ni 等铁磁金属，仅仅用 Pauli 顺磁性不够，因为它们会在没有外磁场时自发磁化。这类现象的核心不是自由电子气的微弱磁化率，而是磁矩之间的交换相互作用。
+
+    Ising 模型把每个格点上的磁矩简化为
+    $
+      S_i = +1, -1
+    $
+    常见 Hamiltonian 为
+    $
+      H = - epsilon sum_{i,j} S_i S_j - mu_0 mu H sum_i S_i
+    $
+    若$epsilon>0$,相邻自旋倾向平行排列，可能出现铁磁有序。
+
+    平均场近似中
+    $
+      macron(H) = H + (z epsilon macron(S))/(mu_0 mu)
+    $
+    用平均自旋 $macron(S)$ 代替邻居自旋，得到自洽方程
+    $
+      S = tanh(beta mu_0 mu macron(H)) = tanh(beta mu_0 mu (H + (z epsilon macron(S))/(mu_0 mu)))
+    $
+    零场下
+    $
+      S = tanh(beta z epsilon macron(S))
+    $
+    临界温度由线性化得到
+    $
+      T_c = (z epsilon)/(k_B)
+    $
+    当$T<T_c$时，出现$S != 0$，系统有自发磁化，进入铁磁态；当$T>T_c$时，只有$S=0$，系统为顺磁态。
+
+    所以 Ising 模型主要解释：顺磁态⟷铁磁态之间的相变，以及自发磁化、临界温度、磁化率发散等现象。
+]
