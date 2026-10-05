@@ -1,5 +1,5 @@
-#import "@preview/scripst:1.1.1": *
-#import "@preview/physica:0.9.8": *
+#import "@preview/scripst:1.1.2": *
+
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 #import "@preview/chemformula:0.1.2": ch
 
@@ -224,15 +224,15 @@ $
 
 在$dd(t)$内，由左侧$v_x$处垂直$v_x$轴的平面进入体积元的分子数为
 $
-  f(x,y,z,v_x,v_y,v_z,t) dd(vb(r)) dd(v_y, v_z) eval(a_x)_(v_x) dd(t)
+  f(x,y,z,v_x,v_y,v_z,t) dd(vb(r)) dd(v_y, v_z) evaluated(a_x)_(v_x) dd(t)
 $
 从右侧$v_x+dd(v_x)$面离开的分子数为
 $
-  f(x,y,z,v_x+dd(v_x),v_y,v_z,t) dd(vb(r)) dd(v_y, v_z) eval(a_x)_(v_x+dd(v_x)) dd(t)
+  f(x,y,z,v_x+dd(v_x),v_y,v_z,t) dd(vb(r)) dd(v_y, v_z) evaluated(a_x)_(v_x+dd(v_x)) dd(t)
 $
 净增加
 $
-  & (f(x,y,z,v_x,v_y,v_z,t) eval(a_x)_(v_x) - f(x,y,z,v_x+dd(v_x),v_y,v_z,t) eval(a_x)_(v_x+dd(v_x))) dd(vb(r)) dd(v_y, v_z) dd(t) \
+  & (f(x,y,z,v_x,v_y,v_z,t) evaluated(a_x)_(v_x) - f(x,y,z,v_x+dd(v_x),v_y,v_z,t) evaluated(a_x)_(v_x+dd(v_x))) dd(vb(r)) dd(v_y, v_z) dd(t) \
   = & - pdv(, v_x) (a_x f) dd(vb(r)) dd(vb(v)) dd(t)
 $
 三个速度分量合起来：

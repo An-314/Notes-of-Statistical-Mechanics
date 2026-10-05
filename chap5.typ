@@ -1,5 +1,5 @@
-#import "@preview/scripst:1.1.1": *
-#import "@preview/physica:0.9.8": *
+#import "@preview/scripst:1.1.2": *
+
 #import "@preview/fletcher:0.5.8": diagram, edge, node
 #import "@preview/chemformula:0.1.2": ch
 
@@ -215,7 +215,7 @@ $
 $
 其中
 $
-  beta = eval(dd(ln Omega_r) / dd(E_r))_(E^((0)))
+  beta = evaluated(dd(ln Omega_r) / dd(E_r))_(E^((0)))
 $
 从而
 $
@@ -610,7 +610,7 @@ $
   $
   求极值
   $
-    eval(pdv(rho, E))_(E_m) = 0 => - beta e^(-beta E_m) vb(Omega)'(E_m) + e^(-beta E_m) vb(Omega)''(E_m) = 0
+    evaluated(pdv(rho, E))_(E_m) = 0 => - beta e^(-beta E_m) vb(Omega)'(E_m) + e^(-beta E_m) vb(Omega)''(E_m) = 0
   $
   得到
   $
@@ -646,7 +646,7 @@ $
   $
       & integral product dd(q_i, p_i) integral xi pdv(E, xi) e^(-beta E) \
     = & integral product dd(q_i, p_i) -1/beta integral xi dd(e^(-beta E), xi) \
-    = & -1/beta integral product dd(q_i, p_i) (eval(xi e^(-beta E))_(xi=-oo)^(xi=+oo) - integral e^(-beta E) dd(xi)) \
+    = & -1/beta integral product dd(q_i, p_i) (evaluated(xi e^(-beta E))_(xi=-oo)^(xi=+oo) - integral e^(-beta E) dd(xi)) \
     = & 1/beta integral product dd(q_i, p_i) e^(-beta E)
   $
   从而得到

@@ -1,5 +1,5 @@
-#import "@preview/scripst:1.1.1": *
-#import "@preview/physica:0.9.8": *
+#import "@preview/scripst:1.1.2": *
+
 
 #let preface = [
   == 统计物理处理的对象
@@ -48,6 +48,8 @@
   matheq-depth: 3,
   lang: "zh",
   preface: preface,
+  par-leading: 0.8em,
+  font-size: 12pt,
 )
 
 #include "chap1.typ"
